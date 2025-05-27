@@ -16,7 +16,7 @@ import {
   useTheme,
 } from "@mui/material";
 import { Menu, BrainCircuit } from "lucide-react";
-import { Link as ScrollLink } from "react-scroll";
+import { Link as RouterLink, useNavigate } from "react-router-dom";
 
 interface NavItem {
   label: string;
@@ -24,17 +24,18 @@ interface NavItem {
 }
 
 const navItems: NavItem[] = [
-  { label: "Home", to: "home" },
-  { label: "Sobre Nós", to: "about" },
-  { label: "Serviços", to: "services" },
-  { label: "FAQ", to: "faq" },
-  { label: "Contato", to: "contact" },
+  { label: "Home", to: "/" },
+  { label: "Sobre Nós", to: "/sobre" },
+  { label: "Serviços", to: "/service" },
+  { label: "Planos", to: "/planos" },
+  { label: "Contato", to: "/contato" },
 ];
 
 const Navbar: React.FC = () => {
   const [drawerOpen, setDrawerOpen] = useState(false);
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
+  const navigate = useNavigate();
 
   const trigger = useScrollTrigger({
     disableHysteresis: true,
@@ -64,7 +65,6 @@ const Navbar: React.FC = () => {
     >
       <Container maxWidth="lg">
         <Toolbar disableGutters>
-          {/* Logo and Title */}
           <Box
             sx={{
               display: "flex",
@@ -72,7 +72,10 @@ const Navbar: React.FC = () => {
               mr: "auto",
               cursor: "pointer",
             }}
-            onClick={scrollToTop}
+            onClick={() => {
+              navigate("/");
+              scrollToTop();
+            }}
           >
             <BrainCircuit
               size={32}
@@ -90,38 +93,30 @@ const Navbar: React.FC = () => {
             </Typography>
           </Box>
 
-          {/* Desktop Navigation */}
           {!isMobile && (
             <Box sx={{ display: "flex" }}>
               {navItems.map((item) => (
-                <ScrollLink
+                <Button
                   key={item.to}
+                  component={RouterLink}
                   to={item.to}
-                  spy={true}
-                  smooth={true}
-                  offset={-70}
-                  duration={500}
+                  color="inherit"
+                  sx={{
+                    mx: 1,
+                    color: trigger ? "white" : "primary.main",
+                    border: "0.2px solid",
+                    borderColor: trigger ? "white" : "primary.main",
+                    "&:hover": {
+                      backgroundColor: "rgba(255, 255, 255, 0.1)",
+                    },
+                  }}
                 >
-                  <Button
-                    color="inherit"
-                    sx={{
-                      mx: 1,
-                      color: trigger ? "white" : "primary.main",
-                      border: "0.2px solid",
-                      borderColor: trigger ? "white" : "primary.main",
-                      "&:hover": {
-                        backgroundColor: "rgba(255, 255, 255, 0.1)",
-                      },
-                    }}
-                  >
-                    {item.label}
-                  </Button>
-                </ScrollLink>
+                  {item.label}
+                </Button>
               ))}
             </Box>
           )}
 
-          {/* Mobile Menu Button */}
           {isMobile && (
             <IconButton
               edge="end"
@@ -136,7 +131,6 @@ const Navbar: React.FC = () => {
         </Toolbar>
       </Container>
 
-      {/* Mobile Drawer */}
       <Drawer anchor="right" open={drawerOpen} onClose={handleDrawerToggle}>
         <Box
           sx={{ width: 250 }}
@@ -145,18 +139,14 @@ const Navbar: React.FC = () => {
         >
           <List>
             {navItems.map((item) => (
-              <ScrollLink
+              <ListItem
+                button
                 key={item.to}
+                component={RouterLink}
                 to={item.to}
-                spy={true}
-                smooth={true}
-                offset={-70}
-                duration={500}
               >
-                <ListItem button>
-                  <ListItemText primary={item.label} />
-                </ListItem>
-              </ScrollLink>
+                <ListItemText primary={item.label} />
+              </ListItem>
             ))}
           </List>
         </Box>
