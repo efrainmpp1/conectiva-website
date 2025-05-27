@@ -14,94 +14,190 @@ import {
   ListItemIcon,
   ListItemText,
 } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 
 const pricingPlans = [
   {
-    title: "Starter",
+    title: "Básico",
     price: "R$ 49",
     credits: 5,
-    examples: ["Até 2 análises de editais", "Ou 5 buscas descritivas"],
+    features: [
+      "5 créditos mensais",
+      "Até 2 análises de editais",
+      "Ou 5 buscas descritivas",
+      "Suporte por email",
+    ],
     highlight: false,
   },
   {
-    title: "Profissional",
+    title: "Intermediário",
     price: "R$ 129",
     credits: 15,
-    examples: ["Até 7 editais", "Ou 15 descrições personalizadas"],
+    features: [
+      "15 créditos mensais",
+      "Até 7 análises de editais",
+      "Ou 15 buscas descritivas",
+      "Suporte prioritário",
+      "Relatórios detalhados",
+    ],
     highlight: true,
   },
   {
-    title: "Empresarial",
+    title: "Profissional",
     price: "R$ 249",
     credits: 35,
-    examples: ["Ideal para equipes comerciais", "Alta demanda por licitações"],
+    features: [
+      "35 créditos mensais",
+      "Análises ilimitadas de editais",
+      "Buscas descritivas ilimitadas",
+      "Suporte 24/7",
+      "API de integração",
+      "Dashboard personalizado",
+    ],
     highlight: false,
   },
 ];
 
 const PricingSection: React.FC = () => {
-  return (
-    <Box sx={{ backgroundColor: "#f9f9f9" }}>
-      <Container maxWidth="lg">
-        <Typography
-          variant="h3"
-          component="h2"
-          align="center"
-          gutterBottom
-          sx={{ fontWeight: 700 }}
-        >
-          Planos e Créditos
-        </Typography>
-        <Typography variant="h6" align="center" color="textSecondary" paragraph>
-          Escolha o plano ideal para sua necessidade e utilize créditos para
-          acessar os serviços da Conectiva.
-        </Typography>
+  const navigate = useNavigate();
 
-        <Grid container spacing={4} justifyContent="center" sx={{ mt: 4 }}>
+  return (
+    <Box
+      sx={{
+        py: { xs: 8, md: 12 },
+        backgroundColor: "#f8f9fa",
+      }}
+    >
+      <Container maxWidth="lg">
+        <Box sx={{ textAlign: "center", mb: 8 }}>
+          <Typography
+            variant="h2"
+            component="h2"
+            gutterBottom
+            sx={{
+              fontWeight: 700,
+              position: "relative",
+              display: "inline-block",
+              "&::after": {
+                content: '""',
+                position: "absolute",
+                bottom: -10,
+                left: "50%",
+                transform: "translateX(-50%)",
+                width: "80px",
+                height: "4px",
+                backgroundColor: "primary.main",
+                borderRadius: "2px",
+              },
+            }}
+          >
+            Planos e Créditos
+          </Typography>
+
+          <Typography
+            variant="h5"
+            color="text.secondary"
+            sx={{
+              maxWidth: "800px",
+              mx: "auto",
+              mt: 4,
+            }}
+          >
+            Escolha o plano ideal para sua necessidade ou compre créditos avulsos
+            para usar quando precisar.
+          </Typography>
+        </Box>
+
+        <Grid container spacing={4} justifyContent="center">
           {pricingPlans.map((plan) => (
             <Grid item xs={12} sm={6} md={4} key={plan.title}>
               <Card
-                elevation={plan.highlight ? 6 : 2}
+                elevation={plan.highlight ? 8 : 2}
                 sx={{
-                  borderRadius: 3,
-                  backgroundColor: plan.highlight ? "#e3f2fd" : "#fff",
+                  height: "100%",
+                  display: "flex",
+                  flexDirection: "column",
+                  position: "relative",
+                  transition: "transform 0.3s ease-in-out",
+                  "&:hover": {
+                    transform: "translateY(-8px)",
+                  },
+                  ...(plan.highlight && {
+                    backgroundColor: "primary.light",
+                    "&::before": {
+                      content: '"Mais Popular"',
+                      position: "absolute",
+                      top: "12px",
+                      right: "12px",
+                      backgroundColor: "primary.main",
+                      color: "white",
+                      padding: "4px 12px",
+                      borderRadius: "16px",
+                      fontSize: "0.75rem",
+                      fontWeight: "bold",
+                    },
+                  }),
                 }}
               >
-                <CardContent>
-                  <Typography variant="h5" component="h3" gutterBottom>
+                <CardContent sx={{ flexGrow: 1 }}>
+                  <Typography
+                    variant="h5"
+                    component="h3"
+                    gutterBottom
+                    sx={{ fontWeight: "bold" }}
+                  >
                     {plan.title}
                   </Typography>
                   <Typography
                     variant="h4"
-                    component="p"
-                    color="primary"
-                    gutterBottom
+                    component="div"
+                    sx={{ fontWeight: "bold", mb: 2 }}
                   >
                     {plan.price}
+                    <Typography
+                      component="span"
+                      variant="subtitle1"
+                      sx={{ color: "text.secondary" }}
+                    >
+                      /mês
+                    </Typography>
                   </Typography>
-                  <Typography
-                    variant="subtitle1"
-                    color="textSecondary"
-                    gutterBottom
-                  >
-                    {plan.credits} créditos por mês
-                  </Typography>
+
                   <Divider sx={{ my: 2 }} />
+
                   <List>
-                    {plan.examples.map((item, index) => (
+                    {plan.features.map((feature, index) => (
                       <ListItem key={index} disableGutters>
-                        <ListItemIcon>
-                          <CheckCircleIcon color="success" />
+                        <ListItemIcon sx={{ minWidth: 36 }}>
+                          <CheckCircleIcon color="primary" />
                         </ListItemIcon>
-                        <ListItemText primary={item} />
+                        <ListItemText primary={feature} />
                       </ListItem>
                     ))}
                   </List>
                 </CardContent>
-                <CardActions sx={{ justifyContent: "center", pb: 2 }}>
-                  <Button variant="contained" color="primary" size="large">
-                    Escolher plano
+
+                <CardActions sx={{ p: 2, pt: 0 }}>
+                  <Button
+                    fullWidth
+                    variant={plan.highlight ? "contained" : "outlined"}
+                    color="primary"
+                    size="large"
+                    onClick={() => navigate("/planos")}
+                    sx={{
+                      py: 1.5,
+                      fontWeight: "bold",
+                      ...(plan.highlight && {
+                        backgroundColor: "primary.dark",
+                        "&:hover": {
+                          backgroundColor: "primary.dark",
+                          opacity: 0.9,
+                        },
+                      }),
+                    }}
+                  >
+                    {plan.highlight ? "Começar Agora" : "Selecionar Plano"}
                   </Button>
                 </CardActions>
               </Card>
@@ -109,13 +205,33 @@ const PricingSection: React.FC = () => {
           ))}
         </Grid>
 
+        <Box sx={{ textAlign: "center", mt: 6 }}>
+          <Button
+            variant="outlined"
+            color="primary"
+            size="large"
+            onClick={() => navigate("/planos")}
+            sx={{ mr: 2 }}
+          >
+            Ver todos os planos
+          </Button>
+          <Button
+            variant="contained"
+            color="primary"
+            size="large"
+            onClick={() => navigate("/planos")}
+          >
+            Comprar créditos avulsos
+          </Button>
+        </Box>
+
         <Typography
           variant="body2"
           align="center"
-          sx={{ mt: 6 }}
-          color="textSecondary"
+          sx={{ mt: 4 }}
+          color="text.secondary"
         >
-          Cada análise de edital consome 2 créditos. Cada prospecção descritiva
+          Cada análise de edital consome 2 créditos. Cada busca descritiva
           consome 1 crédito.
         </Typography>
       </Container>
