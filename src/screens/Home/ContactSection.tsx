@@ -71,8 +71,8 @@ const ContactSection: React.FC = () => {
               </Typography>
 
               <Typography paragraph color="text.secondary" sx={{ mb: 4 }}>
-                Estamos animados para ouvir você! Seja uma pergunta sobre nossos
-                serviços, preços ou qualquer outra coisa, nossa equipe está
+                Estamos animados para ouvir você! Seja uma pergunta sobre nossas
+                ferramentas, preços ou qualquer outra coisa, nossa equipe está
                 pronta para responder a todas as suas dúvidas.
               </Typography>
 

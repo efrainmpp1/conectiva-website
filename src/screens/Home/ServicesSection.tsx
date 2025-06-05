@@ -37,7 +37,7 @@ const ServicesSection: React.FC = () => {
               },
             }}
           >
-            Nossos Serviços
+            Nossas Ferramentas
           </Typography>
 
           <Typography

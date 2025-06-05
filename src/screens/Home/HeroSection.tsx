@@ -105,7 +105,7 @@ const HeroSection: React.FC = () => {
                       borderRadius: "50px",
                     }}
                   >
-                    Nossos Serviços
+                    Nossas Ferramentas
                   </Button>
                 </ScrollLink>
               </Box>
