@@ -27,7 +27,8 @@ interface NavItem {
 const navItems: NavItem[] = [
   { label: "Home", to: "/" },
   { label: "Sobre Nós", to: "/sobre" },
-  { label: "Funcionalidades", to: "/service" },
+  // Navegação para a seção de serviços na página inicial
+  { label: "Funcionalidades", to: "/#services" },
   { label: "Planos", to: "/planos" },
   { label: "Contato", to: "/contato" },
 ];
