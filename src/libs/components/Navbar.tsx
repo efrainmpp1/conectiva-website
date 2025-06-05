@@ -11,7 +11,6 @@ import {
   ListItem,
   ListItemText,
   Box,
-  useScrollTrigger,
   useMediaQuery,
   useTheme,
 } from "@mui/material";
@@ -42,10 +41,6 @@ const Navbar: React.FC = () => {
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
   const navigate = useNavigate();
 
-  const trigger = useScrollTrigger({
-    disableHysteresis: true,
-    threshold: 50,
-  });
 
   useEffect(() => {
     const handleScroll = () => {
@@ -79,12 +74,9 @@ const Navbar: React.FC = () => {
         <AppBar
           position="fixed"
           sx={{
-            backgroundColor: trigger
-              ? alpha(theme.palette.common.white, 0.9)
-              : alpha(theme.palette.primary.main, 0.8),
+            backgroundColor: alpha(theme.palette.primary.main, 0.8),
             backdropFilter: "blur(10px)",
-            boxShadow: trigger ? "0 4px 30px rgba(0, 0, 0, 0.1)" : "none",
-            transition: "all 0.3s ease",
+            boxShadow: "none",
           }}
         >
           <Container maxWidth="lg">
@@ -113,21 +105,14 @@ const Navbar: React.FC = () => {
                 >
                   <BrainCircuit
                     size={32}
-                    color={trigger ? theme.palette.primary.main : "#FFFFFF"}
+                    color="#FFFFFF"
                     style={{ marginRight: "8px" }}
                   />
                   <Typography
                     variant="h5"
                     sx={{
                       fontWeight: 700,
-                      background: trigger
-                        ? "none"
-                        : "linear-gradient(45deg, #2196F3 30%, #21CBF3 90%)",
-                      WebkitBackgroundClip: trigger ? "none" : "text",
-                      WebkitTextFillColor: trigger ? "inherit" : "transparent",
-                      color: trigger
-                        ? theme.palette.primary.main
-                        : "transparent",
+                      color: "#FFFFFF",
                     }}
                   >
                     Conectiva
@@ -150,17 +135,13 @@ const Navbar: React.FC = () => {
                           mx: 0.5,
                           px: 2,
                           py: 1,
-                          color: trigger
-                            ? theme.palette.primary.main
-                            : "#fff",
+                          color: "#fff",
                           borderRadius: "12px",
                           backgroundColor: alpha(theme.palette.common.white, 0.1),
                           backdropFilter: "blur(4px)",
                           transition: "all 0.3s ease",
                           "&:hover": {
-                            backgroundColor: trigger
-                              ? alpha(theme.palette.primary.main, 0.1)
-                              : "rgba(255, 255, 255, 0.2)",
+                            backgroundColor: "rgba(255, 255, 255, 0.2)",
                             transform: "translateY(-2px)",
                           },
                         }}
@@ -180,9 +161,7 @@ const Navbar: React.FC = () => {
                   onClick={handleDrawerToggle}
                   sx={{
                     ml: "auto",
-                    color: trigger
-                      ? theme.palette.primary.main
-                      : "#fff",
+                    color: "#fff",
                   }}
                 >
                   <Menu />
