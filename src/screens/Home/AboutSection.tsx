@@ -112,7 +112,7 @@ const AboutSection: React.FC = () => {
               de aquisição de clientes em 37%.
             </Typography>
             <Typography>
-              Temos nosso inicio em 2023 por uma equipe de pesquisadores de IA e
+              Temos nosso início em 2023 por uma equipe de pesquisadores de IA e
               profissionais de vendas, a Conectiva combina profundo conhecimento
               técnico com perspicácia empresarial prática para oferecer soluções
               que não apenas impressionam com sua tecnologia, mas também geram
