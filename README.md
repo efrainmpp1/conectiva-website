@@ -23,16 +23,26 @@ This repository contains the source code for the official website and service in
 ## 📂 Folder Structure
 
 ```
-
 src/
-├── components/
-├── pages/
-│   ├── Home/
-│   ├── Services/
-│   └── Contact/
-├── services/
 ├── assets/
-└── App.tsx
+├── libs/
+│   ├── components/
+│   ├── interfaces/
+│   └── theme/
+├── screens/
+│   ├── About/
+│   ├── Contact/
+│   ├── Home/
+│   ├── Plans/
+│   └── Service/
+├── services/
+│   ├── Services/
+│   └── mocks/
+├── router.tsx
+├── App.tsx
+├── main.tsx
+├── index.css
+└── vite-env.d.ts
 
 ```
 
