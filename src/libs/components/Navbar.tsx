@@ -15,6 +15,7 @@ import {
   useMediaQuery,
   useTheme,
 } from "@mui/material";
+import { alpha } from "@mui/material/styles";
 import { Menu, BrainCircuit } from "lucide-react";
 import { Link as RouterLink, useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
@@ -78,16 +79,23 @@ const Navbar: React.FC = () => {
         <AppBar
           position="fixed"
           sx={{
-            background: trigger
-              ? "rgba(255, 255, 255, 0.9)"
-              : "transparent",
-            backdropFilter: trigger ? "blur(10px)" : "none",
+            backgroundColor: trigger
+              ? alpha(theme.palette.common.white, 0.9)
+              : alpha(theme.palette.primary.main, 0.8),
+            backdropFilter: "blur(10px)",
             boxShadow: trigger ? "0 4px 30px rgba(0, 0, 0, 0.1)" : "none",
             transition: "all 0.3s ease",
           }}
         >
           <Container maxWidth="lg">
-            <Toolbar disableGutters>
+            <Toolbar
+              disableGutters
+              sx={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "space-between",
+              }}
+            >
               <motion.div
                 whileHover={{ scale: 1.05 }}
                 transition={{ type: "spring", stiffness: 400, damping: 10 }}
@@ -96,7 +104,6 @@ const Navbar: React.FC = () => {
                   sx={{
                     display: "flex",
                     alignItems: "center",
-                    mr: "auto",
                     cursor: "pointer",
                   }}
                   onClick={() => {
@@ -129,7 +136,7 @@ const Navbar: React.FC = () => {
               </motion.div>
 
               {!isMobile && (
-                <Box sx={{ display: "flex", gap: 1 }}>
+                <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
                   {navItems.map((item) => (
                     <motion.div
                       key={item.to}
@@ -147,14 +154,12 @@ const Navbar: React.FC = () => {
                             ? theme.palette.primary.main
                             : "#fff",
                           borderRadius: "12px",
-                          backgroundColor: trigger
-                            ? "rgba(255, 255, 255, 0.1)"
-                            : "rgba(255, 255, 255, 0.1)",
+                          backgroundColor: alpha(theme.palette.common.white, 0.1),
                           backdropFilter: "blur(4px)",
                           transition: "all 0.3s ease",
                           "&:hover": {
                             backgroundColor: trigger
-                              ? "rgba(33, 150, 243, 0.1)"
+                              ? alpha(theme.palette.primary.main, 0.1)
                               : "rgba(255, 255, 255, 0.2)",
                             transform: "translateY(-2px)",
                           },
@@ -215,7 +220,7 @@ const Navbar: React.FC = () => {
                 sx={{
                   transition: "all 0.3s ease",
                   "&:hover": {
-                    backgroundColor: "rgba(33, 150, 243, 0.1)",
+                    backgroundColor: alpha(theme.palette.primary.main, 0.1),
                     transform: "translateX(10px)",
                   },
                 }}
