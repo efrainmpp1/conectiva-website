@@ -63,7 +63,7 @@ const Footer: React.FC = () => {
               display="block"
               sx={{ mb: 1 }}
             >
-              Services
+              Ferramentas
             </Link>
             <Link href="#faq" color="inherit" display="block" sx={{ mb: 1 }}>
               FAQ

@@ -22,10 +22,10 @@ const ServicePage: React.FC = () => {
     return (
       <Container maxWidth="md" sx={{ py: 10, textAlign: "center" }}>
         <Typography variant="h4" gutterBottom>
-          Serviço não encontrado
+          Ferramenta não encontrada
         </Typography>
         <Typography paragraph>
-          O serviço que você está procurando não existe ou foi removido.
+          A ferramenta que você está procurando não existe ou foi removida.
         </Typography>
         <Button
           variant="contained"
@@ -137,7 +137,7 @@ const ServicePage: React.FC = () => {
                   variant="outlined"
                   color="secondary"
                   size="large"
-                  href="https://wa.me/SEUNUMERO?text=Olá, quero testar o serviço da NeoLeadsAI!"
+                  href="https://wa.me/SEUNUMERO?text=Olá, quero testar a ferramenta da NeoLeadsAI!"
                   target="_blank"
                 >
                   💬 Falar com um especialista
