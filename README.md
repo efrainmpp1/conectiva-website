@@ -56,3 +56,14 @@ cd conectiva-website
 npm install
 npm run dev
 ```
+
+### Running tests and lint
+
+After installing dependencies you can run:
+
+```bash
+npm test       # runs Node's test runner
+npm run lint   # runs ESLint if available
+```
+
+The lint command skips execution when ESLint is not installed.
