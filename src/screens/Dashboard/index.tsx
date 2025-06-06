@@ -84,7 +84,16 @@ const DashboardLayout: React.FC = () => {
 
   return (
     <Box sx={{ display: "flex" }}>
-      <AppBar position="fixed" sx={{ ml: { md: `${drawerWidth}px` } }}>
+      <AppBar
+        position="fixed"
+        sx={{
+          ml: { md: `${drawerWidth}px` },
+          bgcolor: "background.paper",
+          color: "text.primary",
+          boxShadow: 1,
+          borderRadius: 1,
+        }}
+      >
         <Toolbar sx={{ display: "flex", justifyContent: "space-between" }}>
           <Box sx={{ display: "flex", alignItems: "center" }}>
             {isMobile && (
@@ -99,8 +108,11 @@ const DashboardLayout: React.FC = () => {
             )}
             <Box sx={{ display: "flex", alignItems: "center" }}>
               <BrainCircuit size={28} style={{ marginRight: 8 }} />
-              <Typography variant="h6" noWrap sx={{ fontWeight: 700 }}>
+              <Typography variant="h6" noWrap sx={{ fontWeight: 700, mr: 1 }}>
                 Conectiva
+              </Typography>
+              <Typography variant="subtitle1" noWrap>
+                Painel do Usuário
               </Typography>
             </Box>
           </Box>
