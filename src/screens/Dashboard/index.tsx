@@ -7,6 +7,7 @@ import {
   ListItemText,
   ListItemIcon,
   IconButton,
+  Button,
   Typography,
   AppBar,
   Toolbar,
@@ -91,10 +92,18 @@ const DashboardLayout: React.FC = () => {
           bgcolor: "background.paper",
           color: "text.primary",
           boxShadow: 1,
-          borderRadius: 1,
+          borderBottom: 1,
         }}
       >
-        <Toolbar sx={{ display: "flex", justifyContent: "space-between" }}>
+        <Toolbar
+          sx={{
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+            minHeight: 64,
+            px: 4,
+          }}
+        >
           <Box sx={{ display: "flex", alignItems: "center" }}>
             {isMobile && (
               <IconButton
@@ -111,27 +120,32 @@ const DashboardLayout: React.FC = () => {
               <Typography variant="h6" noWrap sx={{ fontWeight: 700, mr: 1 }}>
                 Conectiva
               </Typography>
-              <Typography variant="subtitle1">
-                Painel do Usuário
-              </Typography>
+              <Typography variant="subtitle1">Painel do Usuário</Typography>
             </Box>
           </Box>
           <Box sx={{ display: "flex", alignItems: "center" }}>
-            <Typography variant="subtitle1" sx={{ mr: 1 }} noWrap>
-              {user?.displayName || user?.email}
-            </Typography>
-            <IconButton onClick={handleMenuOpen} color="inherit">
-              {user?.photoURL ? (
-                <Avatar
-                  src={user.photoURL}
-                  alt={user.displayName || user.email || "Usuário"}
-                />
-              ) : (
-                <Avatar>
-                  {(user?.displayName || user?.email || "").charAt(0).toUpperCase()}
-                </Avatar>
-              )}
-            </IconButton>
+            <Button
+              onClick={handleMenuOpen}
+              color="inherit"
+              sx={{ display: "flex", alignItems: "center", textTransform: "none", gap: 1, p: 0 }}
+              startIcon={
+                user?.photoURL ? (
+                  <Avatar
+                    src={user.photoURL}
+                    alt={user.displayName || user.email || "Usuário"}
+                    sx={{ width: 32, height: 32 }}
+                  />
+                ) : (
+                  <Avatar sx={{ width: 32, height: 32 }}>
+                    {(user?.displayName || user?.email || "").charAt(0).toUpperCase()}
+                  </Avatar>
+                )
+              }
+            >
+              <Typography variant="subtitle1" noWrap>
+                {user?.displayName || user?.email}
+              </Typography>
+            </Button>
             <MuiMenu anchorEl={anchorEl} open={Boolean(anchorEl)} onClose={handleMenuClose}>
               <MenuItem component={RouterLink} to="/dashboard/perfil" onClick={handleMenuClose}>
                 Ver Perfil
@@ -157,7 +171,7 @@ const DashboardLayout: React.FC = () => {
           {drawer}
         </Drawer>
       </Box>
-      <Box component="main" sx={{ flexGrow: 1, p: 3, mt: 8 }}>
+      <Box component="main" sx={{ flexGrow: 1, p: 3, mt: 0 }}>
         <Outlet />
       </Box>
     </Box>
