@@ -91,10 +91,18 @@ const DashboardLayout: React.FC = () => {
           bgcolor: "background.paper",
           color: "text.primary",
           boxShadow: 1,
-          borderRadius: 1,
+          borderBottom: 1,
         }}
       >
-        <Toolbar sx={{ display: "flex", justifyContent: "space-between" }}>
+        <Toolbar
+          sx={{
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+            height: "64px",
+            px: 4,
+          }}
+        >
           <Box sx={{ display: "flex", alignItems: "center" }}>
             {isMobile && (
               <IconButton
@@ -111,26 +119,29 @@ const DashboardLayout: React.FC = () => {
               <Typography variant="h6" noWrap sx={{ fontWeight: 700, mr: 1 }}>
                 Conectiva
               </Typography>
-              <Typography variant="subtitle1">
-                Painel do Usuário
-              </Typography>
+              <Typography variant="subtitle1">Painel do Usuário</Typography>
             </Box>
           </Box>
           <Box sx={{ display: "flex", alignItems: "center" }}>
-            <Typography variant="subtitle1" sx={{ mr: 1 }} noWrap>
-              {user?.displayName || user?.email}
-            </Typography>
-            <IconButton onClick={handleMenuOpen} color="inherit">
+            <IconButton
+              onClick={handleMenuOpen}
+              color="inherit"
+              sx={{ display: "flex", alignItems: "center", p: 0 }}
+            >
               {user?.photoURL ? (
                 <Avatar
                   src={user.photoURL}
                   alt={user.displayName || user.email || "Usuário"}
+                  sx={{ width: 32, height: 32, mr: 1 }}
                 />
               ) : (
-                <Avatar>
+                <Avatar sx={{ width: 32, height: 32, mr: 1 }}>
                   {(user?.displayName || user?.email || "").charAt(0).toUpperCase()}
                 </Avatar>
               )}
+              <Typography variant="subtitle1" noWrap>
+                {user?.displayName || user?.email}
+              </Typography>
             </IconButton>
             <MuiMenu anchorEl={anchorEl} open={Boolean(anchorEl)} onClose={handleMenuClose}>
               <MenuItem component={RouterLink} to="/dashboard/perfil" onClick={handleMenuClose}>
@@ -157,7 +168,7 @@ const DashboardLayout: React.FC = () => {
           {drawer}
         </Drawer>
       </Box>
-      <Box component="main" sx={{ flexGrow: 1, p: 3, mt: 8 }}>
+      <Box component="main" sx={{ flexGrow: 1, p: 3, mt: 0 }}>
         <Outlet />
       </Box>
     </Box>
