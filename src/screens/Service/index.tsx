@@ -76,7 +76,7 @@ const ServicePage: React.FC = () => {
   };
 
   return (
-    <Box sx={{ pt: { xs: 10, md: 12 }, pb: { xs: 8, md: 12 } }}>
+    <Box sx={{ pb: { xs: 8, md: 12 } }}>
       <Container maxWidth="lg">
         <BackHomeButton />
 
