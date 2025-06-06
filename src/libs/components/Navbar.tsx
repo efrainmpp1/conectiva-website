@@ -60,7 +60,8 @@ const Navbar: React.FC = () => {
         <AppBar
           position="static"
           sx={{
-            backgroundColor: alpha(theme.palette.primary.main, 0.8),
+            background:
+              "linear-gradient(135deg, rgba(26,35,126,0.9) 0%, rgba(13,27,42,0.9) 100%)",
             backdropFilter: "blur(10px)",
             boxShadow: "none",
           }}
@@ -168,7 +169,8 @@ const Navbar: React.FC = () => {
         PaperProps={{
           sx: {
             width: 250,
-            background: "rgba(255, 255, 255, 0.95)",
+            background:
+              "linear-gradient(135deg, rgba(26,35,126,0.95) 0%, rgba(13,27,42,0.95) 100%)",
             backdropFilter: "blur(10px)",
           },
         }}
