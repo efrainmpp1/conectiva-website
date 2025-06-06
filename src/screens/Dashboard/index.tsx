@@ -111,12 +111,15 @@ const DashboardLayout: React.FC = () => {
               <Typography variant="h6" noWrap sx={{ fontWeight: 700, mr: 1 }}>
                 Conectiva
               </Typography>
-              <Typography variant="subtitle1" noWrap>
+              <Typography variant="subtitle1">
                 Painel do Usuário
               </Typography>
             </Box>
           </Box>
-          <Box>
+          <Box sx={{ display: "flex", alignItems: "center" }}>
+            <Typography variant="subtitle1" sx={{ mr: 1 }} noWrap>
+              {user?.displayName || user?.email}
+            </Typography>
             <IconButton onClick={handleMenuOpen} color="inherit">
               {user?.photoURL ? (
                 <Avatar
