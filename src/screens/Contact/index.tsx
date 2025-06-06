@@ -5,7 +5,7 @@ import BackHomeButton from "../../libs/components/BackHomeButton";
 
 const ContactPage: React.FC = () => {
   return (
-    <Box sx={{ pt: { xs: 6, md: 8 } }}>
+    <Box>
       <ContactSection topAction={<BackHomeButton />} />
     </Box>
   );
