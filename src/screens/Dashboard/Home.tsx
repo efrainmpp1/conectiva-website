@@ -1,24 +1,24 @@
 import React from "react";
 import { Box, Grid } from "@mui/material";
 import { Wallet, Clock, Activity, User } from "lucide-react";
-import InfoCard from "./InfoCard";
+import DashboardStatCard from "./DashboardStatCard";
 import ActionBlock from "./ActionBlock";
 
 const DashboardHome: React.FC = () => {
   return (
     <Box>
       <Grid container spacing={2} sx={{ mb: 4 }}>
-        <Grid item xs={12} sm={6} md={3}>
-          <InfoCard icon={<Wallet />} label="Créditos" value="0" color="primary.main" />
+        <Grid item xs={12} sm={6} md={4}>
+          <DashboardStatCard icon={<Wallet size={20} />} label="Créditos" value="0" />
         </Grid>
-        <Grid item xs={12} sm={6} md={3}>
-          <InfoCard icon={<Activity />} label="Execuções" value="0" color="secondary.main" />
+        <Grid item xs={12} sm={6} md={4}>
+          <DashboardStatCard icon={<Activity size={20} />} label="Execuções" value="0" />
         </Grid>
-        <Grid item xs={12} sm={6} md={3}>
-          <InfoCard icon={<Clock />} label="Última Execução" value="-" color="success.main" />
+        <Grid item xs={12} sm={6} md={4}>
+          <DashboardStatCard icon={<Clock size={20} />} label="Última Execução" value="-" />
         </Grid>
-        <Grid item xs={12} sm={6} md={3}>
-          <InfoCard icon={<User />} label="Plano" value="Free" color="warning.main" />
+        <Grid item xs={12} sm={6} md={4}>
+          <DashboardStatCard icon={<User size={20} />} label="Plano" value="Free" />
         </Grid>
       </Grid>
       <Grid container spacing={2}>
