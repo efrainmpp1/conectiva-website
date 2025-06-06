@@ -60,6 +60,12 @@ const DashboardLayout: React.FC = () => {
 
   const drawer = (
     <Box sx={{ width: drawerWidth }}>
+      <Box sx={{ display: "flex", alignItems: "center", justifyContent: "center", p: 2 }}>
+        <BrainCircuit size={28} style={{ marginRight: 8 }} />
+        <Typography variant="h6" noWrap sx={{ fontWeight: 700 }}>
+          Conectiva
+        </Typography>
+      </Box>
       <List>
         {menuItems.map((item) => (
           <ListItemButton
