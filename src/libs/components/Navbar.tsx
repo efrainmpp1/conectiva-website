@@ -58,7 +58,7 @@ const Navbar: React.FC = () => {
         transition={{ duration: 0.3 }}
       >
         <AppBar
-          position="fixed"
+          position="static"
           sx={{
             backgroundColor: alpha(theme.palette.primary.main, 0.8),
             backdropFilter: "blur(10px)",
@@ -123,7 +123,10 @@ const Navbar: React.FC = () => {
                           py: 1,
                           color: "#fff",
                           borderRadius: "12px",
-                          backgroundColor: alpha(theme.palette.common.white, 0.1),
+                          backgroundColor: alpha(
+                            theme.palette.common.white,
+                            0.1
+                          ),
                           backdropFilter: "blur(4px)",
                           transition: "all 0.3s ease",
                           "&:hover": {
