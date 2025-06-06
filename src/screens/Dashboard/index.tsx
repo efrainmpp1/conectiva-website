@@ -5,6 +5,7 @@ import {
   List,
   ListItemButton,
   ListItemText,
+  ListItemIcon,
   IconButton,
   Typography,
   AppBar,
@@ -12,17 +13,25 @@ import {
   useMediaQuery,
   useTheme,
 } from "@mui/material";
-import { Menu } from "lucide-react";
+import {
+  Menu,
+  LayoutDashboard,
+  PlayCircle,
+  History,
+  Coins,
+  User,
+} from "lucide-react";
 import { Outlet, Link as RouterLink } from "react-router-dom";
 import { useAuth } from "../../libs/context/AuthContext";
 
 const drawerWidth = 240;
 
 const menuItems = [
-  { label: "Dashboard", to: "/dashboard" },
-  { label: "Executar Agente", to: "/dashboard/agente" },
-  { label: "Histórico", to: "/dashboard/historico" },
-  { label: "Minhas Moedas", to: "/dashboard/moedas" },
+  { label: "Dashboard", to: "/dashboard", icon: <LayoutDashboard size={20} /> },
+  { label: "Executar Agente", to: "/dashboard/agente", icon: <PlayCircle size={20} /> },
+  { label: "Histórico", to: "/dashboard/historico", icon: <History size={20} /> },
+  { label: "Minhas Moedas", to: "/dashboard/moedas", icon: <Coins size={20} /> },
+  { label: "Perfil", to: "/dashboard/perfil", icon: <User size={20} /> },
 ];
 
 const DashboardLayout: React.FC = () => {
@@ -46,6 +55,7 @@ const DashboardLayout: React.FC = () => {
             to={item.to}
             onClick={() => isMobile && setOpen(false)}
           >
+            {item.icon && <ListItemIcon>{item.icon}</ListItemIcon>}
             <ListItemText primary={item.label} />
           </ListItemButton>
         ))}

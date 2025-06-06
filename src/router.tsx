@@ -13,6 +13,7 @@ import DashboardHome from './screens/Dashboard/Home';
 import AgentPage from './screens/Dashboard/Agent';
 import HistoryPage from './screens/Dashboard/History';
 import CoinsPage from './screens/Dashboard/Coins';
+import ProfilePage from './screens/Dashboard/Profile';
 import ProtectedRoute from './libs/components/ProtectedRoute';
 
 const router = createBrowserRouter([
@@ -71,6 +72,10 @@ const router = createBrowserRouter([
           {
             path: 'moedas',
             element: <CoinsPage />,
+          },
+          {
+            path: 'perfil',
+            element: <ProfilePage />,
           },
         ],
       },
