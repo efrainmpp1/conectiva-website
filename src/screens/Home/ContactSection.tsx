@@ -4,7 +4,11 @@ import { useTheme } from "@mui/material/styles";
 import ContactForm from "../../libs/components/ContactForm";
 import { Phone, Mail, MapPin } from "lucide-react";
 
-const ContactSection: React.FC = () => {
+interface ContactSectionProps {
+  topAction?: React.ReactNode;
+}
+
+const ContactSection: React.FC<ContactSectionProps> = ({ topAction }) => {
   const theme = useTheme();
   return (
     <Box
@@ -15,6 +19,7 @@ const ContactSection: React.FC = () => {
       }}
     >
       <Container maxWidth="lg">
+        {topAction && <Box sx={{ mb: 4 }}>{topAction}</Box>}
         <Box sx={{ textAlign: "center", mb: 8 }}>
           <Typography
             variant="h2"
