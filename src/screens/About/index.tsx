@@ -6,7 +6,7 @@ import BackHomeButton from "../../libs/components/BackHomeButton";
 const AboutPage: React.FC = () => {
 
   return (
-    <Box sx={{ pt: { xs: 8, md: 10 } }}>
+    <Box sx={{ pt: { xs: 6, md: 8 } }}>
       <AboutSection topAction={<BackHomeButton />} />
     </Box>
   );

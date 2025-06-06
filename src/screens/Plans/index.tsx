@@ -5,7 +5,7 @@ import BackHomeButton from "../../libs/components/BackHomeButton";
 
 const PlansPage: React.FC = () => {
   return (
-    <Box sx={{ pt: { xs: 8, md: 10 } }}>
+    <Box sx={{ pt: { xs: 6, md: 8 } }}>
       <PricingSection topAction={<BackHomeButton />} />
     </Box>
   );
