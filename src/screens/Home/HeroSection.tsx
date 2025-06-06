@@ -1,18 +1,22 @@
 import React from "react";
 import { Box, Typography, Button, Container, Grid } from "@mui/material";
 import { Link as ScrollLink } from "react-scroll";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Cpu } from "lucide-react";
+import { motion } from "framer-motion";
+
+const MotionButton = motion(Button);
 
 const HeroSection: React.FC = () => {
   return (
     <Box
       id="home"
       sx={{
-        background: "linear-gradient(135deg, #f5f7fa 0%, #e4e8ef 100%)",
+        background: "linear-gradient(135deg, #1a237e 0%, #0d1b2a 100%)",
         pt: { xs: 15, md: 20 },
         pb: { xs: 8, md: 12 },
         overflow: "hidden",
         position: "relative",
+        color: "#fff",
       }}
     >
       <Container maxWidth="lg">
@@ -29,10 +33,11 @@ const HeroSection: React.FC = () => {
                 component="h1"
                 gutterBottom
                 sx={{
-                  fontWeight: 700,
-                  fontSize: { xs: "2.5rem", sm: "3rem", md: "3.5rem" },
+                  fontWeight: 800,
+                  textTransform: "uppercase",
+                  fontSize: { xs: "2.8rem", sm: "3.4rem", md: "4rem" },
                   background:
-                    "linear-gradient(90deg, #1976D2 0%, #0D47A1 100%)",
+                    "linear-gradient(90deg, #6a11cb 0%, #2575fc 100%)",
                   WebkitBackgroundClip: "text",
                   WebkitTextFillColor: "transparent",
                   mb: 2,
@@ -43,7 +48,7 @@ const HeroSection: React.FC = () => {
 
               <Typography
                 variant="h5"
-                color="text.secondary"
+                color="rgba(255,255,255,0.8)"
                 paragraph
                 sx={{
                   mb: 4,
@@ -51,9 +56,8 @@ const HeroSection: React.FC = () => {
                   mx: { xs: "auto", md: 0 },
                 }}
               >
-                A Conectiva transforma a maneira como as empresas geram leads e
-                adquirem clientes usando nossa plataforma avançada com
-                tecnologia de IA.
+                Automatize a prospeção e conquiste clientes de forma inteligente
+                com nossa plataforma de IA.
               </Typography>
 
               <Box
@@ -69,21 +73,23 @@ const HeroSection: React.FC = () => {
                   offset={-70}
                   duration={500}
                 >
-                  <Button
+                  <MotionButton
                     variant="contained"
                     color="primary"
                     size="large"
                     endIcon={<ArrowRight />}
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
                     sx={{
                       py: 1.5,
                       px: 3,
                       fontWeight: 600,
                       borderRadius: "50px",
-                      boxShadow: "0 8px 20px rgba(25, 118, 210, 0.3)",
+                      boxShadow: "0 8px 20px rgba(25, 118, 210, 0.4)",
                     }}
                   >
-                    Saiba mais
-                  </Button>
+                    Comece Gratuitamente
+                  </MotionButton>
                 </ScrollLink>
 
                 <ScrollLink
@@ -93,20 +99,24 @@ const HeroSection: React.FC = () => {
                   offset={-70}
                   duration={500}
                 >
-                  <Button
+                  <MotionButton
                     variant="outlined"
-                    color="primary"
+                    color="secondary"
                     size="large"
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
                     sx={{
                       ml: 2,
                       py: 1.5,
                       px: 3,
                       fontWeight: 600,
                       borderRadius: "50px",
+                      color: "#fff",
+                      borderColor: "rgba(255,255,255,0.6)",
                     }}
                   >
-                    Nossas Ferramentas
-                  </Button>
+                    Ver Funcionalidades
+                  </MotionButton>
                 </ScrollLink>
               </Box>
             </Box>
@@ -120,21 +130,7 @@ const HeroSection: React.FC = () => {
                 position: "relative",
               }}
             >
-              <Box
-                component="img"
-                src="https://images.pexels.com/photos/8386440/pexels-photo-8386440.jpeg"
-                alt="AI Business Solutions"
-                sx={{
-                  width: "100%",
-                  maxWidth: "550px",
-                  height: "auto",
-                  borderRadius: "20px",
-                  boxShadow: "0 20px 40px rgba(0, 0, 0, 0.1)",
-                  position: "relative",
-                  zIndex: 1,
-                  border: "8px solid white",
-                }}
-              />
+              <Cpu size={220} color="#ffffff" />
 
               {/* Decorative Elements */}
               <Box
@@ -145,10 +141,11 @@ const HeroSection: React.FC = () => {
                   width: "100px",
                   height: "100px",
                   background:
-                    "linear-gradient(45deg, #00796B 0%, #009688 100%)",
+                    "linear-gradient(45deg, #6a11cb 0%, #2575fc 100%)",
                   borderRadius: "50%",
-                  opacity: 0.3,
+                  opacity: 0.4,
                   zIndex: 0,
+                  filter: "blur(2px)",
                 }}
               />
               <Box
@@ -159,9 +156,10 @@ const HeroSection: React.FC = () => {
                   width: "150px",
                   height: "150px",
                   background:
-                    "linear-gradient(45deg, #1976D2 0%, #42A5F5 100%)",
+                    "linear-gradient(45deg, #2575fc 0%, #6a11cb 100%)",
                   borderRadius: "50%",
-                  opacity: 0.2,
+                  opacity: 0.3,
+                  filter: "blur(3px)",
                   zIndex: 0,
                 }}
               />
