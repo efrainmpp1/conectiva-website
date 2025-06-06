@@ -1,9 +1,11 @@
 import React from "react";
 import { Box, Typography, Container, Grid } from "@mui/material";
+import { useTheme } from "@mui/material/styles";
 import ContactForm from "../../libs/components/ContactForm";
 import { Phone, Mail, MapPin } from "lucide-react";
 
 const ContactSection: React.FC = () => {
+  const theme = useTheme();
   return (
     <Box
       id="contact"
@@ -79,7 +81,7 @@ const ContactSection: React.FC = () => {
               <Box sx={{ mb: 3, display: "flex", alignItems: "center" }}>
                 <MapPin
                   size={24}
-                  color="#1976D2"
+                  color={theme.palette.primary.main}
                   style={{ marginRight: "12px" }}
                 />
                 <Typography>Natal, RN</Typography>
@@ -88,7 +90,7 @@ const ContactSection: React.FC = () => {
               <Box sx={{ mb: 3, display: "flex", alignItems: "center" }}>
                 <Mail
                   size={24}
-                  color="#1976D2"
+                  color={theme.palette.primary.main}
                   style={{ marginRight: "12px" }}
                 />
                 <Typography>info@conectiva.com</Typography>
@@ -97,7 +99,7 @@ const ContactSection: React.FC = () => {
               <Box sx={{ mb: 4, display: "flex", alignItems: "center" }}>
                 <Phone
                   size={24}
-                  color="#1976D2"
+                  color={theme.palette.primary.main}
                   style={{ marginRight: "12px" }}
                 />
                 <Typography>(84) 99975-0179</Typography>

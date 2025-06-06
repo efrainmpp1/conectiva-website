@@ -4,15 +4,15 @@ import { createTheme } from '@mui/material/styles';
 const theme = createTheme({
   palette: {
     primary: {
-      light: '#4dabf5',
-      main: '#1976D2',
-      dark: '#0D47A1',
+      light: '#8e63f9',
+      main: '#6a11cb',
+      dark: '#4b088a',
       contrastText: '#fff',
     },
     secondary: {
-      light: '#33ab9f',
-      main: '#00796B',
-      dark: '#004D40',
+      light: '#4895ff',
+      main: '#2575fc',
+      dark: '#1a54b3',
       contrastText: '#fff',
     },
     success: {
@@ -29,7 +29,7 @@ const theme = createTheme({
     },
   },
   typography: {
-    fontFamily: '"Source Sans Pro", "Roboto", "Helvetica", "Arial", sans-serif',
+    fontFamily: '"Inter", "Source Sans Pro", "Roboto", "Helvetica", "Arial", sans-serif',
     h1: {
       fontWeight: 600,
       fontSize: '2.75rem',
