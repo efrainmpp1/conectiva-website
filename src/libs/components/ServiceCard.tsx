@@ -7,6 +7,7 @@ import {
   Box,
   Button,
 } from "@mui/material";
+import { useTheme, alpha } from "@mui/material/styles";
 import { useNavigate } from "react-router-dom";
 import { GanttChart, Mail, Search } from "lucide-react";
 import { Service } from "../interfaces/Service";
@@ -17,6 +18,7 @@ interface ServiceCardProps {
 
 const ServiceCard: React.FC<ServiceCardProps> = ({ service }) => {
   const navigate = useNavigate();
+  const theme = useTheme();
 
   const handleServiceClick = () => {
     navigate(`/service/${service.id}`);
@@ -26,13 +28,13 @@ const ServiceCard: React.FC<ServiceCardProps> = ({ service }) => {
   const getIcon = () => {
     switch (service.icon) {
       case "GanttChart":
-        return <GanttChart size={40} color="#1976D2" />;
+        return <GanttChart size={40} color={theme.palette.primary.main} />;
       case "Mail":
-        return <Mail size={40} color="#1976D2" />;
+        return <Mail size={40} color={theme.palette.primary.main} />;
       case "Search":
-        return <Search size={40} color="#1976D2" />;
+        return <Search size={40} color={theme.palette.primary.main} />;
       default:
-        return <GanttChart size={40} color="#1976D2" />;
+        return <GanttChart size={40} color={theme.palette.primary.main} />;
     }
   };
 
@@ -56,7 +58,7 @@ const ServiceCard: React.FC<ServiceCardProps> = ({ service }) => {
           justifyContent: "center",
           alignItems: "center",
           p: 3,
-          backgroundColor: "rgba(25, 118, 210, 0.05)",
+          backgroundColor: alpha(theme.palette.primary.main, 0.05),
         }}
       >
         {getIcon()}

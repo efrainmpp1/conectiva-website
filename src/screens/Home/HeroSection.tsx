@@ -1,5 +1,6 @@
 import React from "react";
 import { Box, Typography, Button, Container, Grid } from "@mui/material";
+import { useTheme, alpha } from "@mui/material/styles";
 import { Link as ScrollLink } from "react-scroll";
 import { ArrowRight, Cpu } from "lucide-react";
 import { motion } from "framer-motion";
@@ -7,6 +8,7 @@ import { motion } from "framer-motion";
 const MotionButton = motion(Button);
 
 const HeroSection: React.FC = () => {
+  const theme = useTheme();
   return (
     <Box
       id="home"
@@ -85,7 +87,7 @@ const HeroSection: React.FC = () => {
                       px: 3,
                       fontWeight: 600,
                       borderRadius: "50px",
-                      boxShadow: "0 8px 20px rgba(25, 118, 210, 0.4)",
+                      boxShadow: `0 8px 20px ${alpha(theme.palette.primary.main, 0.4)}`,
                     }}
                   >
                     Comece Gratuitamente
