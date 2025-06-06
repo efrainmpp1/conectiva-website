@@ -6,9 +6,9 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
-    "lint": "eslint .",
+    "lint": "node scripts/runLint.js",
     "preview": "vite preview",
-    "test": "vitest"
+    "test": "node --test tests/getServiceById.test.js"
   },
   "dependencies": {
     "@emotion/react": "^11.11.3",
