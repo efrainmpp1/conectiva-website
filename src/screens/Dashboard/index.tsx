@@ -12,14 +12,18 @@ import {
   Toolbar,
   useMediaQuery,
   useTheme,
+  Avatar,
+  Menu as MuiMenu,
+  MenuItem,
 } from "@mui/material";
 import {
-  Menu,
+  Menu as MenuIcon,
   LayoutDashboard,
   PlayCircle,
   History,
   Coins,
   User,
+  BrainCircuit,
 } from "lucide-react";
 import { Outlet, Link as RouterLink } from "react-router-dom";
 import { useAuth } from "../../libs/context/AuthContext";
@@ -35,18 +39,27 @@ const menuItems = [
 ];
 
 const DashboardLayout: React.FC = () => {
-  const { user } = useAuth();
+  const { user, logout } = useAuth();
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
   const [open, setOpen] = useState(false);
+  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+
+  const handleMenuOpen = (event: React.MouseEvent<HTMLButtonElement>) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleMenuClose = () => {
+    setAnchorEl(null);
+  };
+
+  const handleLogout = async () => {
+    await logout();
+    handleMenuClose();
+  };
 
   const drawer = (
     <Box sx={{ width: drawerWidth }}>
-      <Box sx={{ p: 2 }}>
-        <Typography variant="subtitle1">
-          {user?.displayName || user?.email}
-        </Typography>
-      </Box>
       <List>
         {menuItems.map((item) => (
           <ListItemButton
@@ -65,24 +78,46 @@ const DashboardLayout: React.FC = () => {
 
   return (
     <Box sx={{ display: "flex" }}>
-      <AppBar
-        position="fixed"
-        sx={{ ml: { md: `${drawerWidth}px` } }}
-      >
-        <Toolbar>
-          {isMobile && (
-            <IconButton
-              color="inherit"
-              edge="start"
-              onClick={() => setOpen(true)}
-              sx={{ mr: 2 }}
-            >
-              <Menu />
+      <AppBar position="fixed" sx={{ ml: { md: `${drawerWidth}px` } }}>
+        <Toolbar sx={{ display: "flex", justifyContent: "space-between" }}>
+          <Box sx={{ display: "flex", alignItems: "center" }}>
+            {isMobile && (
+              <IconButton
+                color="inherit"
+                edge="start"
+                onClick={() => setOpen(true)}
+                sx={{ mr: 2 }}
+              >
+                <MenuIcon />
+              </IconButton>
+            )}
+            <Box sx={{ display: "flex", alignItems: "center" }}>
+              <BrainCircuit size={28} style={{ marginRight: 8 }} />
+              <Typography variant="h6" noWrap sx={{ fontWeight: 700 }}>
+                Conectiva
+              </Typography>
+            </Box>
+          </Box>
+          <Box>
+            <IconButton onClick={handleMenuOpen} color="inherit">
+              {user?.photoURL ? (
+                <Avatar
+                  src={user.photoURL}
+                  alt={user.displayName || user.email || "Usuário"}
+                />
+              ) : (
+                <Avatar>
+                  {(user?.displayName || user?.email || "").charAt(0).toUpperCase()}
+                </Avatar>
+              )}
             </IconButton>
-          )}
-          <Typography variant="h6" noWrap>
-            Conectiva
-          </Typography>
+            <MuiMenu anchorEl={anchorEl} open={Boolean(anchorEl)} onClose={handleMenuClose}>
+              <MenuItem component={RouterLink} to="/dashboard/perfil" onClick={handleMenuClose}>
+                Ver Perfil
+              </MenuItem>
+              <MenuItem onClick={handleLogout}>Sair</MenuItem>
+            </MuiMenu>
+          </Box>
         </Toolbar>
       </AppBar>
       <Box
