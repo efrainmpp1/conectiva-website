@@ -1,5 +1,6 @@
 import React from "react";
 import { Box, Typography } from "@mui/material";
+import { motion } from "framer-motion";
 import { Link as RouterLink } from "react-router-dom";
 
 interface DashboardActionButtonProps {
@@ -8,10 +9,16 @@ interface DashboardActionButtonProps {
   to: string;
 }
 
+const MotionBox = motion(Box);
+
 const DashboardActionButton: React.FC<DashboardActionButtonProps> = ({ icon, label, to }) => (
-  <Box
+  <MotionBox
     component={RouterLink}
     to={to}
+    initial={{ opacity: 0, y: 20 }}
+    animate={{ opacity: 1, y: 0 }}
+    transition={{ duration: 0.3 }}
+    whileHover={{ scale: 1.05 }}
     sx={{
       textDecoration: "none",
       display: "flex",
@@ -24,10 +31,9 @@ const DashboardActionButton: React.FC<DashboardActionButtonProps> = ({ icon, lab
       boxShadow: 1,
       p: 3,
       height: "100%",
-      transition: "transform 0.2s ease, box-shadow 0.2s ease",
+      transition: "box-shadow 0.3s ease",
       "&:hover": {
         boxShadow: 3,
-        transform: "translateY(-2px)",
       },
     }}
   >
@@ -35,7 +41,7 @@ const DashboardActionButton: React.FC<DashboardActionButtonProps> = ({ icon, lab
     <Typography variant="subtitle1" align="center">
       {label}
     </Typography>
-  </Box>
+  </MotionBox>
 );
 
 export default DashboardActionButton;
