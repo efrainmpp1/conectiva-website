@@ -1,5 +1,5 @@
 import React from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import {
   Box,
   Container,
@@ -9,12 +9,11 @@ import {
   Divider,
   Grid,
 } from "@mui/material";
-import { ArrowLeft } from "lucide-react";
+import BackHomeButton from "../../libs/components/BackHomeButton";
 import { getServiceById } from "../../services/Services";
 
 const ServicePage: React.FC = () => {
   const { id } = useParams<{ id: string }>();
-  const navigate = useNavigate();
 
   const service = getServiceById(id ?? "");
 
@@ -27,14 +26,7 @@ const ServicePage: React.FC = () => {
         <Typography paragraph>
           A ferramenta que você está procurando não existe ou foi removida.
         </Typography>
-        <Button
-          variant="contained"
-          color="primary"
-          onClick={() => navigate("/")}
-          sx={{ mt: 2 }}
-        >
-          Voltar para a página inicial
-        </Button>
+        <BackHomeButton sx={{ mt: 2 }} />
       </Container>
     );
   }
@@ -84,15 +76,9 @@ const ServicePage: React.FC = () => {
   };
 
   return (
-    <Box sx={{ pt: { xs: 12, md: 16 }, pb: { xs: 8, md: 12 } }}>
+    <Box sx={{ pt: { xs: 10, md: 12 }, pb: { xs: 8, md: 12 } }}>
       <Container maxWidth="lg">
-        <Button
-          startIcon={<ArrowLeft />}
-          sx={{ mb: 4 }}
-          onClick={() => navigate("/")}
-        >
-          Voltar para a página inicial
-        </Button>
+        <BackHomeButton />
 
         <Paper
           elevation={2}
@@ -201,3 +187,4 @@ const ServicePage: React.FC = () => {
 };
 
 export default ServicePage;
+

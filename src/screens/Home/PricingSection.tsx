@@ -59,7 +59,11 @@ const pricingPlans = [
   },
 ];
 
-const PricingSection: React.FC = () => {
+interface PricingSectionProps {
+  topAction?: React.ReactNode;
+}
+
+const PricingSection: React.FC<PricingSectionProps> = ({ topAction }) => {
   const navigate = useNavigate();
 
   return (
@@ -70,6 +74,7 @@ const PricingSection: React.FC = () => {
       }}
     >
       <Container maxWidth="lg">
+        {topAction && <Box sx={{ mb: 4 }}>{topAction}</Box>}
         <Box sx={{ textAlign: "center", mb: 8 }}>
           <Typography
             variant="h2"

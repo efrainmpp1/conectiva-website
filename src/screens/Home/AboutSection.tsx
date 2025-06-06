@@ -16,7 +16,11 @@ interface StatItem {
   label: string;
 }
 
-const AboutSection: React.FC = () => {
+interface AboutSectionProps {
+  topAction?: React.ReactNode;
+}
+
+const AboutSection: React.FC<AboutSectionProps> = ({ topAction }) => {
   const theme = useTheme();
 
   const stats: StatItem[] = [
@@ -51,6 +55,7 @@ const AboutSection: React.FC = () => {
       }}
     >
       <Container maxWidth="lg">
+        {topAction && <Box sx={{ mb: 4 }}>{topAction}</Box>}
         <Box sx={{ textAlign: "center", mb: 8 }}>
           <Typography
             variant="h2"
