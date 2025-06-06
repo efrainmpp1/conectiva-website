@@ -8,7 +8,12 @@ import PlansPage from './screens/Plans';
 import ContactPage from './screens/Contact';
 import LoginPage from './screens/Login';
 import RegisterPage from './screens/Register';
-import DashboardPage from './screens/Dashboard';
+import DashboardLayout from './screens/Dashboard';
+import DashboardHome from './screens/Dashboard/Home';
+import AgentPage from './screens/Dashboard/Agent';
+import HistoryPage from './screens/Dashboard/History';
+import CoinsPage from './screens/Dashboard/Coins';
+import ProtectedRoute from './libs/components/ProtectedRoute';
 
 const router = createBrowserRouter([
   {
@@ -45,7 +50,29 @@ const router = createBrowserRouter([
       },
       {
         path: 'dashboard',
-        element: <DashboardPage />,
+        element: (
+          <ProtectedRoute>
+            <DashboardLayout />
+          </ProtectedRoute>
+        ),
+        children: [
+          {
+            index: true,
+            element: <DashboardHome />,
+          },
+          {
+            path: 'agente',
+            element: <AgentPage />,
+          },
+          {
+            path: 'historico',
+            element: <HistoryPage />,
+          },
+          {
+            path: 'moedas',
+            element: <CoinsPage />,
+          },
+        ],
       },
     ],
   },
