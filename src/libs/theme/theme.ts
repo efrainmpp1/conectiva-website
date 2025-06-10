@@ -1,18 +1,47 @@
 import { createTheme } from '@mui/material/styles';
 
-// Create a custom theme
+declare module '@mui/material/styles' {
+  interface Palette {
+    gradients: {
+      bluePurple: string;
+      purplePink: string;
+    };
+  }
+  interface PaletteOptions {
+    gradients?: {
+      bluePurple?: string;
+      purplePink?: string;
+    };
+  }
+
+  interface Theme {
+    customShadows: {
+      neon: string;
+      card: string;
+    };
+  }
+  interface ThemeOptions {
+    customShadows?: {
+      neon?: string;
+      card?: string;
+    };
+  }
+}
+
+// Create a custom theme with a dark/neon palette
 const theme = createTheme({
   palette: {
+    mode: 'dark',
     primary: {
-      light: '#8e63f9',
-      main: '#6a11cb',
-      dark: '#4b088a',
+      light: '#f357a8',
+      main: '#7b2ff2',
+      dark: '#1e1b4b',
       contrastText: '#fff',
     },
     secondary: {
-      light: '#4895ff',
-      main: '#2575fc',
-      dark: '#1a54b3',
+      light: '#7b2ff2',
+      main: '#f357a8',
+      dark: '#b31370',
       contrastText: '#fff',
     },
     success: {
@@ -25,11 +54,16 @@ const theme = createTheme({
       main: '#F44336',
     },
     background: {
-      default: '#FAFAFA',
+      default: '#141627',
+      paper: '#1e1b4b',
+    },
+    gradients: {
+      bluePurple: 'linear-gradient(45deg, #1e1b4b 0%, #7b2ff2 100%)',
+      purplePink: 'linear-gradient(45deg, #7b2ff2 0%, #f357a8 100%)',
     },
   },
   typography: {
-    fontFamily: '"Inter", "Source Sans Pro", "Roboto", "Helvetica", "Arial", sans-serif',
+    fontFamily: '"Inter", "Space Grotesk", "Montserrat", sans-serif',
     h1: {
       fontWeight: 600,
       fontSize: '2.75rem',
@@ -79,16 +113,20 @@ const theme = createTheme({
     borderRadius: 8,
   },
   spacing: 8,
+  customShadows: {
+    neon: '0 0 10px rgba(123,47,242,0.7), 0 0 20px rgba(123,47,242,0.5)',
+    card: '0 0 15px rgba(123,47,242,0.3)',
+  },
   components: {
     MuiButton: {
       styleOverrides: {
         root: {
           padding: '10px 24px',
-          boxShadow: '0 2px 4px rgba(0,0,0,0.1)',
+          boxShadow: '0 0 6px rgba(243,87,168,0.4)',
         },
         containedPrimary: {
           '&:hover': {
-            boxShadow: '0 4px 8px rgba(0,0,0,0.15)',
+            boxShadow: '0 0 10px rgba(243,87,168,0.6)',
           },
         },
       },
@@ -96,11 +134,11 @@ const theme = createTheme({
     MuiCard: {
       styleOverrides: {
         root: {
-          boxShadow: '0 2px 8px rgba(0,0,0,0.08)',
+          boxShadow: '0 0 10px rgba(123,47,242,0.2)',
           transition: 'transform 0.3s ease, box-shadow 0.3s ease',
           '&:hover': {
             transform: 'translateY(-4px)',
-            boxShadow: '0 6px 12px rgba(0,0,0,0.12)',
+            boxShadow: '0 0 20px rgba(243,87,168,0.4)',
           },
         },
       },
@@ -108,7 +146,7 @@ const theme = createTheme({
     MuiAppBar: {
       styleOverrides: {
         root: {
-          boxShadow: '0 2px 4px rgba(0,0,0,0.05)',
+          boxShadow: '0 0 8px rgba(123,47,242,0.2)',
         },
       },
     },
