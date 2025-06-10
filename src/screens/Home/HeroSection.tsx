@@ -13,9 +13,10 @@ const HeroSection: React.FC = () => {
     <Box
       id="home"
       sx={{
-        background: "linear-gradient(135deg, #1a237e 0%, #0d1b2a 100%)",
+        background: "linear-gradient(135deg, #7B1FA2 0%, #512DA8 100%)",
         pt: { xs: 15, md: 20 },
         pb: { xs: 8, md: 12 },
+        minHeight: { md: "80vh" },
         overflow: "hidden",
         position: "relative",
         color: "#fff",
@@ -36,16 +37,15 @@ const HeroSection: React.FC = () => {
                 gutterBottom
                 sx={{
                   fontWeight: 800,
-                  textTransform: "uppercase",
                   fontSize: { xs: "2.8rem", sm: "3.4rem", md: "4rem" },
-                  background:
-                    "linear-gradient(90deg, #6a11cb 0%, #2575fc 100%)",
-                  WebkitBackgroundClip: "text",
-                  WebkitTextFillColor: "transparent",
                   mb: 2,
+                  textShadow: "0 2px 4px rgba(0,0,0,0.4)",
                 }}
               >
-                Turbine seus leads com IA
+                Turbine seus leads com{' '}
+                <Box component="span" sx={{ color: '#FFEB3B' }}>
+                  IA
+                </Box>
               </Typography>
 
               <Typography
@@ -143,7 +143,7 @@ const HeroSection: React.FC = () => {
                   width: "100px",
                   height: "100px",
                   background:
-                    "linear-gradient(45deg, #6a11cb 0%, #2575fc 100%)",
+                    "linear-gradient(45deg, #7B1FA2 0%, #512DA8 100%)",
                   borderRadius: "50%",
                   opacity: 0.4,
                   zIndex: 0,
@@ -158,7 +158,7 @@ const HeroSection: React.FC = () => {
                   width: "150px",
                   height: "150px",
                   background:
-                    "linear-gradient(45deg, #2575fc 0%, #6a11cb 100%)",
+                    "linear-gradient(45deg, #512DA8 0%, #7B1FA2 100%)",
                   borderRadius: "50%",
                   opacity: 0.3,
                   filter: "blur(3px)",
