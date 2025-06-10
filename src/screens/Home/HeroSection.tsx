@@ -1,6 +1,6 @@
 import React from "react";
 import { Box, Typography, Button, Container, Grid } from "@mui/material";
-import { useTheme, alpha } from "@mui/material/styles";
+import { useTheme } from "@mui/material/styles";
 import { Link as ScrollLink } from "react-scroll";
 import { useNavigate } from "react-router-dom";
 import { ArrowRight, Cpu } from "lucide-react";
@@ -15,15 +15,23 @@ const HeroSection: React.FC = () => {
     <Box
       id="home"
       sx={{
-        background: "linear-gradient(135deg, #7B1FA2 0%, #512DA8 100%)",
+        background: theme.palette.gradients.bluePurple,
         pt: { xs: 15, md: 20 },
         pb: { xs: 8, md: 12 },
-        minHeight: { md: "80vh" },
-        overflow: "hidden",
-        position: "relative",
-        color: "#fff",
+        minHeight: { md: '80vh' },
+        overflow: 'hidden',
+        position: 'relative',
+        color: '#fff',
       }}
     >
+      <Box
+        sx={{
+          position: 'absolute',
+          inset: 0,
+          pointerEvents: 'none',
+          backgroundImage: `radial-gradient(circle at 30% 30%, rgba(123,47,242,0.25), transparent 40%), radial-gradient(circle at 70% 60%, rgba(243,87,168,0.2), transparent 45%)`,
+        }}
+      />
       <Container maxWidth="lg">
         <Grid container spacing={4} alignItems="center">
           <Grid item xs={12} md={6}>
@@ -39,13 +47,20 @@ const HeroSection: React.FC = () => {
                 gutterBottom
                 sx={{
                   fontWeight: 800,
-                  fontSize: { xs: "2.8rem", sm: "3.4rem", md: "4rem" },
+                  fontSize: { xs: '2.8rem', sm: '3.4rem', md: '4rem' },
                   mb: 2,
-                  textShadow: "0 2px 4px rgba(0,0,0,0.4)",
+                  textShadow: '0 2px 4px rgba(0,0,0,0.4)',
                 }}
               >
-                Turbine seus leads com{" "}
-                <Box component="span" sx={{ color: "#FFEB3B" }}>
+                Impulsione seus Leads com{' '}
+                <Box
+                  component="span"
+                  sx={{
+                    background: theme.palette.gradients.purplePink,
+                    WebkitBackgroundClip: 'text',
+                    WebkitTextFillColor: 'transparent',
+                  }}
+                >
                   IA
                 </Box>
               </Typography>
@@ -60,8 +75,7 @@ const HeroSection: React.FC = () => {
                   mx: { xs: "auto", md: 0 },
                 }}
               >
-                Automatize a prospeção e conquiste clientes de forma inteligente
-                com nossa plataforma de IA.
+                Geração de clientes em escala com automação inteligente.
               </Typography>
 
               <Box
@@ -82,14 +96,13 @@ const HeroSection: React.FC = () => {
                     py: 1.5,
                     px: 3,
                     fontWeight: 600,
-                    borderRadius: "50px",
-                    boxShadow: `0 8px 20px ${alpha(
-                      theme.palette.primary.main,
-                      0.4
-                    )}`,
+                    borderRadius: theme.shape.borderRadius * 2,
+                    background: theme.palette.gradients.purplePink,
+                    boxShadow: theme.customShadows.neon,
+                    color: '#fff',
                   }}
                 >
-                  Comece Gratuitamente
+                  Start Free Trial
                 </MotionButton>
 
                 <ScrollLink
@@ -101,7 +114,6 @@ const HeroSection: React.FC = () => {
                 >
                   <MotionButton
                     variant="outlined"
-                    color="secondary"
                     size="large"
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
@@ -110,9 +122,11 @@ const HeroSection: React.FC = () => {
                       py: 1.5,
                       px: 3,
                       fontWeight: 600,
-                      borderRadius: "50px",
-                      color: "#fff",
-                      borderColor: "rgba(255,255,255,0.6)",
+                      borderRadius: theme.shape.borderRadius * 2,
+                      color: '#fff',
+                      border: '2px solid transparent',
+                      background:
+                        `linear-gradient(${theme.palette.background.paper}, ${theme.palette.background.paper}) padding-box, ${theme.palette.gradients.purplePink} border-box`,
                     }}
                   >
                     Ver Funcionalidades
@@ -130,36 +144,38 @@ const HeroSection: React.FC = () => {
                 position: "relative",
               }}
             >
-              <Cpu size={220} color="#ffffff" />
+              <Cpu
+                size={220}
+                color={theme.palette.primary.light}
+                style={{ filter: 'drop-shadow(0 0 10px rgba(123,47,242,0.6))' }}
+              />
 
               {/* Decorative Elements */}
               <Box
                 sx={{
-                  position: "absolute",
+                  position: 'absolute',
                   top: { xs: -10, md: -20 },
                   right: { xs: 10, md: 40 },
-                  width: "100px",
-                  height: "100px",
-                  background:
-                    "linear-gradient(45deg, #7B1FA2 0%, #512DA8 100%)",
-                  borderRadius: "50%",
+                  width: '100px',
+                  height: '100px',
+                  background: theme.palette.gradients.purplePink,
+                  borderRadius: '50%',
                   opacity: 0.4,
                   zIndex: 0,
-                  filter: "blur(2px)",
+                  filter: 'blur(2px)',
                 }}
               />
               <Box
                 sx={{
-                  position: "absolute",
+                  position: 'absolute',
                   bottom: { xs: -10, md: -30 },
                   left: { xs: 10, md: 30 },
-                  width: "150px",
-                  height: "150px",
-                  background:
-                    "linear-gradient(45deg, #512DA8 0%, #7B1FA2 100%)",
-                  borderRadius: "50%",
+                  width: '150px',
+                  height: '150px',
+                  background: theme.palette.gradients.bluePurple,
+                  borderRadius: '50%',
                   opacity: 0.3,
-                  filter: "blur(3px)",
+                  filter: 'blur(3px)',
                   zIndex: 0,
                 }}
               />
