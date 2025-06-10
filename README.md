@@ -4,10 +4,6 @@ Plataforma para geração de leads com agentes de IA sob medida.
 
 <!-- Badges can be added here -->
 
-## Demonstração
-
-![Tela inicial](src/assets/busca_empresas.jpeg)
-
 ## Funcionalidades Principais
 
 - **Análise de Editais com IA**
