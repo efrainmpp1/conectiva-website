@@ -8,6 +8,8 @@ import PlansPage from './screens/Plans';
 import ContactPage from './screens/Contact';
 import LoginPage from './screens/Login';
 import RegisterPage from './screens/Register';
+import EditalPage from './screens/Agent/Edital';
+import ProspeccaoPage from './screens/Agent/Prospeccao';
 import DashboardLayout from './screens/Dashboard';
 import DashboardHome from './screens/Dashboard/Home';
 import AgentPage from './screens/Dashboard/Agent';
@@ -48,6 +50,14 @@ const router = createBrowserRouter([
       {
         path: 'cadastro',
         element: <RegisterPage />,
+      },
+      {
+        path: 'agent/edital',
+        element: <EditalPage />,
+      },
+      {
+        path: 'agent/prospeccao',
+        element: <ProspeccaoPage />,
       },
       {
         path: 'dashboard',
