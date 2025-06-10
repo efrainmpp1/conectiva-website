@@ -2,6 +2,7 @@ import React from "react";
 import { Box, Typography, Button, Container, Grid } from "@mui/material";
 import { useTheme, alpha } from "@mui/material/styles";
 import { Link as ScrollLink } from "react-scroll";
+import { useNavigate } from "react-router-dom";
 import { ArrowRight, Cpu } from "lucide-react";
 import { motion } from "framer-motion";
 
@@ -9,6 +10,7 @@ const MotionButton = motion(Button);
 
 const HeroSection: React.FC = () => {
   const theme = useTheme();
+  const navigate = useNavigate();
   return (
     <Box
       id="home"
@@ -68,31 +70,24 @@ const HeroSection: React.FC = () => {
                   justifyContent: { xs: "center", md: "flex-start" },
                 }}
               >
-                <ScrollLink
-                  to="about"
-                  spy={true}
-                  smooth={true}
-                  offset={-70}
-                  duration={500}
+                <MotionButton
+                  variant="contained"
+                  color="primary"
+                  size="large"
+                  endIcon={<ArrowRight />}
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  onClick={() => navigate("/register")}
+                  sx={{
+                    py: 1.5,
+                    px: 3,
+                    fontWeight: 600,
+                    borderRadius: "50px",
+                    boxShadow: `0 8px 20px ${alpha(theme.palette.primary.main, 0.4)}`,
+                  }}
                 >
-                  <MotionButton
-                    variant="contained"
-                    color="primary"
-                    size="large"
-                    endIcon={<ArrowRight />}
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                    sx={{
-                      py: 1.5,
-                      px: 3,
-                      fontWeight: 600,
-                      borderRadius: "50px",
-                      boxShadow: `0 8px 20px ${alpha(theme.palette.primary.main, 0.4)}`,
-                    }}
-                  >
-                    Comece Gratuitamente
-                  </MotionButton>
-                </ScrollLink>
+                  Comece Gratuitamente
+                </MotionButton>
 
                 <ScrollLink
                   to="services"
