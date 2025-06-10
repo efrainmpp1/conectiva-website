@@ -15,7 +15,7 @@ import {
   useTheme,
 } from "@mui/material";
 import { alpha } from "@mui/material/styles";
-import { Menu, BrainCircuit } from "lucide-react";
+import { Menu, BrainCircuit, LogIn } from "lucide-react";
 import { Link as RouterLink, useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -140,6 +140,21 @@ const Navbar: React.FC = () => {
                       </Button>
                     </motion.div>
                   ))}
+                  <Button
+                    variant="contained"
+                    color="primary"
+                    startIcon={<LogIn size={18} />}
+                    component={RouterLink}
+                    to="/login"
+                    sx={{
+                      ml: 2,
+                      borderRadius: "12px",
+                      fontWeight: 600,
+                      boxShadow: "0 2px 6px rgba(0,0,0,0.15)",
+                    }}
+                  >
+                    Entrar
+                  </Button>
                 </Box>
               )}
 
@@ -199,6 +214,22 @@ const Navbar: React.FC = () => {
               </ListItem>
             ))}
           </List>
+          <Box sx={{ textAlign: "center", mt: 2 }}>
+            <Button
+              variant="contained"
+              color="primary"
+              startIcon={<LogIn size={18} />}
+              component={RouterLink}
+              to="/login"
+              sx={{
+                borderRadius: "12px",
+                fontWeight: 600,
+                boxShadow: "0 2px 6px rgba(0,0,0,0.15)",
+              }}
+            >
+              Entrar
+            </Button>
+          </Box>
         </Box>
       </Drawer>
     </AnimatePresence>
