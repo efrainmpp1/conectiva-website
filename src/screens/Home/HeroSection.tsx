@@ -44,8 +44,8 @@ const HeroSection: React.FC = () => {
                   textShadow: "0 2px 4px rgba(0,0,0,0.4)",
                 }}
               >
-                Turbine seus leads com{' '}
-                <Box component="span" sx={{ color: '#FFEB3B' }}>
+                Turbine seus leads com{" "}
+                <Box component="span" sx={{ color: "#FFEB3B" }}>
                   IA
                 </Box>
               </Typography>
@@ -77,13 +77,16 @@ const HeroSection: React.FC = () => {
                   endIcon={<ArrowRight />}
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
-                  onClick={() => navigate("/register")}
+                  onClick={() => navigate("/cadastro")}
                   sx={{
                     py: 1.5,
                     px: 3,
                     fontWeight: 600,
                     borderRadius: "50px",
-                    boxShadow: `0 8px 20px ${alpha(theme.palette.primary.main, 0.4)}`,
+                    boxShadow: `0 8px 20px ${alpha(
+                      theme.palette.primary.main,
+                      0.4
+                    )}`,
                   }}
                 >
                   Comece Gratuitamente
