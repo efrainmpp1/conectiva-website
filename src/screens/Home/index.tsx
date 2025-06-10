@@ -4,11 +4,13 @@ import HeroSection from "./HeroSection";
 import ServicesSection from "./ServicesSection";
 import AboutPreview from "./AboutPreview";
 import PricingSection from "./PricingSection";
+import FeatureCards from "./components/FeatureCards";
 
 const Home: React.FC = () => {
   return (
     <Box>
       <HeroSection />
+      <FeatureCards />
       <AboutPreview />
       <ServicesSection />
       <PricingSection />
