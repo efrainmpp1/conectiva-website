@@ -50,12 +50,12 @@ const AboutSection: React.FC<AboutSectionProps> = ({ topAction }) => {
     <Box
       id="about"
       sx={{
-        py: { xs: 8, md: 12 },
+        py: { xs: 8, md: 3 },
         background: "#ffffff",
       }}
     >
       <Container maxWidth="lg">
-        {topAction && <Box sx={{ mb: 4 }}>{topAction}</Box>}
+        {topAction && <Box>{topAction}</Box>}
         <Box sx={{ textAlign: "center", mb: 8 }}>
           <Typography
             variant="h2"

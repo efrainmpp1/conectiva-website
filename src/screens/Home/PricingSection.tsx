@@ -69,12 +69,12 @@ const PricingSection: React.FC<PricingSectionProps> = ({ topAction }) => {
   return (
     <Box
       sx={{
-        py: { xs: 8, md: 12 },
+        py: { xs: 8, md: 3 },
         backgroundColor: "#f8f9fa",
       }}
     >
       <Container maxWidth="lg">
-        {topAction && <Box sx={{ mb: 4 }}>{topAction}</Box>}
+        {topAction && <Box>{topAction}</Box>}
         <Box sx={{ textAlign: "center", mb: 8 }}>
           <Typography
             variant="h2"
@@ -109,8 +109,8 @@ const PricingSection: React.FC<PricingSectionProps> = ({ topAction }) => {
               mt: 4,
             }}
           >
-            Escolha o plano ideal para sua necessidade ou compre créditos avulsos
-            para usar quando precisar.
+            Escolha o plano ideal para sua necessidade ou compre créditos
+            avulsos para usar quando precisar.
           </Typography>
         </Box>
 
