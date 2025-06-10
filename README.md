@@ -1,54 +1,22 @@
-# CONECTIVA – Website
+# Conectiva
 
-This repository contains the source code for the official website and service interface of **CONECTIVA**, a platform that uses artificial intelligence to automate lead generation for companies based on public bidding documents and business descriptions.
+Plataforma para geração de leads com agentes de IA sob medida.
 
-## 🚀 Features
+<!-- Badges can be added here -->
 
-- 🧠 AI-powered agent that reads public bidding PDFs and returns compatible companies.
-- 💬 Business description-to-prospects tool using natural language input.
-- ⚡ Credit-based pricing system integrated into the frontend.
-- 📱 Responsive and modern interface using React + MUI.
-- 🎥 Embedded demo videos and structured product pages.
-- 🧩 Modular architecture for easy scalability.
+## Demonstração
 
-## 🛠️ Tech Stack
+![Tela inicial](src/assets/busca_empresas.jpeg)
 
-- **Frontend:** React + TypeScript
-- **UI Framework:** Material UI (MUI)
-- **Routing:** React Router
-- **Build Tool:** Vite
-- **Language:** TypeScript
-- **Hosting:** (to be defined)
+## Funcionalidades Principais
 
-## 📂 Folder Structure
+- **Análise de Editais com IA**
+- **Prospecção inteligente por descrição**
+- **Sistema de créditos e planos**
+- **Autenticação por e-mail/senha e Google**
+- **Dashboard interativo com menu lateral**
 
-```
-src/
-├── assets/
-├── libs/
-│   ├── components/
-│   ├── interfaces/
-│   └── theme/
-├── screens/
-│   ├── About/
-│   ├── Contact/
-│   ├── Home/
-│   ├── Plans/
-│   └── Service/
-├── services/
-│   ├── Services/
-│   └── mocks/
-├── router.tsx
-├── App.tsx
-├── main.tsx
-├── index.css
-└── vite-env.d.ts
-
-```
-
-## 🧪 Running Locally
-
-Make sure you have Node.js and npm installed.
+## Instalação
 
 ```bash
 git clone https://github.com/efrainmpp1/conectiva-website.git
@@ -57,13 +25,66 @@ npm install
 npm run dev
 ```
 
-### Running tests and lint
+## Variáveis de Ambiente
 
-After installing dependencies you can run:
+Crie um arquivo `.env` seguindo o exemplo abaixo:
 
 ```bash
-npm test       # runs Node's test runner
-npm run lint   # runs ESLint if available
+VITE_FIREBASE_API_KEY=your_api_key
+VITE_FIREBASE_AUTH_DOMAIN=your_auth_domain
+VITE_FIREBASE_PROJECT_ID=your_project_id
+VITE_FIREBASE_STORAGE_BUCKET=your_storage_bucket
+VITE_FIREBASE_MESSAGING_SENDER_ID=your_sender_id
+VITE_FIREBASE_APP_ID=your_app_id
 ```
 
-The lint command skips execution when ESLint is not installed.
+## Tecnologias Utilizadas
+
+- React + Vite + TypeScript
+- Firebase Authentication
+- Axios
+- Framer Motion
+- Material UI
+- Flask + Node.js (APIs)
+
+## Estrutura de Pastas
+
+```text
+src/
+├── assets/
+├── libs/
+│   ├── components/
+│   ├── context/
+│   ├── interfaces/
+│   └── theme/
+├── screens/
+│   ├── About/
+│   ├── Contact/
+│   ├── Dashboard/
+│   ├── Home/
+│   ├── Login/
+│   ├── Plans/
+│   ├── Register/
+│   └── Service/
+├── services/
+│   ├── Services/
+│   ├── apiIA.ts
+│   ├── apiNode.ts
+│   ├── firebase.ts
+│   └── mocks/
+├── router.tsx
+├── App.tsx
+├── main.tsx
+├── index.css
+└── vite-env.d.ts
+```
+
+## Colaborador
+
+- Efrain Marcelo Pulgar Pantaleon - [efrainmpp1](https://github.com/efrainmpp1)
+
+## Licença
+
+Este projeto ainda não possui uma licença definida.
+
+
