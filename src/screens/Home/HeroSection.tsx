@@ -25,7 +25,6 @@ const HeroSection: React.FC = () => {
         position: 'relative',
         color: '#fff',
       }}
-        }}
         initial={{ opacity: 0, y: reduceMotion ? 0 : 40 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
