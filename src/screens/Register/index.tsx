@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import type { FirebaseError } from "firebase/app";
 import {
   Box,
   Paper,
@@ -29,6 +30,25 @@ const RegisterPage: React.FC = () => {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [errors, setErrors] = useState<FormErrors>({});
   const [loading, setLoading] = useState(false);
+
+  const getErrorMessage = (error: unknown): string => {
+    if (typeof error === "object" && error && (error as FirebaseError).code) {
+      const code = (error as FirebaseError).code;
+      switch (code) {
+        case "auth/email-already-in-use":
+          return "E-mail já cadastrado";
+        case "auth/invalid-email":
+          return "E-mail inválido";
+        case "auth/weak-password":
+          return "Senha deve ter pelo menos 6 caracteres";
+        case "auth/network-request-failed":
+          return "Problema de rede. Tente novamente";
+        default:
+          return "Falha ao criar conta";
+      }
+    }
+    return "Falha ao criar conta";
+  };
 
   const validate = (): boolean => {
     const newErrors: FormErrors = {};
@@ -75,7 +95,8 @@ const RegisterPage: React.FC = () => {
       await signUp(name, email, password);
       navigate("/dashboard");
     } catch (err) {
-      setErrors({ general: "Falha ao criar conta" });
+      console.error(err);
+      setErrors({ general: getErrorMessage(err) });
     } finally {
       setLoading(false);
     }
