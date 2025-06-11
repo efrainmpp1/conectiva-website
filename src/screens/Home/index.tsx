@@ -5,6 +5,7 @@ import ServicesSection from "./ServicesSection";
 import AboutPreview from "./AboutPreview";
 import PricingSection from "./PricingSection";
 import FeatureCards from "./components/FeatureCards";
+import FeatureIcons from "./components/FeatureIcons";
 
 const Home: React.FC = () => {
   return (
@@ -14,6 +15,7 @@ const Home: React.FC = () => {
       <AboutPreview />
       <ServicesSection />
       <PricingSection />
+      <FeatureIcons />
     </Box>
   );
 };
