@@ -30,14 +30,17 @@ const FeatureIcons: React.FC = () => {
     >
       <Container maxWidth="lg">
         <MotionBox
-          role="list"
+          component="ul"
           sx={{
             display: 'flex',
             justifyContent: 'center',
             alignItems: 'center',
-            flexWrap: { xs: 'nowrap', sm: 'wrap' },
+            flexWrap: { xs: 'nowrap', sm: 'inherit' },
             overflowX: { xs: 'auto', sm: 'visible' },
             px: { xs: 2, md: 0 },
+            listStyle: 'none',
+            m: 0,
+            p: 0,
           }}
           initial={{ opacity: 0, y: reduceMotion ? 0 : 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -49,7 +52,7 @@ const FeatureIcons: React.FC = () => {
             return (
               <React.Fragment key={item.label}>
                 <Box
-                  role="listitem"
+                  component="li"
                   sx={{
                     display: 'flex',
                     flexDirection: 'column',
