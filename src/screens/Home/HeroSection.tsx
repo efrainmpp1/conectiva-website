@@ -18,9 +18,11 @@ const HeroSection: React.FC = () => {
       id="home"
       sx={{
         background: theme.palette.gradients.bluePurple,
-        pt: { xs: 15, md: 20 },
-        pb: { xs: 8, md: 12 },
-        minHeight: { md: '80vh' },
+        minHeight: '100vh',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center',
         overflow: 'hidden',
         position: 'relative',
         color: theme.palette.common.white,
