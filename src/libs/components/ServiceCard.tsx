@@ -87,7 +87,7 @@ const ServiceCard: React.FC<ServiceCardProps> = ({ service }) => {
           onClick={handleServiceClick}
           sx={{ alignSelf: "flex-start", mt: "auto" }}
         >
-          Ver Mais
+          Learn More
         </Button>
       </CardContent>
     </Card>

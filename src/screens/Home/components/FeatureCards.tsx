@@ -23,22 +23,22 @@ const FeatureCards: React.FC = () => {
       icon: <GanttChart size={56} color={theme.palette.primary.light} />,
       title: 'Agente de Edital',
       description:
-        'Envie o edital em PDF e receba empresas compatíveis em minutos.',
+        'Envie o edital e receba empresas ideais em minutos.',
       cta: 'Try Now',
     },
     {
       icon: <Search size={56} color={theme.palette.primary.light} />,
       title: 'Busca Descritiva',
       description:
-        'Descreva a empresa ideal e gere uma lista qualificada.',
+        'Descreva sua empresa ideal e gere uma lista em segundos.',
       cta: 'Generate My List',
     },
     {
       icon: <Mail size={56} color={theme.palette.primary.light} />,
       title: 'Contato Automático',
       description:
-        'Envie campanhas personalizadas para prospects de forma rápida.',
-      cta: 'Start Outreach',
+        'Dispare campanhas personalizadas em escala.',
+      cta: 'Start Free Trial',
     },
   ];
 

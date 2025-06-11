@@ -100,8 +100,7 @@ const FAQSection: React.FC = () => {
               mt: 4,
             }}
           >
-            Encontre respostas para perguntas comuns sobre nossas soluções de
-            geração de leads com IA.
+            Encontre respostas sobre nossa plataforma de IA e geração de leads.
           </Typography>
         </Box>
 

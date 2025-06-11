@@ -3,9 +3,9 @@ import { Service } from "../../libs/interfaces/Service";
 export const services: Service[] = [
   {
     id: "ai-public-bidding",
-    title: "Encontre empresas certas para cada edital em minutos",
+    title: "Empresas certas para cada edital em minutos",
     shortDescription:
-      "Envie um edital de licitação em PDF e receba uma lista qualificada de empresas prontas para participar.",
+      "Envie o edital em PDF e receba empresas prontas em minutos.",
     fullDescription: [
       "Você envia um edital em PDF e nós cuidamos do resto. Nosso sistema de IA interpreta o documento, entende o objeto da licitação, identifica automaticamente os CNAEs compatíveis e avalia critérios como porte da empresa, região e requisitos legais.",
       "\uD83D\uDCA1 Benefícios principais:",
@@ -21,9 +21,9 @@ export const services: Service[] = [
   },
   {
     id: "ai-search-companies",
-    title: "Descreva a empresa. A IA encontra para você.",
+    title: "Descreva a empresa e a IA encontra.",
     shortDescription:
-      "Digite como seria a empresa ideal e receba uma lista com contatos reais de negócios compatíveis.",
+      "Digite a empresa ideal e receba contatos qualificados em segundos.",
     fullDescription: [
       'Descreva o tipo de empresa que você quer alcançar em linguagem natural. Exemplo: "Preciso de fornecedores de EPI em São Paulo".',
       "Nossa IA entende sua necessidade, identifica automaticamente os CNAEs certos, cruza com nossa base nacional e retorna uma lista com empresas qualificadas para prospecção.",

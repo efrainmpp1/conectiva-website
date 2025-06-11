@@ -62,7 +62,7 @@ const HeroSection: React.FC = () => {
                   textShadow: '0 2px 4px rgba(0,0,0,0.4)',
                 }}
               >
-                Impulsione seus Leads com{' '}
+                Impulsione Leads com{' '}
                 <Box
                   component="span"
                   sx={{
@@ -85,7 +85,7 @@ const HeroSection: React.FC = () => {
                   color: alpha(theme.palette.common.white, 0.8),
                 }}
               >
-                Geração de clientes em escala com automação inteligente.
+                Automatize a geração de clientes com IA.
               </Typography>
 
               <Box
@@ -141,7 +141,7 @@ const HeroSection: React.FC = () => {
                         `linear-gradient(${theme.palette.background.paper}, ${theme.palette.background.paper}) padding-box, ${theme.palette.gradients.purplePink} border-box`,
                     }}
                   >
-                    Ver Funcionalidades
+                    Explore Features
                   </MotionButton>
                 </ScrollLink>
               </Box>

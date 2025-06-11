@@ -111,8 +111,7 @@ const PricingSection: React.FC<PricingSectionProps> = ({ topAction }) => {
               mt: 4,
             }}
           >
-            Escolha o plano ideal para sua necessidade ou compre créditos
-            avulsos para usar quando precisar.
+            Escolha um plano e adicione créditos extras quando quiser.
           </Typography>
         </Box>
 
@@ -208,7 +207,7 @@ const PricingSection: React.FC<PricingSectionProps> = ({ topAction }) => {
                       }),
                     }}
                   >
-                    {plan.highlight ? "Começar Agora" : "Selecionar Plano"}
+                    {plan.highlight ? "Start Free Trial" : "Select Plan"}
                   </Button>
                 </CardActions>
               </Card>
@@ -224,7 +223,7 @@ const PricingSection: React.FC<PricingSectionProps> = ({ topAction }) => {
             onClick={() => navigate("/planos")}
             sx={{ mr: 2 }}
           >
-            Ver todos os planos
+            View Plans
           </Button>
           <Button
             variant="contained"
@@ -232,7 +231,7 @@ const PricingSection: React.FC<PricingSectionProps> = ({ topAction }) => {
             size="large"
             onClick={() => navigate("/planos")}
           >
-            Comprar créditos avulsos
+            Buy Credits
           </Button>
         </Box>
 

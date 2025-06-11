@@ -51,8 +51,7 @@ const ServicesSection: React.FC = () => {
               mt: 4,
             }}
           >
-            Descubra como nossas soluções impulsionadas por IA podem transformar
-            suas estratégias de geração de leads e aquisição de clientes.
+            Conheça nossas soluções de IA para turbinar sua prospecção.
           </Typography>
         </Box>
 

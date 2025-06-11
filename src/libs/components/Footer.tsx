@@ -33,8 +33,7 @@ const Footer: React.FC = () => {
               Conectiva
             </Typography>
             <Typography variant="body2" sx={{ maxWidth: "80%", mb: 2 }}>
-              Revolucionando a geração de leads e a aquisição de clientes com o
-              poder da inteligência artificial.
+              Impulsionando sua prospecção com IA avançada.
             </Typography>
             <Box sx={{ display: "flex", gap: 1 }}>
               <IconButton color="inherit" size="small" aria-label="twitter">

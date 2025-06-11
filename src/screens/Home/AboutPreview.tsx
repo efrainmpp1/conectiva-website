@@ -51,9 +51,7 @@ const AboutPreview: React.FC = () => {
                   mb: 3,
                 }}
               >
-                Estamos revolucionando a maneira como as empresas abordam a geração
-                de leads e a aquisição de clientes com nossa plataforma alimentada
-                por IA.
+                Aceleramos a prospecção de clientes com IA avançada.
               </Typography>
 
               <Typography
@@ -62,11 +60,8 @@ const AboutPreview: React.FC = () => {
                 paragraph
                 sx={{ mb: 4 }}
               >
-                Na Conectiva, nossa missão é democratizar a tecnologia avançada de
-                IA para empresas de todos os portes. Nossa plataforma analisa
-                grandes volumes de dados para identificar clientes em potencial
-                ideais, prever o comportamento do cliente e automatizar o contato
-                personalizado em grande escala.
+                Nossa missão é democratizar a IA para qualquer empresa,
+                automatizando a busca e o contato com potenciais clientes.
               </Typography>
 
               <Button
@@ -75,7 +70,7 @@ const AboutPreview: React.FC = () => {
                 size="large"
                 onClick={() => navigate("/sobre")}
               >
-                Saiba mais sobre nós
+                Learn More
               </Button>
             </Box>
           </Grid>
