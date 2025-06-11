@@ -14,6 +14,7 @@ import {
   ListItemIcon,
   ListItemText,
 } from "@mui/material";
+import { useTheme } from "@mui/material/styles";
 import { useNavigate } from "react-router-dom";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 
@@ -65,12 +66,13 @@ interface PricingSectionProps {
 
 const PricingSection: React.FC<PricingSectionProps> = ({ topAction }) => {
   const navigate = useNavigate();
+  const theme = useTheme();
 
   return (
     <Box
       sx={{
         py: { xs: 8, md: 3 },
-        backgroundColor: "#f8f9fa",
+        backgroundColor: theme.palette.background.default,
       }}
     >
       <Container maxWidth="lg">
@@ -109,40 +111,43 @@ const PricingSection: React.FC<PricingSectionProps> = ({ topAction }) => {
               mt: 4,
             }}
           >
-            Escolha o plano ideal para sua necessidade ou compre créditos
-            avulsos para usar quando precisar.
+            Escolha um plano e adicione créditos extras quando quiser.
           </Typography>
         </Box>
 
         <Grid container spacing={4} justifyContent="center">
-          {pricingPlans.map((plan) => (
-            <Grid item xs={12} sm={6} md={4} key={plan.title}>
-              <Card
-                elevation={plan.highlight ? 8 : 2}
-                sx={{
+          {pricingPlans.map((plan, idx) => (
+            <Grid item xs={12} sm={6} md={4} key={plan.title ?? idx}>
+              {plan.title && plan.price && plan.features?.length ? (
+                <Card
+                  elevation={plan.highlight ? 8 : 2}
+                  sx={{
                   height: "100%",
                   display: "flex",
                   flexDirection: "column",
                   position: "relative",
-                  transition: "transform 0.3s ease-in-out",
+                  backgroundColor: theme.palette.background.paper,
+                  borderRadius: theme.radii.planCard,
+                  boxShadow: theme.customShadows.card,
+                  transition: "transform 0.3s ease-in-out, box-shadow 0.3s ease",
                   "&:hover": {
                     transform: "translateY(-8px)",
+                    boxShadow: theme.customShadows.neon,
                   },
                   ...(plan.highlight && {
-                    backgroundColor: "#fff",
                     border: "2px solid",
-                    borderColor: "primary.main",
+                    borderColor: theme.palette.primary.light,
                     "&::before": {
                       content: '"Mais Popular"',
                       position: "absolute",
                       top: "12px",
                       right: "12px",
-                      backgroundColor: "white",
-                      color: "primary.main",
+                      backgroundColor: theme.palette.background.paper,
+                      color: theme.palette.primary.light,
                       border: "1px solid",
-                      borderColor: "primary.main",
+                      borderColor: theme.palette.primary.light,
                       padding: "2px 8px",
-                      borderRadius: "12px",
+                      borderRadius: theme.shape.borderRadius,
                       fontSize: "0.7rem",
                       fontWeight: "bold",
                     },
@@ -206,10 +211,26 @@ const PricingSection: React.FC<PricingSectionProps> = ({ topAction }) => {
                       }),
                     }}
                   >
-                    {plan.highlight ? "Começar Agora" : "Selecionar Plano"}
+                    {plan.highlight ? "Start Free Trial" : "Select Plan"}
                   </Button>
                 </CardActions>
               </Card>
+              ) : (
+                <Card
+                  sx={{
+                    height: '100%',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    backgroundColor: theme.palette.background.paper,
+                    borderRadius: theme.radii.planCard,
+                  }}
+                >
+                  <Typography color="text.secondary">
+                    Plano indisponível
+                  </Typography>
+                </Card>
+              )}
             </Grid>
           ))}
         </Grid>
@@ -217,12 +238,15 @@ const PricingSection: React.FC<PricingSectionProps> = ({ topAction }) => {
         <Box sx={{ textAlign: "center", mt: 6 }}>
           <Button
             variant="outlined"
-            color="primary"
             size="large"
             onClick={() => navigate("/planos")}
-            sx={{ mr: 2 }}
+            sx={{
+              mr: 2,
+              color: theme.palette.primary.light,
+              borderColor: theme.palette.primary.light,
+            }}
           >
-            Ver todos os planos
+            View Plans
           </Button>
           <Button
             variant="contained"
@@ -230,7 +254,7 @@ const PricingSection: React.FC<PricingSectionProps> = ({ topAction }) => {
             size="large"
             onClick={() => navigate("/planos")}
           >
-            Comprar créditos avulsos
+            Buy Credits
           </Button>
         </Box>
 

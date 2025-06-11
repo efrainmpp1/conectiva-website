@@ -7,6 +7,7 @@ import {
   AccordionSummary,
   AccordionDetails,
 } from "@mui/material";
+import { useTheme } from "@mui/material/styles";
 import { ChevronDown } from "lucide-react";
 
 interface FAQItem {
@@ -55,12 +56,13 @@ const faqs: FAQItem[] = [
 ];
 
 const FAQSection: React.FC = () => {
+  const theme = useTheme();
   return (
     <Box
       id="faq"
       sx={{
         py: { xs: 8, md: 12 },
-        backgroundColor: "#ffffff",
+        backgroundColor: theme.palette.background.default,
       }}
     >
       <Container maxWidth="lg">
@@ -98,8 +100,7 @@ const FAQSection: React.FC = () => {
               mt: 4,
             }}
           >
-            Encontre respostas para perguntas comuns sobre nossas soluções de
-            geração de leads com IA.
+            Encontre respostas sobre nossa plataforma de IA e geração de leads.
           </Typography>
         </Box>
 
@@ -109,12 +110,16 @@ const FAQSection: React.FC = () => {
               key={faq.id}
               sx={{
                 mb: 2,
-                borderRadius: "8px !important",
+                borderRadius: `${theme.shape.borderRadius}px !important`,
                 overflow: "hidden",
+                backgroundColor: theme.palette.background.paper,
+                boxShadow: theme.customShadows.card,
                 "&:before": {
                   display: "none",
                 },
-                boxShadow: "0 2px 8px rgba(0,0,0,0.05)",
+                "&:hover": {
+                  boxShadow: theme.customShadows.neon,
+                },
               }}
               disableGutters
             >

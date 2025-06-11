@@ -8,10 +8,12 @@ import {
   IconButton,
   Divider,
 } from "@mui/material";
+import { useTheme, alpha } from "@mui/material/styles";
 import { Github, Linkedin } from "lucide-react";
 import { WhatsApp } from "@mui/icons-material";
 
 const Footer: React.FC = () => {
+  const theme = useTheme();
   const currentYear = new Date().getFullYear();
 
   return (
@@ -19,7 +21,7 @@ const Footer: React.FC = () => {
       component="footer"
       sx={{
         backgroundColor: "primary.dark",
-        color: "white",
+        color: theme.palette.common.white,
         py: 6,
         mt: 8,
       }}
@@ -31,8 +33,7 @@ const Footer: React.FC = () => {
               Conectiva
             </Typography>
             <Typography variant="body2" sx={{ maxWidth: "80%", mb: 2 }}>
-              Revolucionando a geração de leads e a aquisição de clientes com o
-              poder da inteligência artificial.
+              Impulsionando sua prospecção com IA avançada.
             </Typography>
             <Box sx={{ display: "flex", gap: 1 }}>
               <IconButton color="inherit" size="small" aria-label="twitter">
@@ -87,7 +88,9 @@ const Footer: React.FC = () => {
           </Grid>
         </Grid>
 
-        <Divider sx={{ my: 4, backgroundColor: "rgba(255, 255, 255, 0.2)" }} />
+        <Divider
+          sx={{ my: 4, backgroundColor: alpha(theme.palette.common.white, 0.2) }}
+        />
 
         <Typography variant="body2" align="center">
           © {currentYear} Conectiva. All rights reserved.

@@ -4,34 +4,52 @@ import { useTheme, alpha } from "@mui/material/styles";
 import { Link as ScrollLink } from "react-scroll";
 import { useNavigate } from "react-router-dom";
 import { ArrowRight, Cpu } from "lucide-react";
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 
 const MotionButton = motion(Button);
+const MotionBox = motion(Box);
 
 const HeroSection: React.FC = () => {
   const theme = useTheme();
   const navigate = useNavigate();
+  const reduceMotion = useReducedMotion();
   return (
-    <Box
+    <MotionBox
       id="home"
       sx={{
-        background: "linear-gradient(135deg, #7B1FA2 0%, #512DA8 100%)",
+        background: theme.palette.gradients.bluePurple,
         pt: { xs: 15, md: 20 },
         pb: { xs: 8, md: 12 },
-        minHeight: { md: "80vh" },
-        overflow: "hidden",
-        position: "relative",
-        color: "#fff",
+        minHeight: { md: '80vh' },
+        overflow: 'hidden',
+        position: 'relative',
+        color: theme.palette.common.white,
       }}
+        initial={{ opacity: 0, y: reduceMotion ? 0 : 40 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: theme.animations.durationLong, ease: theme.animations.easing }}
     >
+      <Box
+        sx={{
+          position: 'absolute',
+          inset: 0,
+          pointerEvents: 'none',
+          backgroundImage: `radial-gradient(circle at 30% 30%, rgba(123,47,242,0.25), transparent 40%), radial-gradient(circle at 70% 60%, rgba(243,87,168,0.2), transparent 45%)`,
+        }}
+      />
       <Container maxWidth="lg">
         <Grid container spacing={4} alignItems="center">
           <Grid item xs={12} md={6}>
-            <Box
+            <MotionBox
               sx={{
                 textAlign: { xs: "center", md: "left" },
                 mb: { xs: 4, md: 0 },
               }}
+              initial={{ opacity: 0, x: reduceMotion ? 0 : -50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: theme.animations.durationBase, ease: theme.animations.easing }}
             >
               <Typography
                 variant="h1"
@@ -39,29 +57,35 @@ const HeroSection: React.FC = () => {
                 gutterBottom
                 sx={{
                   fontWeight: 800,
-                  fontSize: { xs: "2.8rem", sm: "3.4rem", md: "4rem" },
+                  fontSize: { xs: '2.8rem', sm: '3.4rem', md: '4rem' },
                   mb: 2,
-                  textShadow: "0 2px 4px rgba(0,0,0,0.4)",
+                  textShadow: '0 2px 4px rgba(0,0,0,0.4)',
                 }}
               >
-                Turbine seus leads com{" "}
-                <Box component="span" sx={{ color: "#FFEB3B" }}>
+                Impulsione Leads com{' '}
+                <Box
+                  component="span"
+                  sx={{
+                    background: theme.palette.gradients.purplePink,
+                    WebkitBackgroundClip: 'text',
+                    WebkitTextFillColor: 'transparent',
+                  }}
+                >
                   IA
                 </Box>
               </Typography>
 
               <Typography
                 variant="h5"
-                color="rgba(255,255,255,0.8)"
                 paragraph
                 sx={{
                   mb: 4,
                   maxWidth: { md: "80%" },
                   mx: { xs: "auto", md: 0 },
+                  color: alpha(theme.palette.common.white, 0.8),
                 }}
               >
-                Automatize a prospeção e conquiste clientes de forma inteligente
-                com nossa plataforma de IA.
+                Automatize a geração de clientes com IA.
               </Typography>
 
               <Box
@@ -77,19 +101,19 @@ const HeroSection: React.FC = () => {
                   endIcon={<ArrowRight />}
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
+                  transition={{ duration: theme.animations.durationShort, ease: theme.animations.easing }}
                   onClick={() => navigate("/cadastro")}
                   sx={{
                     py: 1.5,
                     px: 3,
                     fontWeight: 600,
-                    borderRadius: "50px",
-                    boxShadow: `0 8px 20px ${alpha(
-                      theme.palette.primary.main,
-                      0.4
-                    )}`,
+                    borderRadius: theme.shape.borderRadius * 2,
+                    background: theme.palette.gradients.purplePink,
+                    boxShadow: theme.customShadows.neon,
+                    color: theme.palette.common.white,
                   }}
                 >
-                  Comece Gratuitamente
+                  Start Free Trial
                 </MotionButton>
 
                 <ScrollLink
@@ -101,73 +125,86 @@ const HeroSection: React.FC = () => {
                 >
                   <MotionButton
                     variant="outlined"
-                    color="secondary"
                     size="large"
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
+                    transition={{ duration: theme.animations.durationShort, ease: theme.animations.easing }}
                     sx={{
                       ml: 2,
                       py: 1.5,
                       px: 3,
                       fontWeight: 600,
-                      borderRadius: "50px",
-                      color: "#fff",
-                      borderColor: "rgba(255,255,255,0.6)",
+                      borderRadius: theme.shape.borderRadius * 2,
+                      color: theme.palette.common.white,
+                      border: '2px solid transparent',
+                      background:
+                        `linear-gradient(${theme.palette.background.paper}, ${theme.palette.background.paper}) padding-box, ${theme.palette.gradients.purplePink} border-box`,
                     }}
                   >
-                    Ver Funcionalidades
+                    Explore Features
                   </MotionButton>
                 </ScrollLink>
               </Box>
-            </Box>
+            </MotionBox>
           </Grid>
 
           <Grid item xs={12} md={6}>
-            <Box
+            <MotionBox
               sx={{
                 display: "flex",
                 justifyContent: "center",
                 position: "relative",
               }}
+              initial={{ opacity: 0, x: reduceMotion ? 0 : 50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: theme.animations.durationBase, ease: theme.animations.easing }}
             >
-              <Cpu size={220} color="#ffffff" />
+              <Cpu
+                size={220}
+                color={theme.palette.primary.light}
+                style={{
+                  filter: `drop-shadow(0 0 10px ${alpha(
+                    theme.palette.primary.light,
+                    0.6
+                  )})`,
+                }}
+              />
 
               {/* Decorative Elements */}
               <Box
                 sx={{
-                  position: "absolute",
+                  position: 'absolute',
                   top: { xs: -10, md: -20 },
                   right: { xs: 10, md: 40 },
-                  width: "100px",
-                  height: "100px",
-                  background:
-                    "linear-gradient(45deg, #7B1FA2 0%, #512DA8 100%)",
-                  borderRadius: "50%",
+                  width: { xs: '6.25rem', md: '7.5rem' },
+                  height: { xs: '6.25rem', md: '7.5rem' },
+                  background: theme.palette.gradients.purplePink,
+                  borderRadius: '50%',
                   opacity: 0.4,
                   zIndex: 0,
-                  filter: "blur(2px)",
+                  filter: 'blur(2px)',
                 }}
               />
               <Box
                 sx={{
-                  position: "absolute",
+                  position: 'absolute',
                   bottom: { xs: -10, md: -30 },
                   left: { xs: 10, md: 30 },
-                  width: "150px",
-                  height: "150px",
-                  background:
-                    "linear-gradient(45deg, #512DA8 0%, #7B1FA2 100%)",
-                  borderRadius: "50%",
+                  width: { xs: '9rem', md: '9.375rem' },
+                  height: { xs: '9rem', md: '9.375rem' },
+                  background: theme.palette.gradients.bluePurple,
+                  borderRadius: '50%',
                   opacity: 0.3,
-                  filter: "blur(3px)",
+                  filter: 'blur(3px)',
                   zIndex: 0,
                 }}
               />
-            </Box>
+            </MotionBox>
           </Grid>
         </Grid>
       </Container>
-    </Box>
+    </MotionBox>
   );
 };
 

@@ -1,15 +1,17 @@
 import React from "react";
 import { Box, Typography, Container, Button, Grid } from "@mui/material";
+import { useTheme } from "@mui/material/styles";
 import { useNavigate } from "react-router-dom";
 
 const AboutPreview: React.FC = () => {
   const navigate = useNavigate();
+  const theme = useTheme();
 
   return (
     <Box
       sx={{
         py: { xs: 6, md: 8 },
-        backgroundColor: "#ffffff",
+        backgroundColor: theme.palette.background.default,
       }}
     >
       <Container maxWidth="lg">
@@ -49,9 +51,7 @@ const AboutPreview: React.FC = () => {
                   mb: 3,
                 }}
               >
-                Estamos revolucionando a maneira como as empresas abordam a geração
-                de leads e a aquisição de clientes com nossa plataforma alimentada
-                por IA.
+                Aceleramos a prospecção de clientes com IA avançada.
               </Typography>
 
               <Typography
@@ -60,11 +60,8 @@ const AboutPreview: React.FC = () => {
                 paragraph
                 sx={{ mb: 4 }}
               >
-                Na Conectiva, nossa missão é democratizar a tecnologia avançada de
-                IA para empresas de todos os portes. Nossa plataforma analisa
-                grandes volumes de dados para identificar clientes em potencial
-                ideais, prever o comportamento do cliente e automatizar o contato
-                personalizado em grande escala.
+                Nossa missão é democratizar a IA para qualquer empresa,
+                automatizando a busca e o contato com potenciais clientes.
               </Typography>
 
               <Button
@@ -73,7 +70,7 @@ const AboutPreview: React.FC = () => {
                 size="large"
                 onClick={() => navigate("/sobre")}
               >
-                Saiba mais sobre nós
+                Learn More
               </Button>
             </Box>
           </Grid>
@@ -86,7 +83,7 @@ const AboutPreview: React.FC = () => {
               sx={{
                 width: "100%",
                 height: "auto",
-                borderRadius: 2,
+                borderRadius: theme.shape.borderRadius,
                 boxShadow: 3,
               }}
             />

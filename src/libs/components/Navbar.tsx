@@ -53,17 +53,16 @@ const Navbar: React.FC = () => {
   return (
     <AnimatePresence>
       <motion.div
-        initial={{ y: -100 }}
-        animate={{ y: 0 }}
-        transition={{ duration: 0.3 }}
+        initial={{ y: -100, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ duration: theme.animations.durationBase, ease: theme.animations.easing }}
       >
         <AppBar
           position="static"
           sx={{
-            background:
-              "linear-gradient(135deg, rgba(26,35,126,0.9) 0%, rgba(13,27,42,0.9) 100%)",
-            backdropFilter: "blur(10px)",
-            boxShadow: "none",
+            backgroundColor: alpha(theme.palette.background.paper, 0.7),
+            backdropFilter: "blur(8px)",
+            boxShadow: theme.customShadows.card,
           }}
         >
           <Container maxWidth="lg">
@@ -77,7 +76,7 @@ const Navbar: React.FC = () => {
             >
               <motion.div
                 whileHover={{ scale: 1.05 }}
-                transition={{ type: "spring", stiffness: 400, damping: 10 }}
+                transition={{ duration: theme.animations.durationShort, ease: theme.animations.easing }}
               >
                 <Box
                   sx={{
@@ -92,14 +91,14 @@ const Navbar: React.FC = () => {
                 >
                   <BrainCircuit
                     size={32}
-                    color="#FFFFFF"
+                    color={theme.palette.common.white}
                     style={{ marginRight: "8px" }}
                   />
                   <Typography
                     variant="h5"
                     sx={{
                       fontWeight: 700,
-                      color: "#FFFFFF",
+                      color: theme.palette.common.white,
                     }}
                   >
                     Conectiva
@@ -108,12 +107,13 @@ const Navbar: React.FC = () => {
               </motion.div>
 
               {!isMobile && (
-                <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
+                <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
                   {navItems.map((item) => (
                     <motion.div
                       key={item.to}
                       whileHover={{ scale: 1.05 }}
                       whileTap={{ scale: 0.95 }}
+                      transition={{ duration: theme.animations.durationShort, ease: theme.animations.easing }}
                     >
                       <Button
                         component={RouterLink}
@@ -122,17 +122,14 @@ const Navbar: React.FC = () => {
                           mx: 0.5,
                           px: 2,
                           py: 1,
-                          color: "#fff",
-                          borderRadius: "12px",
-                          backgroundColor: alpha(
-                            theme.palette.common.white,
-                            0.1
-                          ),
-                          backdropFilter: "blur(4px)",
+                          color: theme.palette.common.white,
+                          borderRadius: theme.shape.borderRadius * 1.5,
+                          background: theme.palette.gradients.bluePurple,
+                          boxShadow: theme.customShadows.card,
                           transition: "all 0.3s ease",
                           "&:hover": {
-                            backgroundColor: "rgba(255, 255, 255, 0.2)",
-                            transform: "translateY(-2px)",
+                            background: theme.palette.gradients.purplePink,
+                            boxShadow: theme.customShadows.neon,
                           },
                         }}
                       >
@@ -140,21 +137,28 @@ const Navbar: React.FC = () => {
                       </Button>
                     </motion.div>
                   ))}
-                  <Button
-                    variant="contained"
-                    color="primary"
-                    startIcon={<LogIn size={18} />}
-                    component={RouterLink}
-                    to="/login"
-                    sx={{
-                      ml: 2,
-                      borderRadius: "12px",
-                      fontWeight: 600,
-                      boxShadow: "0 2px 6px rgba(0,0,0,0.15)",
-                    }}
+                  <motion.div
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                    transition={{ duration: theme.animations.durationShort, ease: theme.animations.easing }}
                   >
-                    Entrar
-                  </Button>
+                    <Button
+                      variant="contained"
+                      startIcon={<LogIn size={18} />}
+                      component={RouterLink}
+                      to="/login"
+                      sx={{
+                        ml: 2,
+                        borderRadius: theme.shape.borderRadius * 1.5,
+                        fontWeight: 600,
+                        color: theme.palette.common.white,
+                        background: theme.palette.gradients.purplePink,
+                        boxShadow: theme.customShadows.neon,
+                      }}
+                    >
+                      Entrar
+                    </Button>
+                  </motion.div>
                 </Box>
               )}
 
@@ -166,7 +170,7 @@ const Navbar: React.FC = () => {
                   onClick={handleDrawerToggle}
                   sx={{
                     ml: "auto",
-                    color: "#fff",
+                    color: theme.palette.common.white,
                   }}
                 >
                   <Menu />
@@ -184,9 +188,9 @@ const Navbar: React.FC = () => {
         PaperProps={{
           sx: {
             width: 250,
-            background:
-              "linear-gradient(135deg, rgba(26,35,126,0.95) 0%, rgba(13,27,42,0.95) 100%)",
-            backdropFilter: "blur(10px)",
+            backgroundColor: alpha(theme.palette.background.paper, 0.9),
+            backdropFilter: "blur(8px)",
+            boxShadow: theme.customShadows.card,
           },
         }}
       >
@@ -197,38 +201,57 @@ const Navbar: React.FC = () => {
         >
           <List>
             {navItems.map((item) => (
-              <ListItem
-                button
+              <motion.div
                 key={item.to}
-                component={RouterLink}
-                to={item.to}
-                sx={{
-                  transition: "all 0.3s ease",
-                  "&:hover": {
-                    backgroundColor: alpha(theme.palette.primary.main, 0.1),
-                    transform: "translateX(10px)",
-                  },
-                }}
+                whileHover={{ scale: 1.03 }}
+                whileTap={{ scale: 0.97 }}
+                transition={{ duration: theme.animations.durationShort, ease: theme.animations.easing }}
               >
-                <ListItemText primary={item.label} />
-              </ListItem>
+                <ListItem
+                  button
+                  component={RouterLink}
+                  to={item.to}
+                  sx={{
+                    my: 1,
+                    borderRadius: theme.shape.borderRadius * 1.5,
+                    background: theme.palette.gradients.bluePurple,
+                    boxShadow: theme.customShadows.card,
+                    color: theme.palette.common.white,
+                    transition: 'all 0.3s ease',
+                    '&:hover': {
+                      background: theme.palette.gradients.purplePink,
+                      boxShadow: theme.customShadows.neon,
+                      transform: 'translateX(10px)',
+                    },
+                  }}
+                >
+                  <ListItemText primary={item.label} />
+                </ListItem>
+              </motion.div>
             ))}
           </List>
           <Box sx={{ textAlign: "center", mt: 2 }}>
-            <Button
-              variant="contained"
-              color="primary"
-              startIcon={<LogIn size={18} />}
-              component={RouterLink}
-              to="/login"
-              sx={{
-                borderRadius: "12px",
-                fontWeight: 600,
-                boxShadow: "0 2px 6px rgba(0,0,0,0.15)",
-              }}
+            <motion.div
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              transition={{ duration: theme.animations.durationShort, ease: theme.animations.easing }}
             >
-              Entrar
-            </Button>
+              <Button
+                variant="contained"
+                startIcon={<LogIn size={18} />}
+                component={RouterLink}
+                to="/login"
+                sx={{
+                  borderRadius: theme.shape.borderRadius * 1.5,
+                  fontWeight: 600,
+                  color: theme.palette.common.white,
+                  background: theme.palette.gradients.purplePink,
+                  boxShadow: theme.customShadows.neon,
+                }}
+              >
+                Entrar
+              </Button>
+            </motion.div>
           </Box>
         </Box>
       </Drawer>

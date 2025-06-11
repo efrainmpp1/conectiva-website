@@ -25,22 +25,22 @@ const AboutSection: React.FC<AboutSectionProps> = ({ topAction }) => {
 
   const stats: StatItem[] = [
     {
-      icon: <TrendingUp size={36} color={theme.palette.primary.main} />,
+      icon: <TrendingUp size={36} color={theme.palette.primary.light} />,
       number: "87%",
       label: "Aumento em leads qualificados",
     },
     {
-      icon: <Users size={36} color={theme.palette.primary.main} />,
+      icon: <Users size={36} color={theme.palette.primary.light} />,
       number: "1.200+",
       label: "Clientes satisfeitos",
     },
     {
-      icon: <Award size={36} color={theme.palette.primary.main} />,
+      icon: <Award size={36} color={theme.palette.primary.light} />,
       number: "18",
       label: "Prêmios da indústria",
     },
     {
-      icon: <BarChart2 size={36} color={theme.palette.primary.main} />,
+      icon: <BarChart2 size={36} color={theme.palette.primary.light} />,
       number: "5M+",
       label: "Leads gerados",
     },
@@ -51,7 +51,7 @@ const AboutSection: React.FC<AboutSectionProps> = ({ topAction }) => {
       id="about"
       sx={{
         py: { xs: 8, md: 3 },
-        background: "#ffffff",
+        background: theme.palette.background.default,
       }}
     >
       <Container maxWidth="lg">
@@ -134,7 +134,7 @@ const AboutSection: React.FC<AboutSectionProps> = ({ topAction }) => {
                 width: "100%",
                 height: "100%",
                 objectFit: "cover",
-                borderRadius: 2,
+                borderRadius: theme.shape.borderRadius,
                 boxShadow: 3,
               }}
             />
@@ -147,14 +147,15 @@ const AboutSection: React.FC<AboutSectionProps> = ({ topAction }) => {
               <Card
                 sx={{
                   height: "100%",
-                  borderRadius: 2,
-                  boxShadow: "none",
+                  borderRadius: theme.shape.borderRadius * 1.5,
+                  backgroundColor: theme.palette.background.paper,
+                  boxShadow: theme.customShadows.card,
                   border: "1px solid",
-                  borderColor: "divider",
+                  borderColor: theme.palette.divider,
                   transition: "transform 0.3s ease, box-shadow 0.3s ease",
                   "&:hover": {
                     transform: "translateY(-8px)",
-                    boxShadow: 3,
+                    boxShadow: theme.customShadows.neon,
                   },
                 }}
               >
