@@ -1,6 +1,6 @@
 import React from 'react';
 import { Box, Typography, Button, Grid, Container } from '@mui/material';
-import { useTheme } from '@mui/material/styles';
+import { useTheme, alpha } from '@mui/material/styles';
 import { motion, useReducedMotion } from 'framer-motion';
 import { GanttChart, Search, Mail } from 'lucide-react';
 
