@@ -8,10 +8,12 @@ import {
   IconButton,
   Divider,
 } from "@mui/material";
+import { useTheme } from "@mui/material/styles";
 import { Github, Linkedin } from "lucide-react";
 import { WhatsApp } from "@mui/icons-material";
 
 const Footer: React.FC = () => {
+  const theme = useTheme();
   const currentYear = new Date().getFullYear();
 
   return (
