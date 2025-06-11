@@ -1,7 +1,7 @@
 import React from 'react';
 import { Box, Typography, Button, Grid, Container } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
-import { motion } from 'framer-motion';
+import { motion, useReducedMotion } from 'framer-motion';
 import { GanttChart, Search, Mail } from 'lucide-react';
 
 const MotionBox = motion(Box);
@@ -16,6 +16,7 @@ interface Feature {
 
 const FeatureCards: React.FC = () => {
   const theme = useTheme();
+  const reduceMotion = useReducedMotion();
 
   const features: Feature[] = [
     {
@@ -50,6 +51,10 @@ const FeatureCards: React.FC = () => {
               <MotionBox
                 whileHover={{ scale: 1.03 }}
                 whileTap={{ scale: 0.97 }}
+                initial={{ opacity: 0, y: reduceMotion ? 0 : 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: theme.animations.durationBase, ease: theme.animations.easing }}
                 sx={{
                   p: { xs: 3, md: 4 },
                   height: '100%',

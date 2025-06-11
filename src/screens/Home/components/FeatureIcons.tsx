@@ -2,6 +2,7 @@ import React from 'react';
 import { Box, Typography, Container } from '@mui/material';
 import { useTheme, alpha } from '@mui/material/styles';
 import { Database, Users, Brain, Mail } from 'lucide-react';
+import { motion, useReducedMotion } from 'framer-motion';
 
 interface Item {
   icon: React.ElementType;
@@ -10,6 +11,8 @@ interface Item {
 
 const FeatureIcons: React.FC = () => {
   const theme = useTheme();
+  const reduceMotion = useReducedMotion();
+  const MotionBox = motion(Box);
   const items: Item[] = [
     { icon: Database, label: 'Extração de Dados' },
     { icon: Users, label: 'Geração de Leads' },
@@ -26,7 +29,7 @@ const FeatureIcons: React.FC = () => {
       }}
     >
       <Container maxWidth="lg">
-        <Box
+        <MotionBox
           role="list"
           sx={{
             display: 'flex',
@@ -36,6 +39,10 @@ const FeatureIcons: React.FC = () => {
             overflowX: { xs: 'auto', sm: 'visible' },
             px: { xs: 2, md: 0 },
           }}
+          initial={{ opacity: 0, y: reduceMotion ? 0 : 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: theme.animations.durationBase, ease: theme.animations.easing }}
         >
           {items.map((item, idx) => {
             const Icon = item.icon;
@@ -75,7 +82,7 @@ const FeatureIcons: React.FC = () => {
               </React.Fragment>
             );
           })}
-        </Box>
+        </MotionBox>
       </Container>
     </Box>
   );

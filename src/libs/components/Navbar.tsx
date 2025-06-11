@@ -53,9 +53,9 @@ const Navbar: React.FC = () => {
   return (
     <AnimatePresence>
       <motion.div
-        initial={{ y: -100 }}
-        animate={{ y: 0 }}
-        transition={{ duration: 0.3 }}
+        initial={{ y: -100, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ duration: theme.animations.durationBase, ease: theme.animations.easing }}
       >
         <AppBar
           position="static"
@@ -76,7 +76,7 @@ const Navbar: React.FC = () => {
             >
               <motion.div
                 whileHover={{ scale: 1.05 }}
-                transition={{ type: "spring", stiffness: 400, damping: 10 }}
+                transition={{ duration: theme.animations.durationShort, ease: theme.animations.easing }}
               >
                 <Box
                   sx={{
@@ -113,6 +113,7 @@ const Navbar: React.FC = () => {
                       key={item.to}
                       whileHover={{ scale: 1.05 }}
                       whileTap={{ scale: 0.95 }}
+                      transition={{ duration: theme.animations.durationShort, ease: theme.animations.easing }}
                     >
                       <Button
                         component={RouterLink}
@@ -136,7 +137,11 @@ const Navbar: React.FC = () => {
                       </Button>
                     </motion.div>
                   ))}
-                  <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+                  <motion.div
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                    transition={{ duration: theme.animations.durationShort, ease: theme.animations.easing }}
+                  >
                     <Button
                       variant="contained"
                       startIcon={<LogIn size={18} />}
@@ -196,7 +201,12 @@ const Navbar: React.FC = () => {
         >
           <List>
             {navItems.map((item) => (
-              <motion.div key={item.to} whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }}>
+              <motion.div
+                key={item.to}
+                whileHover={{ scale: 1.03 }}
+                whileTap={{ scale: 0.97 }}
+                transition={{ duration: theme.animations.durationShort, ease: theme.animations.easing }}
+              >
                 <ListItem
                   button
                   component={RouterLink}
@@ -221,7 +231,11 @@ const Navbar: React.FC = () => {
             ))}
           </List>
           <Box sx={{ textAlign: "center", mt: 2 }}>
-            <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+            <motion.div
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              transition={{ duration: theme.animations.durationShort, ease: theme.animations.easing }}
+            >
               <Button
                 variant="contained"
                 startIcon={<LogIn size={18} />}

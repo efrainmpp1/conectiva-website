@@ -19,11 +19,23 @@ declare module '@mui/material/styles' {
       neon: string;
       card: string;
     };
+    animations: {
+      durationShort: number;
+      durationBase: number;
+      durationLong: number;
+      easing: string;
+    };
   }
   interface ThemeOptions {
     customShadows?: {
       neon?: string;
       card?: string;
+    };
+    animations?: {
+      durationShort?: number;
+      durationBase?: number;
+      durationLong?: number;
+      easing?: string;
     };
   }
 }
@@ -119,6 +131,12 @@ const theme = createTheme({
   customShadows: {
     neon: '0 0 10px rgba(123,47,242,0.7), 0 0 20px rgba(123,47,242,0.5)',
     card: '0 0 15px rgba(123,47,242,0.3)',
+  },
+  animations: {
+    durationShort: 0.2,
+    durationBase: 0.4,
+    durationLong: 0.8,
+    easing: 'easeInOut',
   },
   components: {
     MuiButton: {

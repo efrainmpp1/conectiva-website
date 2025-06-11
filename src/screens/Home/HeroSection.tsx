@@ -4,15 +4,17 @@ import { useTheme } from "@mui/material/styles";
 import { Link as ScrollLink } from "react-scroll";
 import { useNavigate } from "react-router-dom";
 import { ArrowRight, Cpu } from "lucide-react";
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 
 const MotionButton = motion(Button);
+const MotionBox = motion(Box);
 
 const HeroSection: React.FC = () => {
   const theme = useTheme();
   const navigate = useNavigate();
+  const reduceMotion = useReducedMotion();
   return (
-    <Box
+    <MotionBox
       id="home"
       sx={{
         background: theme.palette.gradients.bluePurple,
@@ -23,6 +25,11 @@ const HeroSection: React.FC = () => {
         position: 'relative',
         color: '#fff',
       }}
+        }}
+        initial={{ opacity: 0, y: reduceMotion ? 0 : 40 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: theme.animations.durationLong, ease: theme.animations.easing }}
     >
       <Box
         sx={{
@@ -35,11 +42,15 @@ const HeroSection: React.FC = () => {
       <Container maxWidth="lg">
         <Grid container spacing={4} alignItems="center">
           <Grid item xs={12} md={6}>
-            <Box
+            <MotionBox
               sx={{
                 textAlign: { xs: "center", md: "left" },
                 mb: { xs: 4, md: 0 },
               }}
+              initial={{ opacity: 0, x: reduceMotion ? 0 : -50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: theme.animations.durationBase, ease: theme.animations.easing }}
             >
               <Typography
                 variant="h1"
@@ -91,6 +102,7 @@ const HeroSection: React.FC = () => {
                   endIcon={<ArrowRight />}
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
+                  transition={{ duration: theme.animations.durationShort, ease: theme.animations.easing }}
                   onClick={() => navigate("/cadastro")}
                   sx={{
                     py: 1.5,
@@ -117,6 +129,7 @@ const HeroSection: React.FC = () => {
                     size="large"
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
+                    transition={{ duration: theme.animations.durationShort, ease: theme.animations.easing }}
                     sx={{
                       ml: 2,
                       py: 1.5,
@@ -133,16 +146,20 @@ const HeroSection: React.FC = () => {
                   </MotionButton>
                 </ScrollLink>
               </Box>
-            </Box>
+            </MotionBox>
           </Grid>
 
           <Grid item xs={12} md={6}>
-            <Box
+            <MotionBox
               sx={{
                 display: "flex",
                 justifyContent: "center",
                 position: "relative",
               }}
+              initial={{ opacity: 0, x: reduceMotion ? 0 : 50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: theme.animations.durationBase, ease: theme.animations.easing }}
             >
               <Cpu
                 size={220}
@@ -179,11 +196,11 @@ const HeroSection: React.FC = () => {
                   zIndex: 0,
                 }}
               />
-            </Box>
+            </MotionBox>
           </Grid>
         </Grid>
       </Container>
-    </Box>
+    </MotionBox>
   );
 };
 
