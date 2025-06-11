@@ -26,6 +26,9 @@ declare module '@mui/material/styles' {
       durationLong: number;
       easing: string;
     };
+    radii: {
+      planCard: number;
+    };
   }
   interface ThemeOptions {
     customShadows?: {
@@ -38,6 +41,9 @@ declare module '@mui/material/styles' {
       durationBase?: number;
       durationLong?: number;
       easing?: string;
+    };
+    radii?: {
+      planCard?: number;
     };
   }
 }
@@ -133,6 +139,9 @@ const theme = createTheme({
     borderRadius: 12,
   },
   spacing: 8,
+  radii: {
+    planCard: 18,
+  },
   customShadows: {
     neon: '0 0 10px rgba(123,47,242,0.7), 0 0 20px rgba(123,47,242,0.5)',
     card: '0 0 15px rgba(123,47,242,0.3)',

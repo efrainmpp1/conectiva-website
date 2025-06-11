@@ -127,7 +127,7 @@ const PricingSection: React.FC<PricingSectionProps> = ({ topAction }) => {
                   flexDirection: "column",
                   position: "relative",
                   backgroundColor: theme.palette.background.paper,
-                  borderRadius: theme.shape.borderRadius * 2,
+                  borderRadius: theme.radii.planCard,
                   boxShadow: theme.customShadows.card,
                   transition: "transform 0.3s ease-in-out, box-shadow 0.3s ease",
                   "&:hover": {
@@ -223,7 +223,7 @@ const PricingSection: React.FC<PricingSectionProps> = ({ topAction }) => {
                     alignItems: 'center',
                     justifyContent: 'center',
                     backgroundColor: theme.palette.background.paper,
-                    borderRadius: theme.shape.borderRadius * 2,
+                    borderRadius: theme.radii.planCard,
                   }}
                 >
                   <Typography color="text.secondary">
