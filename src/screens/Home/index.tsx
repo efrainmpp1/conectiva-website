@@ -10,10 +10,10 @@ const Home: React.FC = () => {
   return (
     <Box>
       <HeroSection />
+      <FeatureIcons />
       <FeatureCards />
       <AboutPreview />
       <PricingSection />
-      <FeatureIcons />
     </Box>
   );
 };

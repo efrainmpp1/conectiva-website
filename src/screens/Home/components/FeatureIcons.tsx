@@ -24,7 +24,7 @@ const FeatureIcons: React.FC = () => {
     <Box
       aria-label="Feature icons"
       sx={{
-        py: { xs: 6, md: 8 },
+        py: { xs: 5, md: 4 },
         backgroundColor: theme.palette.background.default,
       }}
     >
@@ -60,8 +60,18 @@ const FeatureIcons: React.FC = () => {
                     textAlign: 'center',
                   }}
                 >
-                  <Box aria-hidden="true" sx={{ mb: 1, filter: `drop-shadow(0 0 4px ${alpha(theme.palette.primary.light, 0.6)})` }}>
-                    <Icon size={40} color={theme.palette.primary.light} style={{ width: '2.5rem', height: '2.5rem' }} />
+                  <Box
+                    aria-hidden="true"
+                    sx={{
+                      mb: 1,
+                      filter: `drop-shadow(0 0 4px ${alpha(theme.palette.primary.light, 0.6)})`,
+                    }}
+                  >
+                    <Icon
+                      size={40}
+                      color={theme.palette.primary.light}
+                      style={{ width: '2.5rem', height: '2.5rem' }}
+                    />
                   </Box>
                   <Typography variant="subtitle1" sx={{ color: theme.palette.common.white }}>
                     {item.label}
