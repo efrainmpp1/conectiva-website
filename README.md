@@ -75,6 +75,10 @@ src/
 └── vite-env.d.ts
 ```
 
+## Padronizacao de Codigo
+
+Para manter a formatacao consistente, utilize o [Prettier](https://prettier.io/) com o arquivo `.prettierrc` presente na raiz do projeto. Instale a extensao **Prettier - Code formatter** no VSCode (ou editor de preferencia) e ative a opcao **Format on Save**.
+
 ## Colaborador
 
 - Efrain Marcelo Pulgar Pantaleon - [efrainmpp1](https://github.com/efrainmpp1)
