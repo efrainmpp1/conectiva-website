@@ -13,7 +13,7 @@ const ServicesSection: React.FC = () => {
       id="services"
       sx={{
         py: { xs: 8, md: 12 },
-        backgroundColor: theme.palette.grey[100],
+        backgroundColor: theme.palette.background.default,
       }}
     >
       <Container maxWidth="lg">

@@ -11,7 +11,7 @@ const AboutPreview: React.FC = () => {
     <Box
       sx={{
         py: { xs: 6, md: 8 },
-        backgroundColor: theme.palette.common.white,
+        backgroundColor: theme.palette.background.default,
       }}
     >
       <Container maxWidth="lg">

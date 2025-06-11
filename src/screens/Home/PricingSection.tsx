@@ -72,7 +72,7 @@ const PricingSection: React.FC<PricingSectionProps> = ({ topAction }) => {
     <Box
       sx={{
         py: { xs: 8, md: 3 },
-        backgroundColor: theme.palette.grey[100],
+        backgroundColor: theme.palette.background.default,
       }}
     >
       <Container maxWidth="lg">
@@ -130,7 +130,7 @@ const PricingSection: React.FC<PricingSectionProps> = ({ topAction }) => {
                     transform: "translateY(-8px)",
                   },
                   ...(plan.highlight && {
-                    backgroundColor: theme.palette.common.white,
+                    backgroundColor: theme.palette.background.paper,
                     border: "2px solid",
                     borderColor: "primary.main",
                     "&::before": {
@@ -138,7 +138,7 @@ const PricingSection: React.FC<PricingSectionProps> = ({ topAction }) => {
                       position: "absolute",
                       top: "12px",
                       right: "12px",
-                      backgroundColor: theme.palette.common.white,
+                      backgroundColor: theme.palette.background.paper,
                       color: "primary.main",
                       border: "1px solid",
                       borderColor: "primary.main",

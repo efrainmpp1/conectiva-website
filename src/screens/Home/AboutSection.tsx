@@ -51,7 +51,7 @@ const AboutSection: React.FC<AboutSectionProps> = ({ topAction }) => {
       id="about"
       sx={{
         py: { xs: 8, md: 3 },
-        background: theme.palette.common.white,
+        background: theme.palette.background.default,
       }}
     >
       <Container maxWidth="lg">

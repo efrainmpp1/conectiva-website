@@ -15,7 +15,7 @@ const ContactSection: React.FC<ContactSectionProps> = ({ topAction }) => {
       id="contact"
       sx={{
         py: { xs: 8, md: 3 },
-        backgroundColor: theme.palette.grey[100],
+        backgroundColor: theme.palette.background.default,
       }}
     >
       <Container maxWidth="lg">
