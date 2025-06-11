@@ -1,9 +1,11 @@
 import React from "react";
 import { Box, Typography, Container, Button, Grid } from "@mui/material";
+import { useTheme } from "@mui/material/styles";
 import { useNavigate } from "react-router-dom";
 
 const AboutPreview: React.FC = () => {
   const navigate = useNavigate();
+  const theme = useTheme();
 
   return (
     <Box

@@ -14,6 +14,7 @@ import {
   ListItemIcon,
   ListItemText,
 } from "@mui/material";
+import { useTheme } from "@mui/material/styles";
 import { useNavigate } from "react-router-dom";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 
@@ -65,6 +66,7 @@ interface PricingSectionProps {
 
 const PricingSection: React.FC<PricingSectionProps> = ({ topAction }) => {
   const navigate = useNavigate();
+  const theme = useTheme();
 
   return (
     <Box

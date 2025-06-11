@@ -1,10 +1,12 @@
 import React from "react";
 import { Box, Typography, Container, Grid } from "@mui/material";
+import { useTheme } from "@mui/material/styles";
 import ServiceCard from "../../libs/components/ServiceCard";
 import { getServices } from "../../services/Services";
 
 const ServicesSection: React.FC = () => {
   const services = getServices();
+  const theme = useTheme();
 
   return (
     <Box

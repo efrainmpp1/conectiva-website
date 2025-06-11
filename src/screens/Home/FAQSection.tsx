@@ -7,6 +7,7 @@ import {
   AccordionSummary,
   AccordionDetails,
 } from "@mui/material";
+import { useTheme } from "@mui/material/styles";
 import { ChevronDown } from "lucide-react";
 
 interface FAQItem {
@@ -55,6 +56,7 @@ const faqs: FAQItem[] = [
 ];
 
 const FAQSection: React.FC = () => {
+  const theme = useTheme();
   return (
     <Box
       id="faq"
