@@ -116,11 +116,12 @@ const PricingSection: React.FC<PricingSectionProps> = ({ topAction }) => {
         </Box>
 
         <Grid container spacing={4} justifyContent="center">
-          {pricingPlans.map((plan) => (
-            <Grid item xs={12} sm={6} md={4} key={plan.title}>
-              <Card
-                elevation={plan.highlight ? 8 : 2}
-                sx={{
+          {pricingPlans.map((plan, idx) => (
+            <Grid item xs={12} sm={6} md={4} key={plan.title ?? idx}>
+              {plan.title && plan.price && plan.features?.length ? (
+                <Card
+                  elevation={plan.highlight ? 8 : 2}
+                  sx={{
                   height: "100%",
                   display: "flex",
                   flexDirection: "column",
@@ -214,6 +215,22 @@ const PricingSection: React.FC<PricingSectionProps> = ({ topAction }) => {
                   </Button>
                 </CardActions>
               </Card>
+              ) : (
+                <Card
+                  sx={{
+                    height: '100%',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    backgroundColor: theme.palette.background.paper,
+                    borderRadius: theme.shape.borderRadius * 2,
+                  }}
+                >
+                  <Typography color="text.secondary">
+                    Plano indisponível
+                  </Typography>
+                </Card>
+              )}
             </Grid>
           ))}
         </Grid>
