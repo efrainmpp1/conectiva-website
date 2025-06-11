@@ -91,14 +91,14 @@ const Navbar: React.FC = () => {
                 >
                   <BrainCircuit
                     size={32}
-                    color="#FFFFFF"
+                    color={theme.palette.common.white}
                     style={{ marginRight: "8px" }}
                   />
                   <Typography
                     variant="h5"
                     sx={{
                       fontWeight: 700,
-                      color: "#FFFFFF",
+                      color: theme.palette.common.white,
                     }}
                   >
                     Conectiva
@@ -122,7 +122,7 @@ const Navbar: React.FC = () => {
                           mx: 0.5,
                           px: 2,
                           py: 1,
-                          color: "#fff",
+                          color: theme.palette.common.white,
                           borderRadius: theme.shape.borderRadius * 1.5,
                           background: theme.palette.gradients.bluePurple,
                           boxShadow: theme.customShadows.card,
@@ -151,7 +151,7 @@ const Navbar: React.FC = () => {
                         ml: 2,
                         borderRadius: theme.shape.borderRadius * 1.5,
                         fontWeight: 600,
-                        color: '#fff',
+                        color: theme.palette.common.white,
                         background: theme.palette.gradients.purplePink,
                         boxShadow: theme.customShadows.neon,
                       }}
@@ -170,7 +170,7 @@ const Navbar: React.FC = () => {
                   onClick={handleDrawerToggle}
                   sx={{
                     ml: "auto",
-                    color: "#fff",
+                    color: theme.palette.common.white,
                   }}
                 >
                   <Menu />
@@ -216,7 +216,7 @@ const Navbar: React.FC = () => {
                     borderRadius: theme.shape.borderRadius * 1.5,
                     background: theme.palette.gradients.bluePurple,
                     boxShadow: theme.customShadows.card,
-                    color: '#fff',
+                    color: theme.palette.common.white,
                     transition: 'all 0.3s ease',
                     '&:hover': {
                       background: theme.palette.gradients.purplePink,
@@ -244,7 +244,7 @@ const Navbar: React.FC = () => {
                 sx={{
                   borderRadius: theme.shape.borderRadius * 1.5,
                   fontWeight: 600,
-                  color: '#fff',
+                  color: theme.palette.common.white,
                   background: theme.palette.gradients.purplePink,
                   boxShadow: theme.customShadows.neon,
                 }}

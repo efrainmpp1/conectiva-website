@@ -1,6 +1,6 @@
 import React from "react";
 import { Box, Typography, Button, Container, Grid } from "@mui/material";
-import { useTheme } from "@mui/material/styles";
+import { useTheme, alpha } from "@mui/material/styles";
 import { Link as ScrollLink } from "react-scroll";
 import { useNavigate } from "react-router-dom";
 import { ArrowRight, Cpu } from "lucide-react";
@@ -23,7 +23,7 @@ const HeroSection: React.FC = () => {
         minHeight: { md: '80vh' },
         overflow: 'hidden',
         position: 'relative',
-        color: '#fff',
+        color: theme.palette.common.white,
       }}
         initial={{ opacity: 0, y: reduceMotion ? 0 : 40 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -77,12 +77,12 @@ const HeroSection: React.FC = () => {
 
               <Typography
                 variant="h5"
-                color="rgba(255,255,255,0.8)"
                 paragraph
                 sx={{
                   mb: 4,
                   maxWidth: { md: "80%" },
                   mx: { xs: "auto", md: 0 },
+                  color: alpha(theme.palette.common.white, 0.8),
                 }}
               >
                 Geração de clientes em escala com automação inteligente.
@@ -110,7 +110,7 @@ const HeroSection: React.FC = () => {
                     borderRadius: theme.shape.borderRadius * 2,
                     background: theme.palette.gradients.purplePink,
                     boxShadow: theme.customShadows.neon,
-                    color: '#fff',
+                    color: theme.palette.common.white,
                   }}
                 >
                   Start Free Trial
@@ -135,7 +135,7 @@ const HeroSection: React.FC = () => {
                       px: 3,
                       fontWeight: 600,
                       borderRadius: theme.shape.borderRadius * 2,
-                      color: '#fff',
+                      color: theme.palette.common.white,
                       border: '2px solid transparent',
                       background:
                         `linear-gradient(${theme.palette.background.paper}, ${theme.palette.background.paper}) padding-box, ${theme.palette.gradients.purplePink} border-box`,
@@ -163,7 +163,12 @@ const HeroSection: React.FC = () => {
               <Cpu
                 size={220}
                 color={theme.palette.primary.light}
-                style={{ filter: 'drop-shadow(0 0 10px rgba(123,47,242,0.6))' }}
+                style={{
+                  filter: `drop-shadow(0 0 10px ${alpha(
+                    theme.palette.primary.light,
+                    0.6
+                  )})`,
+                }}
               />
 
               {/* Decorative Elements */}

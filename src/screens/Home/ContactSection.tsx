@@ -15,7 +15,7 @@ const ContactSection: React.FC<ContactSectionProps> = ({ topAction }) => {
       id="contact"
       sx={{
         py: { xs: 8, md: 3 },
-        backgroundColor: "#f8f9fa",
+        backgroundColor: theme.palette.grey[100],
       }}
     >
       <Container maxWidth="lg">
@@ -117,7 +117,7 @@ const ContactSection: React.FC<ContactSectionProps> = ({ topAction }) => {
                   border: 0,
                   width: "100%",
                   height: "250px",
-                  borderRadius: 2,
+                  borderRadius: theme.shape.borderRadius,
                   mt: "auto",
                 }}
                 allowFullScreen

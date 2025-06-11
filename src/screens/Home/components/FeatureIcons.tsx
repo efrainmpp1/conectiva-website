@@ -63,7 +63,7 @@ const FeatureIcons: React.FC = () => {
                   <Box aria-hidden="true" sx={{ mb: 1, filter: `drop-shadow(0 0 4px ${alpha(theme.palette.primary.main, 0.6)})` }}>
                     <Icon size={40} color={theme.palette.primary.light} style={{ width: '2.5rem', height: '2.5rem' }} />
                   </Box>
-                  <Typography variant="subtitle1" sx={{ color: '#fff' }}>
+                  <Typography variant="subtitle1" sx={{ color: theme.palette.common.white }}>
                     {item.label}
                   </Typography>
                 </Box>

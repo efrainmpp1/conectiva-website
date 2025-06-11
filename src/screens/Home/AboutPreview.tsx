@@ -9,7 +9,7 @@ const AboutPreview: React.FC = () => {
     <Box
       sx={{
         py: { xs: 6, md: 8 },
-        backgroundColor: "#ffffff",
+        backgroundColor: theme.palette.common.white,
       }}
     >
       <Container maxWidth="lg">
@@ -86,7 +86,7 @@ const AboutPreview: React.FC = () => {
               sx={{
                 width: "100%",
                 height: "auto",
-                borderRadius: 2,
+                borderRadius: theme.shape.borderRadius,
                 boxShadow: 3,
               }}
             />

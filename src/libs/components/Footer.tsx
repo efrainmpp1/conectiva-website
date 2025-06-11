@@ -19,7 +19,7 @@ const Footer: React.FC = () => {
       component="footer"
       sx={{
         backgroundColor: "primary.dark",
-        color: "white",
+        color: theme.palette.common.white,
         py: 6,
         mt: 8,
       }}

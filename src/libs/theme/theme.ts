@@ -18,6 +18,7 @@ declare module '@mui/material/styles' {
     customShadows: {
       neon: string;
       card: string;
+      button: string;
     };
     animations: {
       durationShort: number;
@@ -30,6 +31,7 @@ declare module '@mui/material/styles' {
     customShadows?: {
       neon?: string;
       card?: string;
+      button?: string;
     };
     animations?: {
       durationShort?: number;
@@ -71,6 +73,9 @@ const theme = createTheme({
     background: {
       default: '#141627',
       paper: '#1e1b4b',
+    },
+    grey: {
+      100: '#f8f9fa',
     },
     gradients: {
       bluePurple: 'linear-gradient(45deg, #1e1b4b 0%, #7b2ff2 100%)',
@@ -125,12 +130,13 @@ const theme = createTheme({
     },
   },
   shape: {
-    borderRadius: 8,
+    borderRadius: 12,
   },
   spacing: 8,
   customShadows: {
     neon: '0 0 10px rgba(123,47,242,0.7), 0 0 20px rgba(123,47,242,0.5)',
     card: '0 0 15px rgba(123,47,242,0.3)',
+    button: '0 0 6px rgba(243,87,168,0.4)',
   },
   animations: {
     durationShort: 0.2,
@@ -141,34 +147,34 @@ const theme = createTheme({
   components: {
     MuiButton: {
       styleOverrides: {
-        root: {
+        root: ({ theme }) => ({
           padding: '10px 24px',
-          boxShadow: '0 0 6px rgba(243,87,168,0.4)',
-        },
-        containedPrimary: {
+          boxShadow: theme.customShadows.button,
+        }),
+        containedPrimary: ({ theme }) => ({
           '&:hover': {
-            boxShadow: '0 0 10px rgba(243,87,168,0.6)',
+            boxShadow: theme.customShadows.neon,
           },
-        },
+        }),
       },
     },
     MuiCard: {
       styleOverrides: {
-        root: {
-          boxShadow: '0 0 10px rgba(123,47,242,0.2)',
+        root: ({ theme }) => ({
+          boxShadow: theme.customShadows.card,
           transition: 'transform 0.3s ease, box-shadow 0.3s ease',
           '&:hover': {
             transform: 'translateY(-4px)',
-            boxShadow: '0 0 20px rgba(243,87,168,0.4)',
+            boxShadow: theme.customShadows.neon,
           },
-        },
+        }),
       },
     },
     MuiAppBar: {
       styleOverrides: {
-        root: {
-          boxShadow: '0 0 8px rgba(123,47,242,0.2)',
-        },
+        root: ({ theme }) => ({
+          boxShadow: theme.customShadows.card,
+        }),
       },
     },
   },

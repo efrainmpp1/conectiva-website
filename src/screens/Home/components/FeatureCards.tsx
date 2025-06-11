@@ -69,7 +69,16 @@ const FeatureCards: React.FC = () => {
                   backgroundImage: `linear-gradient(${theme.palette.background.paper}, ${theme.palette.background.paper}) padding-box, ${theme.palette.gradients.bluePurple} border-box`,
                 }}
               >
-                <Box aria-hidden="true" sx={{ mb: 3, filter: 'drop-shadow(0 0 6px rgba(123,47,242,0.6))' }}>
+                <Box
+                  aria-hidden="true"
+                  sx={{
+                    mb: 3,
+                    filter: `drop-shadow(0 0 6px ${alpha(
+                      theme.palette.primary.main,
+                      0.6
+                    )})`,
+                  }}
+                >
                   {feature.icon}
                 </Box>
                 <Typography variant="h5" component="h3" gutterBottom sx={{ fontWeight: 700 }}>
@@ -86,7 +95,7 @@ const FeatureCards: React.FC = () => {
                   sx={{
                     mt: 'auto',
                     background: theme.palette.gradients.purplePink,
-                    color: '#fff',
+                    color: theme.palette.common.white,
                     boxShadow: theme.customShadows.neon,
                     borderRadius: theme.shape.borderRadius * 2,
                     px: { xs: 2.5, sm: 3 },

@@ -60,7 +60,7 @@ const FAQSection: React.FC = () => {
       id="faq"
       sx={{
         py: { xs: 8, md: 12 },
-        backgroundColor: "#ffffff",
+        backgroundColor: theme.palette.common.white,
       }}
     >
       <Container maxWidth="lg">

@@ -51,7 +51,7 @@ const AboutSection: React.FC<AboutSectionProps> = ({ topAction }) => {
       id="about"
       sx={{
         py: { xs: 8, md: 3 },
-        background: "#ffffff",
+        background: theme.palette.common.white,
       }}
     >
       <Container maxWidth="lg">
@@ -134,7 +134,7 @@ const AboutSection: React.FC<AboutSectionProps> = ({ topAction }) => {
                 width: "100%",
                 height: "100%",
                 objectFit: "cover",
-                borderRadius: 2,
+                borderRadius: theme.shape.borderRadius,
                 boxShadow: 3,
               }}
             />
@@ -147,7 +147,7 @@ const AboutSection: React.FC<AboutSectionProps> = ({ topAction }) => {
               <Card
                 sx={{
                   height: "100%",
-                  borderRadius: 2,
+                  borderRadius: theme.shape.borderRadius,
                   boxShadow: "none",
                   border: "1px solid",
                   borderColor: "divider",
