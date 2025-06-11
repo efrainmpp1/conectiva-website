@@ -86,7 +86,7 @@ const ContactSection: React.FC<ContactSectionProps> = ({ topAction }) => {
               <Box sx={{ mb: 3, display: "flex", alignItems: "center" }}>
                 <MapPin
                   size={24}
-                  color={theme.palette.primary.main}
+                  color={theme.palette.primary.light}
                   style={{ marginRight: "12px" }}
                 />
                 <Typography>Natal, RN</Typography>
@@ -95,7 +95,7 @@ const ContactSection: React.FC<ContactSectionProps> = ({ topAction }) => {
               <Box sx={{ mb: 3, display: "flex", alignItems: "center" }}>
                 <Mail
                   size={24}
-                  color={theme.palette.primary.main}
+                  color={theme.palette.primary.light}
                   style={{ marginRight: "12px" }}
                 />
                 <Typography>info@conectiva.com</Typography>
@@ -104,7 +104,7 @@ const ContactSection: React.FC<ContactSectionProps> = ({ topAction }) => {
               <Box sx={{ mb: 4, display: "flex", alignItems: "center" }}>
                 <Phone
                   size={24}
-                  color={theme.palette.primary.main}
+                  color={theme.palette.primary.light}
                   style={{ marginRight: "12px" }}
                 />
                 <Typography>(84) 99975-0179</Typography>

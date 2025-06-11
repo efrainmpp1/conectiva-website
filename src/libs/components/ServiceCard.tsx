@@ -28,13 +28,13 @@ const ServiceCard: React.FC<ServiceCardProps> = ({ service }) => {
   const getIcon = () => {
     switch (service.icon) {
       case "GanttChart":
-        return <GanttChart size={40} color={theme.palette.primary.main} />;
+        return <GanttChart size={40} color={theme.palette.primary.light} />;
       case "Mail":
-        return <Mail size={40} color={theme.palette.primary.main} />;
+        return <Mail size={40} color={theme.palette.primary.light} />;
       case "Search":
-        return <Search size={40} color={theme.palette.primary.main} />;
+        return <Search size={40} color={theme.palette.primary.light} />;
       default:
-        return <GanttChart size={40} color={theme.palette.primary.main} />;
+        return <GanttChart size={40} color={theme.palette.primary.light} />;
     }
   };
 
@@ -83,9 +83,13 @@ const ServiceCard: React.FC<ServiceCardProps> = ({ service }) => {
         </Typography>
         <Button
           variant="outlined"
-          color="primary"
           onClick={handleServiceClick}
-          sx={{ alignSelf: "flex-start", mt: "auto" }}
+          sx={{
+            alignSelf: "flex-start",
+            mt: "auto",
+            color: theme.palette.primary.light,
+            borderColor: theme.palette.primary.light,
+          }}
         >
           Learn More
         </Button>

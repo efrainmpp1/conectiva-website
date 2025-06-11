@@ -60,7 +60,7 @@ const FeatureIcons: React.FC = () => {
                     textAlign: 'center',
                   }}
                 >
-                  <Box aria-hidden="true" sx={{ mb: 1, filter: `drop-shadow(0 0 4px ${alpha(theme.palette.primary.main, 0.6)})` }}>
+                  <Box aria-hidden="true" sx={{ mb: 1, filter: `drop-shadow(0 0 4px ${alpha(theme.palette.primary.light, 0.6)})` }}>
                     <Icon size={40} color={theme.palette.primary.light} style={{ width: '2.5rem', height: '2.5rem' }} />
                   </Box>
                   <Typography variant="subtitle1" sx={{ color: theme.palette.common.white }}>
@@ -73,8 +73,8 @@ const FeatureIcons: React.FC = () => {
                     sx={{
                       width: '0.125rem',
                       height: '2.5rem',
-                      background: alpha(theme.palette.primary.main, 0.4),
-                      boxShadow: `0 0 6px ${alpha(theme.palette.primary.main, 0.4)}`,
+                      background: alpha(theme.palette.primary.light, 0.4),
+                      boxShadow: `0 0 6px ${alpha(theme.palette.primary.light, 0.4)}`,
                       mx: { xs: 1, md: 2 },
                     }}
                   />

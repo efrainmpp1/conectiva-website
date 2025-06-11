@@ -25,22 +25,22 @@ const AboutSection: React.FC<AboutSectionProps> = ({ topAction }) => {
 
   const stats: StatItem[] = [
     {
-      icon: <TrendingUp size={36} color={theme.palette.primary.main} />,
+      icon: <TrendingUp size={36} color={theme.palette.primary.light} />,
       number: "87%",
       label: "Aumento em leads qualificados",
     },
     {
-      icon: <Users size={36} color={theme.palette.primary.main} />,
+      icon: <Users size={36} color={theme.palette.primary.light} />,
       number: "1.200+",
       label: "Clientes satisfeitos",
     },
     {
-      icon: <Award size={36} color={theme.palette.primary.main} />,
+      icon: <Award size={36} color={theme.palette.primary.light} />,
       number: "18",
       label: "Prêmios da indústria",
     },
     {
-      icon: <BarChart2 size={36} color={theme.palette.primary.main} />,
+      icon: <BarChart2 size={36} color={theme.palette.primary.light} />,
       number: "5M+",
       label: "Leads gerados",
     },

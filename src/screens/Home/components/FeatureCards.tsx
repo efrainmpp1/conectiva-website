@@ -74,7 +74,7 @@ const FeatureCards: React.FC = () => {
                   sx={{
                     mb: 3,
                     filter: `drop-shadow(0 0 6px ${alpha(
-                      theme.palette.primary.main,
+                      theme.palette.primary.light,
                       0.6
                     )})`,
                   }}

@@ -8,7 +8,7 @@ import {
   IconButton,
   Divider,
 } from "@mui/material";
-import { useTheme } from "@mui/material/styles";
+import { useTheme, alpha } from "@mui/material/styles";
 import { Github, Linkedin } from "lucide-react";
 import { WhatsApp } from "@mui/icons-material";
 
@@ -88,7 +88,9 @@ const Footer: React.FC = () => {
           </Grid>
         </Grid>
 
-        <Divider sx={{ my: 4, backgroundColor: "rgba(255, 255, 255, 0.2)" }} />
+        <Divider
+          sx={{ my: 4, backgroundColor: alpha(theme.palette.common.white, 0.2) }}
+        />
 
         <Typography variant="body2" align="center">
           © {currentYear} Conectiva. All rights reserved.

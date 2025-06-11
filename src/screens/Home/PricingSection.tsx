@@ -132,16 +132,16 @@ const PricingSection: React.FC<PricingSectionProps> = ({ topAction }) => {
                   ...(plan.highlight && {
                     backgroundColor: theme.palette.background.paper,
                     border: "2px solid",
-                    borderColor: "primary.main",
+                    borderColor: theme.palette.primary.light,
                     "&::before": {
                       content: '"Mais Popular"',
                       position: "absolute",
                       top: "12px",
                       right: "12px",
                       backgroundColor: theme.palette.background.paper,
-                      color: "primary.main",
+                      color: theme.palette.primary.light,
                       border: "1px solid",
-                      borderColor: "primary.main",
+                      borderColor: theme.palette.primary.light,
                       padding: "2px 8px",
                       borderRadius: "12px",
                       fontSize: "0.7rem",
@@ -218,10 +218,13 @@ const PricingSection: React.FC<PricingSectionProps> = ({ topAction }) => {
         <Box sx={{ textAlign: "center", mt: 6 }}>
           <Button
             variant="outlined"
-            color="primary"
             size="large"
             onClick={() => navigate("/planos")}
-            sx={{ mr: 2 }}
+            sx={{
+              mr: 2,
+              color: theme.palette.primary.light,
+              borderColor: theme.palette.primary.light,
+            }}
           >
             View Plans
           </Button>
