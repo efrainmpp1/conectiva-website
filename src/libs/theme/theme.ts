@@ -30,6 +30,9 @@ declare module '@mui/material/styles' {
 
 // Create a custom theme with a dark/neon palette
 const theme = createTheme({
+  breakpoints: {
+    values: { xs: 0, sm: 360, md: 768, lg: 1024, xl: 1440 },
+  },
   palette: {
     mode: 'dark',
     primary: {

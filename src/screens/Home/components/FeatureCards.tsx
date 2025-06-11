@@ -44,14 +44,14 @@ const FeatureCards: React.FC = () => {
   return (
     <Box sx={{ py: { xs: 8, md: 12 }, backgroundColor: theme.palette.background.default }}>
       <Container maxWidth="lg">
-        <Grid container spacing={4}>
+        <Grid container spacing={4} role="list">
           {features.map((feature) => (
-            <Grid item xs={12} sm={6} md={4} key={feature.title}>
+            <Grid item xs={12} sm={6} md={4} key={feature.title} role="listitem">
               <MotionBox
                 whileHover={{ scale: 1.03 }}
                 whileTap={{ scale: 0.97 }}
                 sx={{
-                  p: 4,
+                  p: { xs: 3, md: 4 },
                   height: '100%',
                   background: theme.palette.background.paper,
                   borderRadius: theme.shape.borderRadius * 2.5,
@@ -84,8 +84,8 @@ const FeatureCards: React.FC = () => {
                     color: '#fff',
                     boxShadow: theme.customShadows.neon,
                     borderRadius: theme.shape.borderRadius * 2,
-                    px: 3,
-                    py: 1.5,
+                    px: { xs: 2.5, sm: 3 },
+                    py: { xs: 1.25, sm: 1.5 },
                     fontWeight: 600,
                   }}
                 >
