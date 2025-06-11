@@ -19,14 +19,14 @@ const AgentPage: React.FC = () => {
       description:
         "Envie um edital em PDF e descubra empresas compatíveis para a licitação.",
       icon: <FileText size={36} />,
-      path: "/edital",
+      path: "/agent/edital",
     },
     {
       title: "Prospecção Inteligente de Empresas",
       description:
         "Descreva o tipo de empresa que procura e a IA retorna opções relevantes.",
       icon: <Search size={36} />,
-      path: "/prospeccao",
+      path: "/agent/prospeccao",
     },
   ];
 
