@@ -147,14 +147,15 @@ const AboutSection: React.FC<AboutSectionProps> = ({ topAction }) => {
               <Card
                 sx={{
                   height: "100%",
-                  borderRadius: theme.shape.borderRadius,
-                  boxShadow: "none",
+                  borderRadius: theme.shape.borderRadius * 1.5,
+                  backgroundColor: theme.palette.background.paper,
+                  boxShadow: theme.customShadows.card,
                   border: "1px solid",
-                  borderColor: "divider",
+                  borderColor: theme.palette.divider,
                   transition: "transform 0.3s ease, box-shadow 0.3s ease",
                   "&:hover": {
                     transform: "translateY(-8px)",
-                    boxShadow: 3,
+                    boxShadow: theme.customShadows.neon,
                   },
                 }}
               >

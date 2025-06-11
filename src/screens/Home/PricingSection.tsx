@@ -125,12 +125,15 @@ const PricingSection: React.FC<PricingSectionProps> = ({ topAction }) => {
                   display: "flex",
                   flexDirection: "column",
                   position: "relative",
-                  transition: "transform 0.3s ease-in-out",
+                  backgroundColor: theme.palette.background.paper,
+                  borderRadius: theme.shape.borderRadius * 2,
+                  boxShadow: theme.customShadows.card,
+                  transition: "transform 0.3s ease-in-out, box-shadow 0.3s ease",
                   "&:hover": {
                     transform: "translateY(-8px)",
+                    boxShadow: theme.customShadows.neon,
                   },
                   ...(plan.highlight && {
-                    backgroundColor: theme.palette.background.paper,
                     border: "2px solid",
                     borderColor: theme.palette.primary.light,
                     "&::before": {
@@ -143,7 +146,7 @@ const PricingSection: React.FC<PricingSectionProps> = ({ topAction }) => {
                       border: "1px solid",
                       borderColor: theme.palette.primary.light,
                       padding: "2px 8px",
-                      borderRadius: "12px",
+                      borderRadius: theme.shape.borderRadius,
                       fontSize: "0.7rem",
                       fontWeight: "bold",
                     },

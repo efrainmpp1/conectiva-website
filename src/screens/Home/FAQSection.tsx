@@ -110,12 +110,16 @@ const FAQSection: React.FC = () => {
               key={faq.id}
               sx={{
                 mb: 2,
-                borderRadius: "8px !important",
+                borderRadius: `${theme.shape.borderRadius}px !important`,
                 overflow: "hidden",
+                backgroundColor: theme.palette.background.paper,
+                boxShadow: theme.customShadows.card,
                 "&:before": {
                   display: "none",
                 },
-                boxShadow: "0 2px 8px rgba(0,0,0,0.05)",
+                "&:hover": {
+                  boxShadow: theme.customShadows.neon,
+                },
               }}
               disableGutters
             >
