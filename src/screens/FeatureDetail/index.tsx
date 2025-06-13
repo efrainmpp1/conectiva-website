@@ -11,11 +11,11 @@ import {
 } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
 import CircularProgress from "@mui/material/CircularProgress";
-import PublicBiddingExtras from "./components/PublicBiddingExtras";
-import PublicBiddingHero from "./components/PublicBiddingHero";
-import PublicBiddingBenefits from "./components/PublicBiddingBenefits";
-import PublicBiddingAudience from "./components/PublicBiddingAudience";
-import PublicBiddingFinalCTA from "./components/PublicBiddingFinalCTA";
+import AgentExtrasSection from "../../components/agent/AgentExtrasSection";
+import AgentHeroSection from "../../components/agent/AgentHeroSection";
+import AgentBenefitsSection from "../../components/agent/AgentBenefitsSection";
+import AgentAudienceSection from "../../components/agent/AgentAudienceSection";
+import AgentFinalCTASection from "../../components/agent/AgentFinalCTASection";
 import BackHomeButton from "../../libs/components/BackHomeButton";
 import { getServiceById } from "../../services/Services";
 import { useAuth } from "../../libs/context/AuthContext";
@@ -119,9 +119,9 @@ const FeatureDetailPage: React.FC<FeatureDetailPageProps> = ({ serviceId }) => {
 
         {id === "ai-public-bidding" && (
           <>
-            <PublicBiddingHero />
-            <PublicBiddingBenefits />
-            <PublicBiddingAudience />
+            <AgentHeroSection />
+            <AgentBenefitsSection />
+            <AgentAudienceSection />
           </>
         )}
 
@@ -253,8 +253,8 @@ const FeatureDetailPage: React.FC<FeatureDetailPageProps> = ({ serviceId }) => {
 
         {id === "ai-public-bidding" && (
           <>
-            <PublicBiddingExtras />
-            <PublicBiddingFinalCTA />
+            <AgentExtrasSection />
+            <AgentFinalCTASection />
           </>
         )}
       </Container>

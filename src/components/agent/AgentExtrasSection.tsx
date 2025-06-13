@@ -19,8 +19,8 @@ import {
   ShieldCheck,
   ChevronDown,
 } from "lucide-react";
-import { trackEvent } from "../../../libs/analytics";
-import PublicBiddingBeforeAfter from "./PublicBiddingBeforeAfter";
+import { trackEvent } from "../../libs/analytics";
+import AgentComparativoSection from "./AgentComparativoSection";
 
 const benefits = [
   { icon: Clock, label: "Economia de tempo" },
@@ -46,7 +46,10 @@ const faqs = [
 
 const MotionBox = motion(Box);
 
-const PublicBiddingExtras: React.FC = () => {
+/**
+ * Collection of extra informational blocks such as benefits icons, FAQ and demo request.
+ */
+const AgentExtrasSection: React.FC = () => {
   const theme = useTheme();
   const reduceMotion = useReducedMotion();
   const [demoLoading, setDemoLoading] = useState(false);
@@ -107,7 +110,7 @@ const PublicBiddingExtras: React.FC = () => {
         </Grid>
       </Grid>
 
-      <PublicBiddingBeforeAfter />
+      <AgentComparativoSection />
 
       {/* IA illustration */}
       <Box sx={{ textAlign: "center", mb: 8 }}>
@@ -223,4 +226,4 @@ const PublicBiddingExtras: React.FC = () => {
   );
 };
 
-export default PublicBiddingExtras;
+export default AgentExtrasSection;

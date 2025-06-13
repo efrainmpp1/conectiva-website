@@ -17,7 +17,10 @@ const afterItems = [
 
 const MotionPaper = motion(Paper);
 
-const PublicBiddingBeforeAfter: React.FC = () => {
+/**
+ * Side-by-side comparison showing workflow before and after using the tool.
+ */
+const AgentComparativoSection: React.FC = () => {
   const theme = useTheme();
   const reduceMotion = useReducedMotion();
   const cardSx = {
@@ -96,4 +99,4 @@ const PublicBiddingBeforeAfter: React.FC = () => {
   );
 };
 
-export default PublicBiddingBeforeAfter;
+export default AgentComparativoSection;

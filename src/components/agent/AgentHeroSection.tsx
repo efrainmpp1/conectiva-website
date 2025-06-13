@@ -5,7 +5,10 @@ import { motion, useReducedMotion } from 'framer-motion';
 
 const MotionBox = motion(Box);
 
-const PublicBiddingHero: React.FC = () => {
+/**
+ * Hero section for the Agente de Edital page.
+ */
+const AgentHeroSection: React.FC = () => {
   const theme = useTheme();
   const reduceMotion = useReducedMotion();
   return (
@@ -73,4 +76,4 @@ const PublicBiddingHero: React.FC = () => {
   );
 };
 
-export default PublicBiddingHero;
+export default AgentHeroSection;

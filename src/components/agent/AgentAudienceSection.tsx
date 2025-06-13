@@ -26,7 +26,10 @@ const audiences = [
 
 const MotionPaper = motion(Paper);
 
-const PublicBiddingAudience: React.FC = () => {
+/**
+ * Section highlighting who benefits from the Agente de Edital service.
+ */
+const AgentAudienceSection: React.FC = () => {
   const theme = useTheme();
   const reduceMotion = useReducedMotion();
   return (
@@ -93,4 +96,4 @@ const PublicBiddingAudience: React.FC = () => {
   );
 };
 
-export default PublicBiddingAudience;
+export default AgentAudienceSection;

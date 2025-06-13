@@ -3,11 +3,14 @@ import { Box, Button, Paper, Typography } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
 import CircularProgress from '@mui/material/CircularProgress';
 import { motion, useReducedMotion } from 'framer-motion';
-import { trackEvent } from '../../../libs/analytics';
+import { trackEvent } from '../../libs/analytics';
 
 const MotionPaper = motion(Paper);
 
-const PublicBiddingFinalCTA: React.FC = () => {
+/**
+ * Highlighted final call-to-action encouraging registration or contact.
+ */
+const AgentFinalCTASection: React.FC = () => {
   const theme = useTheme();
   const reduceMotion = useReducedMotion();
   const [loading, setLoading] = useState(false);
@@ -70,4 +73,4 @@ const PublicBiddingFinalCTA: React.FC = () => {
   );
 };
 
-export default PublicBiddingFinalCTA;
+export default AgentFinalCTASection;

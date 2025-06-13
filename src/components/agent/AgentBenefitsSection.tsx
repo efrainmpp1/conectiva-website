@@ -24,7 +24,10 @@ const benefits = [
 
 const MotionPaper = motion(Paper);
 
-const PublicBiddingBenefits: React.FC = () => {
+/**
+ * Benefits section highlighting core advantages of the Agente de Edital.
+ */
+const AgentBenefitsSection: React.FC = () => {
   const theme = useTheme();
   const reduceMotion = useReducedMotion();
   return (
@@ -85,4 +88,4 @@ const PublicBiddingBenefits: React.FC = () => {
   );
 };
 
-export default PublicBiddingBenefits;
+export default AgentBenefitsSection;
