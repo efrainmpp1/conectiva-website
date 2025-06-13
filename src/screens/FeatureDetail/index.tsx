@@ -15,6 +15,7 @@ import PublicBiddingExtras from "./components/PublicBiddingExtras";
 import PublicBiddingHero from "./components/PublicBiddingHero";
 import PublicBiddingBenefits from "./components/PublicBiddingBenefits";
 import PublicBiddingAudience from "./components/PublicBiddingAudience";
+import PublicBiddingFinalCTA from "./components/PublicBiddingFinalCTA";
 import BackHomeButton from "../../libs/components/BackHomeButton";
 import { getServiceById } from "../../services/Services";
 import { useAuth } from "../../libs/context/AuthContext";
@@ -250,7 +251,12 @@ const FeatureDetailPage: React.FC<FeatureDetailPageProps> = ({ serviceId }) => {
           />
         </Paper>
 
-        {id === "ai-public-bidding" && <PublicBiddingExtras />}
+        {id === "ai-public-bidding" && (
+          <>
+            <PublicBiddingExtras />
+            <PublicBiddingFinalCTA />
+          </>
+        )}
       </Container>
     </Box>
   );
