@@ -19,6 +19,7 @@ import {
   ChevronDown,
 } from "lucide-react";
 import { trackEvent } from "../../../libs/analytics";
+import PublicBiddingBeforeAfter from "./PublicBiddingBeforeAfter";
 
 const benefits = [
   { icon: Clock, label: "Economia de tempo" },
@@ -89,6 +90,8 @@ const PublicBiddingExtras: React.FC = () => {
           </Typography>
         </Grid>
       </Grid>
+
+      <PublicBiddingBeforeAfter />
 
       {/* IA illustration */}
       <Box sx={{ textAlign: "center", mb: 8 }}>
