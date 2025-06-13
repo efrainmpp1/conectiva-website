@@ -3,6 +3,7 @@ import { createBrowserRouter } from 'react-router-dom';
 import App from './App';
 import Home from './screens/Home';
 import ServicePage from './screens/Service';
+import FeatureDetailPage from './screens/FeatureDetail';
 import AboutPage from './screens/About';
 import PlansPage from './screens/Plans';
 import ContactPage from './screens/Contact';
@@ -26,6 +27,10 @@ const router = createBrowserRouter([
       {
         index: true,
         element: <Home />,
+      },
+      {
+        path: 'ferramenta/:id',
+        element: <FeatureDetailPage />,
       },
       {
         path: 'service/:id',

@@ -27,21 +27,21 @@ const FeatureCards: React.FC = () => {
       title: 'Agente de Edital',
       description: 'Envie o edital e receba empresas ideais em minutos.',
       cta: 'Saiba Mais',
-      link: '/service/ai-public-bidding',
+      link: '/ferramenta/ai-public-bidding',
     },
     {
       icon: <Search size={56} color={theme.palette.primary.light} />,
       title: 'Busca Descritiva',
       description: 'Descreva sua empresa ideal e gere uma lista em segundos.',
       cta: 'Saiba Mais',
-      link: '/service/ai-search-companies',
+      link: '/ferramenta/ai-search-companies',
     },
     {
       icon: <Mail size={56} color={theme.palette.primary.light} />,
       title: 'Contato Automático',
       description: 'Dispare campanhas personalizadas em escala.',
       cta: 'Saiba Mais',
-      link: '/service/ai-contact-automation',
+      link: '/ferramenta/ai-contact-automation',
     },
   ];
 
