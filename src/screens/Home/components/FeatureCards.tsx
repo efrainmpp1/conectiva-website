@@ -3,6 +3,7 @@ import { Box, Typography, Button, Grid, Container } from '@mui/material';
 import { useTheme, alpha } from '@mui/material/styles';
 import { motion, useReducedMotion } from 'framer-motion';
 import { GanttChart, Search, Mail } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
 const MotionBox = motion(Box);
 const MotionButton = motion(Button);
@@ -12,38 +13,43 @@ interface Feature {
   title: string;
   description: string;
   cta: string;
+  link: string;
 }
 
 const FeatureCards: React.FC = () => {
   const theme = useTheme();
+  const navigate = useNavigate();
   const reduceMotion = useReducedMotion();
 
   const features: Feature[] = [
     {
       icon: <GanttChart size={56} color={theme.palette.primary.light} />,
       title: 'Agente de Edital',
-      description:
-        'Envie o edital e receba empresas ideais em minutos.',
-      cta: 'Try Now',
+      description: 'Envie o edital e receba empresas ideais em minutos.',
+      cta: 'Saiba Mais',
+      link: '/service/ai-public-bidding',
     },
     {
       icon: <Search size={56} color={theme.palette.primary.light} />,
       title: 'Busca Descritiva',
-      description:
-        'Descreva sua empresa ideal e gere uma lista em segundos.',
-      cta: 'Generate My List',
+      description: 'Descreva sua empresa ideal e gere uma lista em segundos.',
+      cta: 'Saiba Mais',
+      link: '/service/ai-search-companies',
     },
     {
       icon: <Mail size={56} color={theme.palette.primary.light} />,
       title: 'Contato Automático',
-      description:
-        'Dispare campanhas personalizadas em escala.',
-      cta: 'Start Free Trial',
+      description: 'Dispare campanhas personalizadas em escala.',
+      cta: 'Saiba Mais',
+      link: '/service/ai-contact-automation',
     },
   ];
 
   return (
-    <Box id="services" sx={{ py: { xs: 8, md: 12 }, backgroundColor: theme.palette.background.default }}>
+    <Box
+      id="services"
+      sx={{ py: { xs: 8, md: 12 }, backgroundColor: theme.palette.background.default }}
+    >
       <Container maxWidth="lg">
         <Box sx={{ textAlign: 'center', mb: 8 }}>
           <Typography
@@ -90,7 +96,10 @@ const FeatureCards: React.FC = () => {
                 initial={{ opacity: 0, y: reduceMotion ? 0 : 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: theme.animations.durationBase, ease: theme.animations.easing }}
+                transition={{
+                  duration: theme.animations.durationBase,
+                  ease: theme.animations.easing,
+                }}
                 sx={{
                   p: { xs: 3, md: 4 },
                   height: '100%',
@@ -109,10 +118,7 @@ const FeatureCards: React.FC = () => {
                   aria-hidden="true"
                   sx={{
                     mb: 3,
-                    filter: `drop-shadow(0 0 6px ${alpha(
-                      theme.palette.primary.light,
-                      0.6
-                    )})`,
+                    filter: `drop-shadow(0 0 6px ${alpha(theme.palette.primary.light, 0.6)})`,
                   }}
                 >
                   {feature.icon}
@@ -127,7 +133,8 @@ const FeatureCards: React.FC = () => {
                   variant="contained"
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
-                  aria-label={feature.cta}
+                  aria-label={`Saiba mais sobre ${feature.title}`}
+                  onClick={() => navigate(feature.link)}
                   sx={{
                     mt: 'auto',
                     background: theme.palette.gradients.purplePink,
