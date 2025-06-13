@@ -4,6 +4,8 @@ import App from './App';
 import Home from './screens/Home';
 import ServicePage from './screens/Service';
 import FeatureDetailPage from './screens/FeatureDetail';
+import NotFound from './screens/NotFound';
+import { featureRoutes } from './routes/featureRoutes';
 import AboutPage from './screens/About';
 import PlansPage from './screens/Plans';
 import ContactPage from './screens/Contact';
@@ -28,10 +30,10 @@ const router = createBrowserRouter([
         index: true,
         element: <Home />,
       },
-      {
-        path: 'ferramenta/:id',
-        element: <FeatureDetailPage />,
-      },
+      ...featureRoutes.map(fr => ({
+        path: fr.path,
+        element: <FeatureDetailPage serviceId={fr.id} />,
+      })),
       {
         path: 'service/:id',
         element: <ServicePage />,
@@ -93,6 +95,10 @@ const router = createBrowserRouter([
             element: <ProfilePage />,
           },
         ],
+      },
+      {
+        path: '*',
+        element: <NotFound />,
       },
     ],
   },

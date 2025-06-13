@@ -4,16 +4,17 @@ import { useTheme, alpha } from '@mui/material/styles';
 import { motion, useReducedMotion } from 'framer-motion';
 import { GanttChart, Search, Mail } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
+import { getFeaturePathById } from '../../../routes/featureRoutes';
 
 const MotionBox = motion(Box);
 const MotionButton = motion(Button);
 
 interface Feature {
+  id: string;
   icon: React.ReactNode;
   title: string;
   description: string;
   cta: string;
-  link: string;
 }
 
 const FeatureCards: React.FC = () => {
@@ -23,25 +24,25 @@ const FeatureCards: React.FC = () => {
 
   const features: Feature[] = [
     {
+      id: 'ai-public-bidding',
       icon: <GanttChart size={56} color={theme.palette.primary.light} />,
       title: 'Agente de Edital',
       description: 'Envie o edital e receba empresas ideais em minutos.',
       cta: 'Saiba Mais',
-      link: '/ferramenta/ai-public-bidding',
     },
     {
+      id: 'ai-search-companies',
       icon: <Search size={56} color={theme.palette.primary.light} />,
       title: 'Busca Descritiva',
       description: 'Descreva sua empresa ideal e gere uma lista em segundos.',
       cta: 'Saiba Mais',
-      link: '/ferramenta/ai-search-companies',
     },
     {
+      id: 'ai-contact-automation',
       icon: <Mail size={56} color={theme.palette.primary.light} />,
       title: 'Contato Automático',
       description: 'Dispare campanhas personalizadas em escala.',
       cta: 'Saiba Mais',
-      link: '/ferramenta/ai-contact-automation',
     },
   ];
 
@@ -134,7 +135,10 @@ const FeatureCards: React.FC = () => {
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                   aria-label={`Saiba mais sobre ${feature.title}`}
-                  onClick={() => navigate(feature.link)}
+                  onClick={() => {
+                    const path = getFeaturePathById(feature.id);
+                    if (path) navigate(`/${path}`);
+                  }}
                   sx={{
                     mt: 'auto',
                     background: theme.palette.gradients.purplePink,

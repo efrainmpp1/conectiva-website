@@ -13,8 +13,13 @@ import BackHomeButton from "../../libs/components/BackHomeButton";
 import { getServiceById } from "../../services/Services";
 import { useAuth } from "../../libs/context/AuthContext";
 
-const FeatureDetailPage: React.FC = () => {
-  const { id } = useParams<{ id: string }>();
+interface FeatureDetailPageProps {
+  serviceId?: string;
+}
+
+const FeatureDetailPage: React.FC<FeatureDetailPageProps> = ({ serviceId }) => {
+  const params = useParams<{ id: string }>();
+  const id = serviceId ?? params.id;
   const navigate = useNavigate();
   const { user } = useAuth();
 
