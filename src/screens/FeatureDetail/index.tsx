@@ -12,6 +12,7 @@ import {
 import { useTheme } from "@mui/material/styles";
 import CircularProgress from "@mui/material/CircularProgress";
 import PublicBiddingExtras from "./components/PublicBiddingExtras";
+import PublicBiddingHero from "./components/PublicBiddingHero";
 import BackHomeButton from "../../libs/components/BackHomeButton";
 import { getServiceById } from "../../services/Services";
 import { useAuth } from "../../libs/context/AuthContext";
@@ -112,6 +113,8 @@ const FeatureDetailPage: React.FC<FeatureDetailPageProps> = ({ serviceId }) => {
     <Box sx={{ pb: { xs: 8, md: 12 } }}>
       <Container maxWidth="lg">
         <BackHomeButton />
+
+        {id === "ai-public-bidding" && <PublicBiddingHero />}
 
         <Paper
           elevation={2}
