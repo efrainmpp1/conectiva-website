@@ -1,5 +1,5 @@
 import React from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import {
   Box,
   Container,
@@ -11,11 +11,28 @@ import {
 } from "@mui/material";
 import BackHomeButton from "../../libs/components/BackHomeButton";
 import { getServiceById } from "../../services/Services";
+import { useAuth } from "../../libs/context/AuthContext";
 
 const FeatureDetailPage: React.FC = () => {
   const { id } = useParams<{ id: string }>();
+  const navigate = useNavigate();
+  const { user } = useAuth();
 
   const service = getServiceById(id ?? "");
+
+  const handleStartClick = () => {
+    if (user) {
+      if (id === "ai-public-bidding") {
+        navigate("/agent/edital");
+      } else if (id === "ai-search-companies") {
+        navigate("/agent/prospeccao");
+      } else {
+        navigate("/dashboard");
+      }
+    } else {
+      navigate("/cadastro");
+    }
+  };
 
   if (!service) {
     return (
@@ -115,9 +132,10 @@ const FeatureDetailPage: React.FC = () => {
                   variant="contained"
                   color="primary"
                   size="large"
-                  href="/comprar-creditos"
+                  onClick={handleStartClick}
+                  aria-label="Criar conta e testar gratuitamente"
                 >
-                  🎯 Solicitar Teste Grátis (3 Créditos)
+                  🚀 Criar Conta e Testar Grátis
                 </Button>
                 <Button
                   variant="outlined"
