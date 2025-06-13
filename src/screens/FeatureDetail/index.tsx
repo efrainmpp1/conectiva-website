@@ -14,6 +14,7 @@ import CircularProgress from "@mui/material/CircularProgress";
 import PublicBiddingExtras from "./components/PublicBiddingExtras";
 import PublicBiddingHero from "./components/PublicBiddingHero";
 import PublicBiddingBenefits from "./components/PublicBiddingBenefits";
+import PublicBiddingAudience from "./components/PublicBiddingAudience";
 import BackHomeButton from "../../libs/components/BackHomeButton";
 import { getServiceById } from "../../services/Services";
 import { useAuth } from "../../libs/context/AuthContext";
@@ -119,6 +120,7 @@ const FeatureDetailPage: React.FC<FeatureDetailPageProps> = ({ serviceId }) => {
           <>
             <PublicBiddingHero />
             <PublicBiddingBenefits />
+            <PublicBiddingAudience />
           </>
         )}
 
