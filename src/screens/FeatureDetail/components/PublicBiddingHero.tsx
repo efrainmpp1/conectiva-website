@@ -39,6 +39,12 @@ const PublicBiddingHero: React.FC = () => {
           >
             Envie seu edital. Nossa IA faz o trabalho por você.
           </Typography>
+          <Typography
+            variant="subtitle1"
+            sx={{ mt: 1, color: theme.palette.primary.light, fontWeight: 600 }}
+          >
+            IA que entende seu edital
+          </Typography>
         </Grid>
         <Grid item xs={12} md={6} sx={{ textAlign: 'center' }}>
           <Box
@@ -56,6 +62,13 @@ const PublicBiddingHero: React.FC = () => {
           />
         </Grid>
       </Grid>
+      <Box
+        sx={{
+          height: 2,
+          background: theme.palette.gradients.bluePurple,
+          mt: { xs: 6, md: 8 },
+        }}
+      />
     </MotionBox>
   );
 };

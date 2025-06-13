@@ -1,6 +1,7 @@
 import React from 'react';
 import { Box, Grid, Paper, Typography } from '@mui/material';
 import { useTheme, alpha } from '@mui/material/styles';
+import { motion, useReducedMotion } from 'framer-motion';
 
 const beforeItems = [
   { emoji: '🕒', label: '5 horas de pesquisa manual', aria: 'cinco horas de pesquisa manual' },
@@ -14,8 +15,11 @@ const afterItems = [
   { emoji: '🎯', label: 'Lista pronta com dados de contato', aria: 'lista pronta com dados de contato' },
 ];
 
+const MotionPaper = motion(Paper);
+
 const PublicBiddingBeforeAfter: React.FC = () => {
   const theme = useTheme();
+  const reduceMotion = useReducedMotion();
   const cardSx = {
     p: 3,
     backgroundColor: theme.palette.background.paper,
@@ -46,20 +50,32 @@ const PublicBiddingBeforeAfter: React.FC = () => {
     <Box sx={{ mb: 6 }}>
       <Grid container spacing={4}>
         <Grid item xs={12} md={6}>
-          <Paper sx={cardSx}>
+          <MotionPaper
+            sx={cardSx}
+            initial={{ opacity: 0, x: reduceMotion ? 0 : -40 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: theme.animations.durationBase, ease: theme.animations.easing }}
+          >
             <Typography variant="h5" gutterBottom fontWeight={600}>
               Antes
             </Typography>
             {renderItems(beforeItems)}
-          </Paper>
+          </MotionPaper>
         </Grid>
         <Grid item xs={12} md={6}>
-          <Paper sx={cardSx}>
+          <MotionPaper
+            sx={cardSx}
+            initial={{ opacity: 0, x: reduceMotion ? 0 : 40 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: theme.animations.durationBase, ease: theme.animations.easing }}
+          >
             <Typography variant="h5" gutterBottom fontWeight={600}>
               Depois com IA
             </Typography>
             {renderItems(afterItems)}
-          </Paper>
+          </MotionPaper>
         </Grid>
       </Grid>
       <Typography
@@ -69,6 +85,13 @@ const PublicBiddingBeforeAfter: React.FC = () => {
         “Antes, nossa cliente Joana gastava 5h por edital. Hoje, resolve tudo em
         5 minutos e já fechou novos contratos.”
       </Typography>
+      <Box
+        sx={{
+          height: 2,
+          background: theme.palette.gradients.purplePink,
+          mt: { xs: 6, md: 8 },
+        }}
+      />
     </Box>
   );
 };

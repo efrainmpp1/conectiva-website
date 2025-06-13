@@ -2,10 +2,14 @@ import React, { useState } from 'react';
 import { Box, Button, Paper, Typography } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
 import CircularProgress from '@mui/material/CircularProgress';
+import { motion, useReducedMotion } from 'framer-motion';
 import { trackEvent } from '../../../libs/analytics';
+
+const MotionPaper = motion(Paper);
 
 const PublicBiddingFinalCTA: React.FC = () => {
   const theme = useTheme();
+  const reduceMotion = useReducedMotion();
   const [loading, setLoading] = useState(false);
 
   const handleClick = () => {
@@ -14,7 +18,11 @@ const PublicBiddingFinalCTA: React.FC = () => {
   };
 
   return (
-    <Paper
+    <MotionPaper
+      initial={{ opacity: 0, y: reduceMotion ? 0 : 40 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: theme.animations.durationBase, ease: theme.animations.easing }}
       sx={{
         mt: 8,
         p: { xs: 4, md: 6 },
@@ -58,7 +66,7 @@ const PublicBiddingFinalCTA: React.FC = () => {
           💬 Falar com um especialista
         </Button>
       </Box>
-    </Paper>
+    </MotionPaper>
   );
 };
 

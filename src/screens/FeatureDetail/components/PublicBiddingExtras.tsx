@@ -10,6 +10,7 @@ import {
   AccordionDetails,
 } from "@mui/material";
 import { useTheme, alpha } from "@mui/material/styles";
+import { motion, useReducedMotion } from "framer-motion";
 import CircularProgress from "@mui/material/CircularProgress";
 import {
   Clock,
@@ -43,11 +44,20 @@ const faqs = [
   },
 ];
 
+const MotionBox = motion(Box);
+
 const PublicBiddingExtras: React.FC = () => {
   const theme = useTheme();
+  const reduceMotion = useReducedMotion();
   const [demoLoading, setDemoLoading] = useState(false);
   return (
-    <Box sx={{ mt: 8 }}>
+    <MotionBox
+      sx={{ mt: 8 }}
+      initial={{ opacity: 0, y: reduceMotion ? 0 : 40 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: theme.animations.durationBase, ease: theme.animations.easing }}
+    >
       {/* Benefits icons */}
       <Grid container spacing={4} sx={{ mb: 8 }} justifyContent="center">
         {benefits.map((item) => {
@@ -70,6 +80,12 @@ const PublicBiddingExtras: React.FC = () => {
           );
         })}
       </Grid>
+      <Typography
+        variant="subtitle1"
+        sx={{ textAlign: "center", color: theme.palette.primary.light, fontWeight: 600, mb: 6 }}
+      >
+        Resultados na tela em minutos
+      </Typography>
 
       {/* Infographic / comparison */}
       <Grid container spacing={4} alignItems="center" sx={{ mb: 8 }}>
@@ -144,6 +160,14 @@ const PublicBiddingExtras: React.FC = () => {
         ))}
       </Box>
 
+      <Box
+        sx={{
+          height: 2,
+          background: theme.palette.gradients.purplePink,
+          mb: { xs: 6, md: 8 },
+        }}
+      />
+
       {/* Final demo offer */}
       <Paper
         sx={{
@@ -195,7 +219,7 @@ const PublicBiddingExtras: React.FC = () => {
           </Button>
         </Box>
       </Paper>
-    </Box>
+    </MotionBox>
   );
 };
 
