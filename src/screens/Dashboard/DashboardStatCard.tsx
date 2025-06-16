@@ -1,16 +1,37 @@
 import React from "react";
-import { Box, Typography } from "@mui/material";
+import { Box, Typography, LinearProgress, Button } from "@mui/material";
+import { Link as RouterLink } from "react-router-dom";
 import { motion } from "framer-motion";
 
 interface DashboardStatCardProps {
   icon: React.ReactNode;
   label: string;
   value: React.ReactNode;
+  progress?: number;
+  /**
+   * MUI color applied to progress bar and icon
+   */
+  statusColor?:
+    | "primary"
+    | "secondary"
+    | "error"
+    | "warning"
+    | "success";
+  actionLabel?: string;
+  actionTo?: string;
 }
 
 const MotionBox = motion(Box);
 
-const DashboardStatCard: React.FC<DashboardStatCardProps> = ({ icon, label, value }) => (
+const DashboardStatCard: React.FC<DashboardStatCardProps> = ({
+  icon,
+  label,
+  value,
+  progress,
+  statusColor = "primary",
+  actionLabel,
+  actionTo,
+}) => (
   <MotionBox
     initial={{ opacity: 0, y: 20 }}
     animate={{ opacity: 1, y: 0 }}
@@ -19,7 +40,8 @@ const DashboardStatCard: React.FC<DashboardStatCardProps> = ({ icon, label, valu
     sx={{
       p: 2,
       display: "flex",
-      alignItems: "center",
+      flexDirection: "column",
+      alignItems: "flex-start",
       bgcolor: "background.paper",
       borderRadius: 2,
       boxShadow: 1,
@@ -27,15 +49,34 @@ const DashboardStatCard: React.FC<DashboardStatCardProps> = ({ icon, label, valu
       "&:hover": { boxShadow: 3 },
     }}
   >
-    <Box sx={{ mr: 2, color: "text.secondary" }}>{icon}</Box>
-    <Box>
+    <Box sx={{ mb: 1, display: "flex", alignItems: "center", color: `${statusColor}.main` }}>
+      <Box sx={{ mr: 1 }}>{icon}</Box>
       <Typography variant="caption" color="text.secondary">
         {label}
       </Typography>
-      <Typography variant="h6" sx={{ fontWeight: 700 }}>
-        {value}
-      </Typography>
     </Box>
+    <Typography variant="h6" sx={{ fontWeight: 700 }}>
+      {value}
+    </Typography>
+    {typeof progress === "number" && (
+      <LinearProgress
+        variant="determinate"
+        value={progress}
+        color={statusColor}
+        sx={{ mt: 1, width: "100%", height: 6, borderRadius: 3 }}
+      />
+    )}
+    {actionLabel && actionTo && (
+      <Button
+        component={RouterLink}
+        to={actionTo}
+        size="small"
+        sx={{ mt: 1 }}
+        aria-label={actionLabel}
+      >
+        {actionLabel}
+      </Button>
+    )}
   </MotionBox>
 );
 
