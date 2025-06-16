@@ -13,6 +13,10 @@ import {
   useMediaQuery,
   useTheme,
   Avatar,
+  Tooltip,
+  Badge,
+  Button,
+  LinearProgress,
   Menu as MuiMenu,
   MenuItem,
 } from "@mui/material";
@@ -44,6 +48,15 @@ const DashboardLayout: React.FC = () => {
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
   const [open, setOpen] = useState(false);
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+
+  const plan = "Free";
+  const progress = 30;
+  const getGreeting = () => {
+    const hour = new Date().getHours();
+    if (hour < 12) return "Bom dia";
+    if (hour < 18) return "Boa tarde";
+    return "Boa noite";
+  };
 
   const handleMenuOpen = (event: React.MouseEvent<HTMLButtonElement>) => {
     setAnchorEl(event.currentTarget);
@@ -94,7 +107,7 @@ const DashboardLayout: React.FC = () => {
           borderRadius: 1,
         }}
       >
-        <Toolbar sx={{ display: "flex", justifyContent: "space-between" }}>
+        <Toolbar sx={{ display: "flex", justifyContent: "space-between", flexWrap: "wrap", gap: 2 }}>
           <Box sx={{ display: "flex", alignItems: "center" }}>
             {isMobile && (
               <IconButton
@@ -116,28 +129,53 @@ const DashboardLayout: React.FC = () => {
               </Typography>
             </Box>
           </Box>
-          <Box sx={{ display: "flex", alignItems: "center" }}>
-            <Typography variant="subtitle1" sx={{ mr: 1 }} noWrap>
-              {user?.displayName || user?.email}
-            </Typography>
-            <IconButton onClick={handleMenuOpen} color="inherit">
-              {user?.photoURL ? (
-                <Avatar
-                  src={user.photoURL}
-                  alt={user.displayName || user.email || "Usuário"}
-                />
-              ) : (
-                <Avatar>
-                  {(user?.displayName || user?.email || "").charAt(0).toUpperCase()}
-                </Avatar>
-              )}
-            </IconButton>
+          <Box sx={{ display: "flex", alignItems: "center", flexWrap: "wrap", justifyContent: "flex-end", gap: 2 }}>
+            <Box sx={{ textAlign: { xs: "center", md: "right" }, mr: 1 }}>
+              <Typography
+                variant="h6"
+                sx={{
+                  fontWeight: 700,
+                  background: theme.palette.gradients.purplePink,
+                  WebkitBackgroundClip: "text",
+                  WebkitTextFillColor: "transparent",
+                }}
+              >
+                {`${getGreeting()}, ${(user?.displayName || user?.email || "").split(" ")[0]}! Pronto para gerar novos leads hoje?`}
+              </Typography>
+              <LinearProgress
+                variant="determinate"
+                value={progress}
+                sx={{ height: 6, borderRadius: 3, mt: 0.5, bgcolor: "grey.800" }}
+              />
+            </Box>
+            <Tooltip title={`Plano ${plan}`}> 
+              <IconButton onClick={handleMenuOpen} color="inherit" aria-label="Perfil do usuário">
+                <Badge
+                  overlap="circular"
+                  badgeContent={plan}
+                  color="secondary"
+                  anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
+                  sx={{
+                    "& .MuiBadge-badge": { fontSize: "0.6rem", height: 16, minWidth: 16 }
+                  }}
+                >
+                  {user?.photoURL ? (
+                    <Avatar src={user.photoURL} alt={user.displayName || user.email || "Usuário"} />
+                  ) : (
+                    <Avatar>{(user?.displayName || user?.email || "").charAt(0).toUpperCase()}</Avatar>
+                  )}
+                </Badge>
+              </IconButton>
+            </Tooltip>
             <MuiMenu anchorEl={anchorEl} open={Boolean(anchorEl)} onClose={handleMenuClose}>
               <MenuItem component={RouterLink} to="/dashboard/perfil" onClick={handleMenuClose}>
                 Ver Perfil
               </MenuItem>
               <MenuItem onClick={handleLogout}>Sair</MenuItem>
             </MuiMenu>
+            <Button variant="contained" color="secondary" sx={{ ml: 1 }} aria-label="Adicionar créditos">
+              Adicionar Créditos
+            </Button>
           </Box>
         </Toolbar>
       </AppBar>
