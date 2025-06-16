@@ -36,8 +36,6 @@ const FeatureDetailPage: React.FC<FeatureDetailPageProps> = ({ serviceId }) => {
   return (
     <Box sx={{ pb: { xs: 8, md: 12 } }}>
       <Container maxWidth="lg">
-        <BackHomeButton />
-
         {id === 'ai-public-bidding' && (
           <>
             <AgentHeroSection />
