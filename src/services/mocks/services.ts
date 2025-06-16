@@ -3,16 +3,18 @@ import { Service } from "../../libs/interfaces/Service";
 export const services: Service[] = [
   {
     id: "ai-public-bidding",
-    title: "Empresas certas para cada edital em minutos",
+    title: "Agente de Edital: empresas certas em minutos",
     shortDescription:
-      "Envie o edital em PDF e receba empresas prontas em minutos.",
+      "Envie o PDF do edital e receba uma lista qualificada em instantes.",
     fullDescription: [
-      "Você envia um edital em PDF e nós cuidamos do resto. Nosso sistema de IA interpreta o documento, entende o objeto da licitação, identifica automaticamente os CNAEs compatíveis e avalia critérios como porte da empresa, região e requisitos legais.",
+      "Encontrar parceiros certos para um edital costuma consumir horas de pesquisa e ainda deixar dúvidas.",
+      "Com o Agente de Edital, basta enviar o documento. A IA analisa cada cláusula, cruza CNAEs e requisitos legais e entrega empresas prontas para disputar.",
       "\uD83D\uDCA1 Benefícios principais:",
-      "✅ Agilidade: Receba respostas em minutos, não em horas.\n✅ Matching inteligente: CNAEs e critérios legais verificados com precisão.\n✅ Leads qualificados: Empresas prontas para participar, com CNPJ, contato e localização.",
+      "✅ Economia de tempo: lista de empresas em minutos.\n✅ Precisão incomparável: critérios técnicos e legais checados um a um.\n✅ Mais vitórias: contatos completos e aptos a participar.",
       "\uD83C\uDFC6 Ideal para:",
-      "• Assessorias jurídicas e comerciais\n• Órgãos públicos e empresas privadas que abrem licitação\n• Startups e consultorias que prestam serviços para terceiros",
-      "Economize horas de trabalho e receba sua planilha pronta com os contatos certos.",
+      "• Assessorias, departamentos de compras e áreas jurídicas.\n• Órgãos públicos ou empresas que lançam licitações.\n• Startups e consultorias que prospectam para terceiros.",
+      "Antes, nossa cliente Joana gastava 5h por edital. Hoje, resolve tudo em 5 minutos e já fechou novos contratos.",
+      "Você está a 2 minutos de acessar sua primeira lista qualificada.",
     ],
     icon: "GanttChart",
     imagePath:
