@@ -23,3 +23,8 @@ dist-ssr
 *.sln
 *.sw?
 .env
+
+# Legacy service files
+src/services/mocks/services.js
+src/services/Services/index.js
+
