@@ -1,11 +1,9 @@
 import React from "react";
-import { Box, Typography, Button } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import ConstructionIcon from "@mui/icons-material/Construction";
-import { useNavigate } from "react-router-dom";
+import BackDashboardButton from "../../libs/components/BackDashboardButton";
 
 const ProspeccaoPage: React.FC = () => {
-  const navigate = useNavigate();
-
   return (
     <Box
       display="flex"
@@ -22,13 +20,7 @@ const ProspeccaoPage: React.FC = () => {
       <Typography variant="body1" mb={4}>
         Estamos trabalhando nesta funcionalidade. Em breve, ela estará disponível para você!
       </Typography>
-      <Button
-        variant="contained"
-        color="primary"
-        onClick={() => navigate("/dashboard")}
-      >
-        Voltar para o Painel
-      </Button>
+      <BackDashboardButton />
     </Box>
   );
 };
