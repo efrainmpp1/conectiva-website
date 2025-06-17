@@ -87,30 +87,31 @@ const DropzoneUploadPdf: React.FC = () => {
   };
 
   return (
-    <Box
-      onClick={openFileDialog}
-      onDrop={handleDrop}
-      onDragOver={handleDragOver}
-      onDragLeave={handleDragLeave}
-      tabIndex={0}
-      aria-label="Área para upload de PDF"
-      sx={{
-        maxWidth: 400,
-        border: '2px dashed',
-        borderColor: isDragOver ? 'primary.main' : 'grey.500',
-        borderRadius: 2,
-        p: 4,
-        m: '0 auto',
-        textAlign: 'center',
-        cursor: 'pointer',
-        outline: 'none',
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        gap: 1,
-        transition: 'border-color 0.2s ease-in-out',
-      }}
-    >
+    <>
+      <Box
+        onClick={openFileDialog}
+        onDrop={handleDrop}
+        onDragOver={handleDragOver}
+        onDragLeave={handleDragLeave}
+        tabIndex={0}
+        aria-label="Área para upload de PDF"
+        sx={{
+          maxWidth: 400,
+          border: '2px dashed',
+          borderColor: isDragOver ? 'primary.main' : 'grey.500',
+          borderRadius: 2,
+          p: 4,
+          m: '0 auto',
+          textAlign: 'center',
+          cursor: 'pointer',
+          outline: 'none',
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          gap: 1,
+          transition: 'border-color 0.2s ease-in-out',
+        }}
+      >
       {fileName ? (
         <>
           <CheckCircleIcon color="success" sx={{ fontSize: 48 }} />
@@ -167,22 +168,23 @@ const DropzoneUploadPdf: React.FC = () => {
         accept="application/pdf"
         style={{ display: 'none' }}
         onChange={handleChange}
-      />
-    </Box>
-    <Snackbar
-      open={showSuccess}
-      autoHideDuration={6000}
-      onClose={() => setShowSuccess(false)}
-      anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
-    >
+        />
+      </Box>
+      <Snackbar
+        open={showSuccess}
+        autoHideDuration={6000}
+        onClose={() => setShowSuccess(false)}
+        anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
+      >
       <Alert
         onClose={() => setShowSuccess(false)}
         severity="success"
         variant="filled"
       >
         Análise concluída. Download iniciado.
-      </Alert>
-    </Snackbar>
+        </Alert>
+      </Snackbar>
+    </>
   );
 };
 
