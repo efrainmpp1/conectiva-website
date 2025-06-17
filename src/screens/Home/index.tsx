@@ -4,14 +4,15 @@ import HeroSection from './HeroSection';
 import AboutPreview from './AboutPreview';
 import PricingSection from './PricingSection';
 import FeatureCards from './components/FeatureCards';
-import FeatureIcons from './components/FeatureIcons';
+import AiProcessIllustration from './components/AiProcessIllustration';
 
 const Home: React.FC = () => {
   return (
     <Box>
       <HeroSection />
       <FeatureCards />
-      <FeatureIcons />
+      {/* Visual explanation of how our AI works */}
+      <AiProcessIllustration />
       <AboutPreview />
       <PricingSection />
     </Box>
