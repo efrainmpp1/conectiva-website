@@ -9,6 +9,7 @@ import AgentFinalCTASection from '../../components/agent/AgentFinalCTASection';
 import SearchHeroSection from '../../components/search/SearchHeroSection';
 import SearchBenefitsSection from '../../components/search/SearchBenefitsSection';
 import SearchAudienceSection from '../../components/search/SearchAudienceSection';
+import SearchFinalCTASection from '../../components/search/SearchFinalCTASection';
 import BackHomeButton from '../../libs/components/BackHomeButton';
 import { getServiceById } from '../../services/Services';
 
@@ -59,6 +60,7 @@ const FeatureDetailPage: React.FC<FeatureDetailPageProps> = ({ serviceId }) => {
             <SearchHeroSection />
             <SearchBenefitsSection />
             <SearchAudienceSection />
+            <SearchFinalCTASection />
           </>
         )}
       </Container>
