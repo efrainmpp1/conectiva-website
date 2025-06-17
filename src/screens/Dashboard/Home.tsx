@@ -4,6 +4,7 @@ import { Wallet, Clock, Activity, User } from "lucide-react";
 import DashboardStatCard from "./DashboardStatCard";
 import DashboardActionButton from "./DashboardActionButton";
 import RecentActivityItem from "./RecentActivityItem";
+import NextStepItem from "./NextStepItem";
 import { Link as RouterLink } from "react-router-dom";
 
 const DashboardHome: React.FC = () => {
@@ -60,6 +61,27 @@ const DashboardHome: React.FC = () => {
     { value: 2 },
     { value: 3 },
     { value: 5 },
+  ];
+
+  const nextSteps = [
+    {
+      icon: <Activity size={18} />,
+      text: "Execute um agente agora",
+      actionLabel: "Executar",
+      actionTo: "/dashboard/agente",
+    },
+    {
+      icon: <Wallet size={18} />,
+      text: "Adicione créditos e continue prospectando",
+      actionLabel: "Adicionar",
+      actionTo: "/dashboard/moedas",
+    },
+    {
+      icon: <User size={18} />,
+      text: "Veja dicas para melhorar seus resultados",
+      actionLabel: "Ver dicas",
+      actionTo: "/ajuda",
+    },
   ];
 
   return (
@@ -127,6 +149,14 @@ const DashboardHome: React.FC = () => {
         >
           Ver tudo
         </Button>
+      </Box>
+      <Box sx={{ mb: 4 }}>
+        <Typography variant="h6" sx={{ mb: 2 }}>
+          Próximos Passos
+        </Typography>
+        {nextSteps.map((step, idx) => (
+          <NextStepItem key={idx} {...step} />
+        ))}
       </Box>
       <Grid container spacing={2}>
         <Grid item xs={6} md={3}>
