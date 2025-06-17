@@ -20,7 +20,8 @@ const Footer: React.FC = () => {
     <Box
       component="footer"
       sx={{
-        backgroundColor: "primary.dark",
+        backgroundColor: theme.palette.background.default,
+        borderTop: `1px solid ${theme.palette.divider}`,
         color: theme.palette.common.white,
         py: 6,
         mt: 8,
@@ -89,7 +90,7 @@ const Footer: React.FC = () => {
         </Grid>
 
         <Divider
-          sx={{ my: 4, backgroundColor: alpha(theme.palette.common.white, 0.2) }}
+          sx={{ my: 4, backgroundColor: alpha(theme.palette.common.white, 0.1) }}
         />
 
         <Typography variant="body2" align="center">

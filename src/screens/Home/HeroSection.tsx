@@ -111,7 +111,9 @@ const HeroSection: React.FC = () => {
                     fontWeight: 600,
                     borderRadius: theme.shape.borderRadius * 2,
                     background: theme.palette.gradients.purplePink,
-                    boxShadow: theme.customShadows.neon,
+                    // mantém destaque mais forte para o CTA principal
+                    boxShadow:
+                      '0 0 10px rgba(123,47,242,0.7), 0 0 20px rgba(123,47,242,0.5)',
                     color: theme.palette.common.white,
                   }}
                 >

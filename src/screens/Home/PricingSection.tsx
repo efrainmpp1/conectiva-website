@@ -245,6 +245,9 @@ const PricingSection: React.FC<PricingSectionProps> = ({ topAction }) => {
                       ...(plan.highlight
                         ? {
                             backgroundColor: "primary.dark",
+                            // destaque do botão principal
+                            boxShadow:
+                              '0 0 10px rgba(123,47,242,0.7), 0 0 20px rgba(123,47,242,0.5)',
                             "&:hover": {
                               backgroundColor: "primary.dark",
                               opacity: 0.9,
@@ -303,6 +306,8 @@ const PricingSection: React.FC<PricingSectionProps> = ({ topAction }) => {
               // contraste reforçado p/ acessibilidade
               backgroundColor: "primary.dark",
               color: theme.palette.common.white,
+              boxShadow:
+                '0 0 10px rgba(123,47,242,0.7), 0 0 20px rgba(123,47,242,0.5)',
               "&:hover": {
                 backgroundColor: "primary.dark",
                 opacity: 0.9,

@@ -143,9 +143,10 @@ const theme = createTheme({
     planCard: 3,
   },
   customShadows: {
-    neon: "0 0 10px rgba(123,47,242,0.7), 0 0 20px rgba(123,47,242,0.5)",
-    card: "0 0 15px rgba(123,47,242,0.3)",
-    button: "0 0 6px rgba(243,87,168,0.4)",
+    // glow mais suave para evitar fadiga visual em elementos secundários
+    neon: "0 0 6px rgba(123,47,242,0.4), 0 0 12px rgba(123,47,242,0.3)",
+    card: "0 0 8px rgba(123,47,242,0.15)",
+    button: "0 0 4px rgba(243,87,168,0.3)",
   },
   animations: {
     durationShort: 0.2,
