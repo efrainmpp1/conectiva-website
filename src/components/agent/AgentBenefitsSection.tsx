@@ -22,7 +22,7 @@ const benefits = [
   },
 ];
 
-const MotionPaper = motion(Paper);
+const MotionPaper = motion.create(Paper);
 
 /**
  * Benefits section highlighting core advantages of the Agente de Edital.

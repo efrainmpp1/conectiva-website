@@ -6,8 +6,8 @@ import { useNavigate } from "react-router-dom";
 import { ArrowRight, Cpu } from "lucide-react";
 import { motion, useReducedMotion } from "framer-motion";
 
-const MotionButton = motion(Button);
-const MotionBox = motion(Box);
+const MotionButton = motion.create(Button);
+const MotionBox = motion.create(Box);
 
 const HeroSection: React.FC = () => {
   const theme = useTheme();

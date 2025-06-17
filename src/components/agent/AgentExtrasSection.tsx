@@ -35,7 +35,7 @@ const faqs = [
   },
 ];
 
-const MotionBox = motion(Box);
+const MotionBox = motion.create(Box);
 
 /**
  * Collection of extra informational blocks such as benefits icons, FAQ and demo request.

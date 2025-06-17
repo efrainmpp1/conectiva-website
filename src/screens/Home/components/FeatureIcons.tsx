@@ -12,7 +12,7 @@ interface Item {
 const FeatureIcons: React.FC = () => {
   const theme = useTheme();
   const reduceMotion = useReducedMotion();
-  const MotionBox = motion(Box);
+  const MotionBox = motion.create(Box);
   const items: Item[] = [
     { icon: Database, label: 'Extração de Dados' },
     { icon: Users, label: 'Geração de Leads' },
