@@ -1,6 +1,6 @@
 import axios from 'axios';
 
 export const apiIA = axios.create({
-  baseURL: 'http://localhost:3333',
+  baseURL: import.meta.env.VITE_API_IA_URL,
   timeout: 20000,
 });
