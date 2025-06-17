@@ -1,3 +1,11 @@
-const useMock = !import.meta.env.PROD;
+import * as mock from './mock';
+import * as integration from './integration';
+import { isProductionEnv } from '../../utils/env';
 
-export * from (useMock ? './mock' : './integration');
+export const getBalance = isProductionEnv()
+  ? integration.getBalance
+  : mock.getBalance;
+
+export const buyCredits = isProductionEnv()
+  ? integration.buyCredits
+  : mock.buyCredits;

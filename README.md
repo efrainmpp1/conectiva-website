@@ -26,6 +26,7 @@ npm run dev
 Crie um arquivo `.env` seguindo o exemplo abaixo:
 
 ```bash
+VITE_PROD=false
 VITE_FIREBASE_API_KEY=your_api_key
 VITE_FIREBASE_AUTH_DOMAIN=your_auth_domain
 VITE_FIREBASE_PROJECT_ID=your_project_id
@@ -35,6 +36,17 @@ VITE_FIREBASE_APP_ID=your_app_id
 VITE_API_NODE_URL=http://localhost:3331
 VITE_API_IA_URL=http://localhost:3333
 ```
+
+Para produção defina `VITE_PROD=true`.
+
+**Importante:** compare essa variável sempre como string:
+
+```typescript
+const isProduction = import.meta.env.VITE_PROD === 'true';
+```
+
+Evite checar apenas `if (import.meta.env.VITE_PROD)` pois a string será
+sempre *truthy* e a alternância de mock/integração não funcionará.
 
 ## Tecnologias Utilizadas
 
