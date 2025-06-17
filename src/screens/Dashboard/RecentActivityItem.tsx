@@ -12,7 +12,7 @@ interface RecentActivityItemProps {
   actionTo?: string;
 }
 
-const MotionBox = motion(Box);
+const MotionBox = motion.create(Box);
 
 const RecentActivityItem: React.FC<RecentActivityItemProps> = ({
   icon,

@@ -26,7 +26,7 @@ interface DashboardStatCardProps {
   chartArea?: boolean;
 }
 
-const MotionBox = motion(Box);
+const MotionBox = motion.create(Box);
 
 const DashboardStatCard: React.FC<DashboardStatCardProps> = ({
   icon,
