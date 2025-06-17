@@ -1,9 +1,17 @@
 import React, { useState, useRef } from 'react';
-import { Box, Typography, Button, CircularProgress } from '@mui/material';
+import {
+  Box,
+  Typography,
+  Button,
+  CircularProgress,
+  Snackbar,
+  Alert,
+} from '@mui/material';
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import PictureAsPdfIcon from '@mui/icons-material/PictureAsPdf';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import ErrorOutlineIcon from '@mui/icons-material/ErrorOutline';
+import { analyzeEdital } from '../../services/edital';
 
 const DropzoneUploadPdf: React.FC = () => {
   const [fileName, setFileName] = useState<string | null>(null);
@@ -11,6 +19,7 @@ const DropzoneUploadPdf: React.FC = () => {
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
   const [isDragOver, setIsDragOver] = useState(false);
+  const [showSuccess, setShowSuccess] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
 
   const handleFiles = (files: FileList | null) => {
@@ -52,8 +61,15 @@ const DropzoneUploadPdf: React.FC = () => {
     if (!pdfFile) return;
     try {
       setLoading(true);
-      // Placeholder for API request
-      await new Promise(resolve => setTimeout(resolve, 1000));
+      const blob = await analyzeEdital(pdfFile);
+      const url = window.URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.href = url;
+      link.setAttribute('download', 'empresas_interessadas.csv');
+      document.body.appendChild(link);
+      link.click();
+      link.remove();
+      setShowSuccess(true);
     } catch {
       setError('Ocorreu um erro ao enviar o arquivo. Tente novamente.');
     } finally {
@@ -153,6 +169,20 @@ const DropzoneUploadPdf: React.FC = () => {
         onChange={handleChange}
       />
     </Box>
+    <Snackbar
+      open={showSuccess}
+      autoHideDuration={6000}
+      onClose={() => setShowSuccess(false)}
+      anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
+    >
+      <Alert
+        onClose={() => setShowSuccess(false)}
+        severity="success"
+        variant="filled"
+      >
+        Análise concluída. Download iniciado.
+      </Alert>
+    </Snackbar>
   );
 };
 
