@@ -29,7 +29,7 @@ const MotionPaper = motion(Paper);
 /**
  * Audience section for Busca Descritiva.
  */
-const SearchAudienceSection: React.FC = () => {
+const BuscaAudienceSection: React.FC = () => {
   const theme = useTheme();
   const reduceMotion = useReducedMotion();
   return (
@@ -100,4 +100,4 @@ const SearchAudienceSection: React.FC = () => {
   );
 };
 
-export default SearchAudienceSection;
+export default BuscaAudienceSection;

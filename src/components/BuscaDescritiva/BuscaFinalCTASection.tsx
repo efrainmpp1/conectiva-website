@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Box, Button, Paper, Typography } from '@mui/material';
-import { useTheme } from '@mui/material/styles';
+import { useTheme, alpha } from '@mui/material/styles';
 import CircularProgress from '@mui/material/CircularProgress';
 import { motion, useReducedMotion } from 'framer-motion';
 import { trackEvent } from '../../libs/analytics';
@@ -10,7 +10,7 @@ const MotionPaper = motion(Paper);
 /**
  * Final call-to-action inviting users to try the search tool.
  */
-const SearchFinalCTASection: React.FC = () => {
+const BuscaFinalCTASection: React.FC = () => {
   const theme = useTheme();
   const reduceMotion = useReducedMotion();
   const [loading, setLoading] = useState(false);
@@ -93,4 +93,4 @@ const SearchFinalCTASection: React.FC = () => {
   );
 };
 
-export default SearchFinalCTASection;
+export default BuscaFinalCTASection;

@@ -8,7 +8,7 @@ const MotionBox = motion(Box);
 /**
  * Hero section for the Busca Descritiva page.
  */
-const SearchHeroSection: React.FC = () => {
+const BuscaHeroSection: React.FC = () => {
   const theme = useTheme();
   const reduceMotion = useReducedMotion();
   return (
@@ -76,4 +76,4 @@ const SearchHeroSection: React.FC = () => {
   );
 };
 
-export default SearchHeroSection;
+export default BuscaHeroSection;

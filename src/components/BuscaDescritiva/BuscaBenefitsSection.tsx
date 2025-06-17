@@ -29,7 +29,7 @@ const MotionPaper = motion(Paper);
 /**
  * Benefits section highlighting key points of Busca Descritiva.
  */
-const SearchBenefitsSection: React.FC = () => {
+const BuscaBenefitsSection: React.FC = () => {
   const theme = useTheme();
   const reduceMotion = useReducedMotion();
   return (
@@ -98,4 +98,4 @@ const SearchBenefitsSection: React.FC = () => {
   );
 };
 
-export default SearchBenefitsSection;
+export default BuscaBenefitsSection;

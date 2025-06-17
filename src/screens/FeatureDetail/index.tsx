@@ -6,10 +6,10 @@ import AgentHeroSection from '../../components/agent/AgentHeroSection';
 import AgentBenefitsSection from '../../components/agent/AgentBenefitsSection';
 import AgentAudienceSection from '../../components/agent/AgentAudienceSection';
 import AgentFinalCTASection from '../../components/agent/AgentFinalCTASection';
-import SearchHeroSection from '../../components/search/SearchHeroSection';
-import SearchBenefitsSection from '../../components/search/SearchBenefitsSection';
-import SearchAudienceSection from '../../components/search/SearchAudienceSection';
-import SearchFinalCTASection from '../../components/search/SearchFinalCTASection';
+import BuscaHeroSection from '../../components/BuscaDescritiva/BuscaHeroSection';
+import BuscaBenefitsSection from '../../components/BuscaDescritiva/BuscaBenefitsSection';
+import BuscaAudienceSection from '../../components/BuscaDescritiva/BuscaAudienceSection';
+import BuscaFinalCTASection from '../../components/BuscaDescritiva/BuscaFinalCTASection';
 import BackHomeButton from '../../libs/components/BackHomeButton';
 import { getServiceById } from '../../services/Services';
 
@@ -57,10 +57,10 @@ const FeatureDetailPage: React.FC<FeatureDetailPageProps> = ({ serviceId }) => {
 
         {id === 'ai-search-companies' && (
           <>
-            <SearchHeroSection />
-            <SearchBenefitsSection />
-            <SearchAudienceSection />
-            <SearchFinalCTASection />
+            <BuscaHeroSection />
+            <BuscaBenefitsSection />
+            <BuscaAudienceSection />
+            <BuscaFinalCTASection />
           </>
         )}
       </Container>
