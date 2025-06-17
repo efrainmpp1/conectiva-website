@@ -117,7 +117,19 @@ const PricingSection: React.FC<PricingSectionProps> = ({ topAction }) => {
 
         <Grid container spacing={4} justifyContent="center">
           {pricingPlans.map((plan, idx) => (
-            <Grid item xs={12} sm={6} md={4} key={plan.title ?? idx}>
+            <Grid
+              item
+              xs={12}
+              sm={6}
+              md={4}
+              key={plan.title ?? idx}
+              sx={{
+                "@media (max-width:480px)": {
+                  flexBasis: "100%",
+                  maxWidth: "100%",
+                },
+              }}
+            >
               {plan.title && plan.price && plan.features?.length ? (
                 <Card
                   elevation={plan.highlight ? 8 : 2}
@@ -159,20 +171,38 @@ const PricingSection: React.FC<PricingSectionProps> = ({ topAction }) => {
                     variant="h5"
                     component="h3"
                     gutterBottom
-                    sx={{ fontWeight: "bold" }}
+                    sx={{
+                      fontWeight: "bold",
+                      // fontes menores em telas pequenas
+                      "@media (max-width:480px)": {
+                        fontSize: "1.2rem",
+                      },
+                    }}
                   >
                     {plan.title}
                   </Typography>
                   <Typography
                     variant="h4"
                     component="div"
-                    sx={{ fontWeight: "bold", mb: 2 }}
+                    sx={{
+                      fontWeight: "bold",
+                      mb: 2,
+                      // ajuste responsivo do preço
+                      "@media (max-width:480px)": {
+                        fontSize: "1.5rem",
+                      },
+                    }}
                   >
                     {plan.price}
                     <Typography
                       component="span"
                       variant="subtitle1"
-                      sx={{ color: "text.secondary" }}
+                      sx={{
+                        color: "text.secondary",
+                        "@media (max-width:480px)": {
+                          fontSize: "0.9rem",
+                        },
+                      }}
                     >
                       /mês
                     </Typography>
@@ -186,7 +216,17 @@ const PricingSection: React.FC<PricingSectionProps> = ({ topAction }) => {
                         <ListItemIcon sx={{ minWidth: 36 }}>
                           <CheckCircleIcon color="primary" />
                         </ListItemIcon>
-                        <ListItemText primary={feature} />
+                        <ListItemText
+                          primary={feature}
+                          primaryTypographyProps={{
+                            sx: {
+                              '@media (max-width:480px)': {
+                                fontSize: '0.9rem',
+                                lineHeight: 1.4,
+                              },
+                            },
+                          }}
+                        />
                       </ListItem>
                     ))}
                   </List>
@@ -276,7 +316,10 @@ const PricingSection: React.FC<PricingSectionProps> = ({ topAction }) => {
         <Typography
           variant="body2"
           align="center"
-          sx={{ mt: 4 }}
+          sx={{
+            mt: 4,
+            '@media (max-width:480px)': { fontSize: '0.875rem' },
+          }}
           color="text.secondary"
         >
           Cada análise de edital consome 2 créditos. Cada busca descritiva
