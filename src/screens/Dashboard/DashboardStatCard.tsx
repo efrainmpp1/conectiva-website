@@ -48,25 +48,45 @@ const DashboardStatCard: React.FC<DashboardStatCardProps> = ({
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.3 }}
-    whileHover={{ scale: 1.03 }}
-    sx={{
-      p: 2,
-      display: "flex",
-      flexDirection: "column",
-      alignItems: "flex-start",
-      bgcolor: "background.paper",
-      borderRadius: 2,
-      boxShadow: 1,
-      transition: "box-shadow 0.3s ease",
-      "&:hover": { boxShadow: 3 },
-    }}
-  >
-    <Box sx={{ mb: 1, display: "flex", alignItems: "center", color: `${statusColor}.main` }}>
-      <Box sx={{ mr: 1 }}>{icon}</Box>
-      <Typography variant="caption" color="text.secondary">
-        {label}
-      </Typography>
-    </Box>
+      whileHover={{ scale: 1.03 }}
+      sx={{
+        p: 2,
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "flex-start",
+        background: theme.palette.gradients.bluePurple,
+        color: "common.white",
+        borderRadius: 2,
+        boxShadow: theme.customShadows.neon,
+      }}
+    >
+      <Box
+        sx={{
+          mb: 1,
+          display: "flex",
+          alignItems: "center",
+          color: theme.palette[statusColor].light,
+        }}
+      >
+        <Box
+          sx={{
+            mr: 1,
+            p: 0.5,
+            borderRadius: "50%",
+            background: theme.palette.gradients.purplePink,
+            boxShadow: theme.customShadows.button,
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+          aria-label={label}
+        >
+          {icon}
+        </Box>
+        <Typography variant="caption" sx={{ color: "grey.100" }}>
+          {label}
+        </Typography>
+      </Box>
     <Typography variant="h6" sx={{ fontWeight: 700 }}>
       {value}
     </Typography>

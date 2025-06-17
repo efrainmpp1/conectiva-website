@@ -172,8 +172,18 @@ const DashboardHome: React.FC = () => {
           />
         </Grid>
       </Grid>
+      <Box sx={{ height: 2, background: (theme) => theme.palette.gradients.purplePink, borderRadius: 1, mb: 4 }} />
       <Box sx={{ mb: 4 }}>
-        <Typography variant="h6" sx={{ mb: 2 }}>
+        <Typography
+          variant="h6"
+          sx={{
+            mb: 2,
+            fontWeight: 700,
+            background: (theme) => theme.palette.gradients.purplePink,
+            WebkitBackgroundClip: "text",
+            WebkitTextFillColor: "transparent",
+          }}
+        >
           Atividades Recentes
         </Typography>
         {recentActivities.map((activity, idx) => (
@@ -189,8 +199,18 @@ const DashboardHome: React.FC = () => {
           Ver tudo
         </Button>
       </Box>
+      <Box sx={{ height: 2, background: (theme) => theme.palette.gradients.purplePink, borderRadius: 1, mb: 4 }} />
       <Box sx={{ mb: 4 }}>
-        <Typography variant="h6" sx={{ mb: 2 }}>
+        <Typography
+          variant="h6"
+          sx={{
+            mb: 2,
+            fontWeight: 700,
+            background: (theme) => theme.palette.gradients.purplePink,
+            WebkitBackgroundClip: "text",
+            WebkitTextFillColor: "transparent",
+          }}
+        >
           Próximos Passos
         </Typography>
         {nextSteps.map((step, idx) => (

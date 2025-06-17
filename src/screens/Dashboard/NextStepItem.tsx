@@ -22,19 +22,30 @@ const NextStepItem: React.FC<NextStepItemProps> = ({
     initial={{ opacity: 0, x: 10 }}
     animate={{ opacity: 1, x: 0 }}
     transition={{ duration: 0.3 }}
-    sx={{
+    sx={(theme) => ({
       display: "flex",
       alignItems: "center",
       p: 2,
       mb: 1,
-      bgcolor: "background.paper",
+      background: theme.palette.gradients.bluePurple,
+      color: theme.palette.common.white,
       borderRadius: 2,
-      boxShadow: 1,
-      transition: "box-shadow 0.3s ease",
-      "&:hover": { boxShadow: 3 },
-    }}
+      boxShadow: theme.customShadows.neon,
+    })}
   >
-    <Box sx={{ mr: 2 }} aria-label="Ícone da sugestão">
+    <Box
+      sx={(theme) => ({
+        mr: 2,
+        p: 0.5,
+        borderRadius: "50%",
+        background: theme.palette.gradients.purplePink,
+        boxShadow: theme.customShadows.button,
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+      })}
+      aria-label="Ícone da sugestão"
+    >
       {icon}
     </Box>
     <Box sx={{ flexGrow: 1 }}>

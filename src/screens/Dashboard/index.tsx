@@ -173,7 +173,16 @@ const DashboardLayout: React.FC = () => {
               </MenuItem>
               <MenuItem onClick={handleLogout}>Sair</MenuItem>
             </MuiMenu>
-            <Button variant="contained" color="secondary" sx={{ ml: 1 }} aria-label="Adicionar créditos">
+            <Button
+              variant="contained"
+              aria-label="Adicionar créditos"
+              sx={(theme) => ({
+                ml: 1,
+                background: theme.palette.gradients.purplePink,
+                boxShadow: theme.customShadows.neon,
+                '&:hover': { background: theme.palette.gradients.bluePurple },
+              })}
+            >
               Adicionar Créditos
             </Button>
           </Box>

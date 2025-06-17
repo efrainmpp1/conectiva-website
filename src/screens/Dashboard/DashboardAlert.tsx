@@ -16,7 +16,8 @@ const DashboardAlert: React.FC<DashboardAlertProps> = ({
   <Collapse in>
     <Alert
       severity={severity}
-      sx={{ mb: 2 }}
+      variant="filled"
+      sx={(theme) => ({ mb: 2, boxShadow: theme.customShadows.neon })}
       action={
         onClose ? (
           <IconButton
