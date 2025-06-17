@@ -10,12 +10,20 @@ import {
   Grid,
 } from "@mui/material";
 import BackHomeButton from "../../libs/components/BackHomeButton";
-import { getServiceById } from "../../services/Services";
+import { getServiceById } from "../../services/services";
+import { Service } from "../../libs/interfaces/Service";
 
 const ServicePage: React.FC = () => {
   const { id } = useParams<{ id: string }>();
+  const [service, setService] = React.useState<Service | undefined>();
 
-  const service = getServiceById(id ?? "");
+  React.useEffect(() => {
+    const load = async () => {
+      const result = await getServiceById(id ?? "");
+      setService(result);
+    };
+    load();
+  }, [id]);
 
   if (!service) {
     return (

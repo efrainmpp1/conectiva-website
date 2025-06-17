@@ -11,7 +11,8 @@ import BuscaBenefitsSection from '../../components/BuscaDescritiva/BuscaBenefits
 import BuscaAudienceSection from '../../components/BuscaDescritiva/BuscaAudienceSection';
 import BuscaFinalCTASection from '../../components/BuscaDescritiva/BuscaFinalCTASection';
 import BackHomeButton from '../../libs/components/BackHomeButton';
-import { getServiceById } from '../../services/Services';
+import { getServiceById } from '../../services/services';
+import { Service } from '../../libs/interfaces/Service';
 
 interface FeatureDetailPageProps {
   serviceId?: string;
@@ -20,8 +21,15 @@ interface FeatureDetailPageProps {
 const FeatureDetailPage: React.FC<FeatureDetailPageProps> = ({ serviceId }) => {
   const params = useParams<{ id: string }>();
   const id = serviceId ?? params.id;
+  const [service, setService] = React.useState<Service | undefined>();
 
-  const service = getServiceById(id ?? '');
+  React.useEffect(() => {
+    const load = async () => {
+      const result = await getServiceById(id ?? '');
+      setService(result);
+    };
+    load();
+  }, [id]);
 
   if (!service) {
     return (
