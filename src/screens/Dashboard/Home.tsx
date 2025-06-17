@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import { Box, Grid, Typography, Button } from "@mui/material";
 import { Wallet, Clock, Activity, User } from "lucide-react";
 import DashboardStatCard from "./DashboardStatCard";
 import DashboardActionButton from "./DashboardActionButton";
 import RecentActivityItem from "./RecentActivityItem";
 import NextStepItem from "./NextStepItem";
+import DashboardAlert from "./DashboardAlert";
 import { Link as RouterLink } from "react-router-dom";
 
 const DashboardHome: React.FC = () => {
@@ -48,6 +49,36 @@ const DashboardHome: React.FC = () => {
       ? "warning"
       : "success";
 
+  const [alerts, setAlerts] = useState(() => {
+    const items = [] as { id: number; severity: "error" | "success" | "info" | "warning"; message: string; dismissible?: boolean }[];
+    if (creditsRemaining < 10) {
+      items.push({
+        id: 1,
+        severity: "error",
+        message: "Seus créditos estão quase acabando. Adicione mais para continuar.",
+      });
+    }
+    if (executions >= 10) {
+      items.push({
+        id: 2,
+        severity: "success",
+        message: `Parabéns, você executou ${executions} agentes este mês!`,
+        dismissible: true,
+      });
+    }
+    items.push({
+      id: 3,
+      severity: "info",
+      message: "Confira as novidades e recursos que acabamos de lançar.",
+      dismissible: true,
+    });
+    return items;
+  });
+
+  const handleCloseAlert = (id: number) => {
+    setAlerts((prev) => prev.filter((a) => a.id !== id));
+  };
+
   const creditsTrend = [
     { value: 50 },
     { value: 40 },
@@ -86,6 +117,14 @@ const DashboardHome: React.FC = () => {
 
   return (
     <Box>
+      {alerts.map((alert) => (
+        <DashboardAlert
+          key={alert.id}
+          severity={alert.severity}
+          message={alert.message}
+          onClose={alert.dismissible ? () => handleCloseAlert(alert.id) : undefined}
+        />
+      ))}
       <Grid container spacing={2} sx={{ mb: 4 }}>
         <Grid item xs={12} sm={6} md={3}>
           <DashboardStatCard
