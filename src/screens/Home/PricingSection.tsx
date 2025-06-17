@@ -202,13 +202,19 @@ const PricingSection: React.FC<PricingSectionProps> = ({ topAction }) => {
                     sx={{
                       py: 1.5,
                       fontWeight: "bold",
-                      ...(plan.highlight && {
-                        backgroundColor: "primary.dark",
-                        "&:hover": {
-                          backgroundColor: "primary.dark",
-                          opacity: 0.9,
-                        },
-                      }),
+                      ...(plan.highlight
+                        ? {
+                            backgroundColor: "primary.dark",
+                            "&:hover": {
+                              backgroundColor: "primary.dark",
+                              opacity: 0.9,
+                            },
+                          }
+                        : {
+                            // contraste reforçado p/ acessibilidade
+                            color: theme.palette.primary.light,
+                            borderColor: theme.palette.primary.light,
+                          }),
                     }}
                   >
                     {plan.highlight ? "Start Free Trial" : "Select Plan"}
@@ -253,6 +259,15 @@ const PricingSection: React.FC<PricingSectionProps> = ({ topAction }) => {
             color="primary"
             size="large"
             onClick={() => navigate("/planos")}
+            sx={{
+              // contraste reforçado p/ acessibilidade
+              backgroundColor: "primary.dark",
+              color: theme.palette.common.white,
+              "&:hover": {
+                backgroundColor: "primary.dark",
+                opacity: 0.9,
+              },
+            }}
           >
             Buy Credits
           </Button>
