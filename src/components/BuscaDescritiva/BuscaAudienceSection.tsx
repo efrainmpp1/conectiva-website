@@ -24,7 +24,7 @@ const audiences = [
   },
 ];
 
-const MotionPaper = motion(Paper);
+const MotionPaper = motion.create(Paper);
 
 /**
  * Audience section for Busca Descritiva.

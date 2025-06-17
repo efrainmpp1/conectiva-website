@@ -24,7 +24,7 @@ const audiences = [
   },
 ];
 
-const MotionPaper = motion(Paper);
+const MotionPaper = motion.create(Paper);
 
 /**
  * Section highlighting who benefits from the Agente de Edital service.

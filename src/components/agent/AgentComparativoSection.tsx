@@ -15,7 +15,7 @@ const afterItems = [
   { emoji: '🎯', label: 'Lista pronta com dados de contato', aria: 'lista pronta com dados de contato' },
 ];
 
-const MotionPaper = motion(Paper);
+const MotionPaper = motion.create(Paper);
 
 /**
  * Side-by-side comparison showing workflow before and after using the tool.

@@ -24,7 +24,7 @@ const benefits = [
   },
 ];
 
-const MotionPaper = motion(Paper);
+const MotionPaper = motion.create(Paper);
 
 /**
  * Benefits section highlighting key points of Busca Descritiva.

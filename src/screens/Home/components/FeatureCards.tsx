@@ -6,8 +6,8 @@ import { GanttChart, Search, Mail } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { getFeaturePathById } from '../../../routes/featureRoutes';
 
-const MotionBox = motion(Box);
-const MotionButton = motion(Button);
+const MotionBox = motion.create(Box);
+const MotionButton = motion.create(Button);
 
 interface Feature {
   id: string;

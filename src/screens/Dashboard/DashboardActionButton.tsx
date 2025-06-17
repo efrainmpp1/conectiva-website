@@ -9,7 +9,7 @@ interface DashboardActionButtonProps {
   to: string;
 }
 
-const MotionBox = motion(Box);
+const MotionBox = motion.create(Box);
 
 const DashboardActionButton: React.FC<DashboardActionButtonProps> = ({ icon, label, to }) => (
   <MotionBox
