@@ -1,10 +1,11 @@
-import { services } from '../mocks/services';
-import { Service } from '../../libs/interfaces/Service';
+import * as mock from './mock';
+import * as integration from './integration';
+import { isProductionEnv } from '../../utils/env';
 
-export const getServices = (): Service[] => {
-  return services;
-};
+export const getServices = isProductionEnv()
+  ? integration.getServices
+  : mock.getServices;
 
-export const getServiceById = (id: string): Service | undefined => {
-  return services.find(service => service.id === id);
-};
+export const getServiceById = isProductionEnv()
+  ? integration.getServiceById
+  : mock.getServiceById;
