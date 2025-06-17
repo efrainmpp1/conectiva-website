@@ -1,5 +1,5 @@
 import React, { useState, useRef } from 'react';
-import { Box, Typography, Button } from '@mui/material';
+import { Box, Typography, Button, CircularProgress } from '@mui/material';
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import PictureAsPdfIcon from '@mui/icons-material/PictureAsPdf';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
@@ -7,7 +7,9 @@ import ErrorOutlineIcon from '@mui/icons-material/ErrorOutline';
 
 const DropzoneUploadPdf: React.FC = () => {
   const [fileName, setFileName] = useState<string | null>(null);
+  const [pdfFile, setPdfFile] = useState<File | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const [loading, setLoading] = useState(false);
   const [isDragOver, setIsDragOver] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -17,8 +19,10 @@ const DropzoneUploadPdf: React.FC = () => {
     if (file.type !== 'application/pdf') {
       setError('Somente arquivos .pdf são aceitos.');
       setFileName(null);
+      setPdfFile(null);
     } else {
       setFileName(file.name);
+      setPdfFile(file);
       setError(null);
     }
   };
@@ -44,8 +48,22 @@ const DropzoneUploadPdf: React.FC = () => {
     inputRef.current?.click();
   };
 
+  const handleAnalyze = async () => {
+    if (!pdfFile) return;
+    try {
+      setLoading(true);
+      // Placeholder for API request
+      await new Promise(resolve => setTimeout(resolve, 1000));
+    } catch {
+      setError('Ocorreu um erro ao enviar o arquivo. Tente novamente.');
+    } finally {
+      setLoading(false);
+    }
+  };
+
   const reset = () => {
     setFileName(null);
+    setPdfFile(null);
     setError(null);
     if (inputRef.current) {
       inputRef.current.value = '';
@@ -86,9 +104,25 @@ const DropzoneUploadPdf: React.FC = () => {
           <Typography variant="body2" color="success.main" sx={{ mb: 2 }}>
             Edital carregado com sucesso!
           </Typography>
-          <Button variant="outlined" onClick={reset} aria-label="Enviar outro arquivo">
-            Enviar outro arquivo
-          </Button>
+          <Box sx={{ display: 'flex', gap: 1, mb: 1 }}>
+            <Button
+              variant="contained"
+              onClick={handleAnalyze}
+              disabled={loading}
+              aria-label="Analisar edital"
+            >
+              {loading ? <CircularProgress size={24} /> : 'Analisar Edital'}
+            </Button>
+            <Button variant="outlined" onClick={reset} aria-label="Enviar outro arquivo">
+              Enviar outro arquivo
+            </Button>
+          </Box>
+          {error && (
+            <Box sx={{ display: 'flex', alignItems: 'center', mt: 1, color: 'error.main' }}>
+              <ErrorOutlineIcon sx={{ mr: 0.5 }} />
+              <Typography variant="body2">{error}</Typography>
+            </Box>
+          )}
         </>
       ) : (
         <>
