@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Card, Typography, Button, Box } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-import { apiNode } from "../../services/apiNode";
+import { getBalance, buyCredits } from "../../services/credits";
 
 const CoinsPage: React.FC = () => {
   const [balance, setBalance] = useState(0);
@@ -10,10 +10,8 @@ const CoinsPage: React.FC = () => {
   useEffect(() => {
     const fetchBalance = async () => {
       try {
-        const { data } = await apiNode.get("/credits");
-        if (typeof data.balance === "number") {
-          setBalance(data.balance);
-        }
+        const value = await getBalance();
+        setBalance(value);
       } catch (err) {
         console.error("Erro ao buscar saldo de moedas", err);
       }
@@ -24,7 +22,7 @@ const CoinsPage: React.FC = () => {
 
   const handleBuyCredits = async () => {
     try {
-      await apiNode.post("/credits/buy");
+      await buyCredits();
       navigate("/comprar-moedas");
     } catch (err) {
       console.error("Erro ao comprar moedas", err);
