@@ -7,6 +7,7 @@ import AgentBenefitsSection from '../../components/agent/AgentBenefitsSection';
 import AgentAudienceSection from '../../components/agent/AgentAudienceSection';
 import AgentFinalCTASection from '../../components/agent/AgentFinalCTASection';
 import SearchHeroSection from '../../components/search/SearchHeroSection';
+import SearchBenefitsSection from '../../components/search/SearchBenefitsSection';
 import BackHomeButton from '../../libs/components/BackHomeButton';
 import { getServiceById } from '../../services/Services';
 
@@ -55,6 +56,7 @@ const FeatureDetailPage: React.FC<FeatureDetailPageProps> = ({ serviceId }) => {
         {id === 'ai-search-companies' && (
           <>
             <SearchHeroSection />
+            <SearchBenefitsSection />
           </>
         )}
       </Container>
