@@ -1,8 +1,9 @@
 import React from "react";
-import { Box, Grid } from "@mui/material";
+import { Box, Grid, Typography, Button } from "@mui/material";
 import { Wallet, Clock, Activity, User } from "lucide-react";
 import DashboardStatCard from "./DashboardStatCard";
 import DashboardActionButton from "./DashboardActionButton";
+import RecentActivityItem from "./RecentActivityItem";
 import { Link as RouterLink } from "react-router-dom";
 
 const DashboardHome: React.FC = () => {
@@ -15,6 +16,29 @@ const DashboardHome: React.FC = () => {
     date: "10/06/2025 14:00",
     success: true,
   };
+
+  const recentActivities = [
+    {
+      icon: <Activity size={18} />,
+      description: "Executou LeadGen",
+      date: "10/06/2025 14:00",
+      statusColor: "success" as const,
+      actionLabel: "Ver",
+      actionTo: "/dashboard/historico",
+    },
+    {
+      icon: <Wallet size={18} />,
+      description: "Adicionou 20 créditos",
+      date: "08/06/2025 12:30",
+      statusColor: "secondary" as const,
+    },
+    {
+      icon: <User size={18} />,
+      description: "Upgrade para plano Pro",
+      date: "05/06/2025 09:00",
+      statusColor: "primary" as const,
+    },
+  ];
 
   const creditsColor =
     creditsUsedPercent >= 80
@@ -67,6 +91,23 @@ const DashboardHome: React.FC = () => {
           />
         </Grid>
       </Grid>
+      <Box sx={{ mb: 4 }}>
+        <Typography variant="h6" sx={{ mb: 2 }}>
+          Atividades Recentes
+        </Typography>
+        {recentActivities.map((activity, idx) => (
+          <RecentActivityItem key={idx} {...activity} />
+        ))}
+        <Button
+          component={RouterLink}
+          to="/dashboard/historico"
+          size="small"
+          sx={{ mt: 1 }}
+          aria-label="Ver todas as atividades"
+        >
+          Ver tudo
+        </Button>
+      </Box>
       <Grid container spacing={2}>
         <Grid item xs={6} md={3}>
           <DashboardActionButton
