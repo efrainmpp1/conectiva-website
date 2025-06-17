@@ -1,8 +1,9 @@
-const useMock = process.env.NODE_ENV !== 'production';
-let mod;
-if (useMock) {
-  mod = await import('./mock.js');
-} else {
-  mod = await import('./integration.js');
-}
-export const { getServices, getServiceById } = mod;
+import { services } from '../mocks/services.js';
+
+export const getServices = () => {
+  return services;
+};
+
+export const getServiceById = (id) => {
+  return services.find(service => service.id === id);
+};
