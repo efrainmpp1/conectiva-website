@@ -47,6 +47,21 @@ const DashboardHome: React.FC = () => {
       ? "warning"
       : "success";
 
+  const creditsTrend = [
+    { value: 50 },
+    { value: 40 },
+    { value: 35 },
+    { value: 30 },
+    { value: 30 },
+  ];
+  const executionsTrend = [
+    { value: 1 },
+    { value: 2 },
+    { value: 2 },
+    { value: 3 },
+    { value: 5 },
+  ];
+
   return (
     <Box>
       <Grid container spacing={2} sx={{ mb: 4 }}>
@@ -59,6 +74,9 @@ const DashboardHome: React.FC = () => {
             statusColor={creditsColor}
             actionLabel="Adicionar"
             actionTo="/dashboard/moedas"
+            chartData={creditsTrend}
+            chartColor="#00e676"
+            chartArea
           />
         </Grid>
         <Grid item xs={12} sm={6} md={3}>
@@ -69,6 +87,8 @@ const DashboardHome: React.FC = () => {
             statusColor="primary"
             actionLabel="Ver histórico"
             actionTo="/dashboard/historico"
+            chartData={executionsTrend}
+            chartColor="#ff9100"
           />
         </Grid>
         <Grid item xs={12} sm={6} md={3}>

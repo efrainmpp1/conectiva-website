@@ -1,7 +1,9 @@
 import React from "react";
 import { Box, Typography, LinearProgress, Button } from "@mui/material";
+import { useTheme } from "@mui/material/styles";
 import { Link as RouterLink } from "react-router-dom";
 import { motion } from "framer-motion";
+import MiniTrendChart from "./MiniTrendChart";
 
 interface DashboardStatCardProps {
   icon: React.ReactNode;
@@ -19,6 +21,9 @@ interface DashboardStatCardProps {
     | "success";
   actionLabel?: string;
   actionTo?: string;
+  chartData?: { value: number }[];
+  chartColor?: string;
+  chartArea?: boolean;
 }
 
 const MotionBox = motion(Box);
@@ -31,11 +36,18 @@ const DashboardStatCard: React.FC<DashboardStatCardProps> = ({
   statusColor = "primary",
   actionLabel,
   actionTo,
-}) => (
-  <MotionBox
-    initial={{ opacity: 0, y: 20 }}
-    animate={{ opacity: 1, y: 0 }}
-    transition={{ duration: 0.3 }}
+  chartData,
+  chartColor,
+  chartArea,
+}) => {
+  const theme = useTheme();
+  const color = chartColor || theme.palette[statusColor].main;
+
+  return (
+    <MotionBox
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.3 }}
     whileHover={{ scale: 1.03 }}
     sx={{
       p: 2,
@@ -66,6 +78,11 @@ const DashboardStatCard: React.FC<DashboardStatCardProps> = ({
         sx={{ mt: 1, width: "100%", height: 6, borderRadius: 3 }}
       />
     )}
+    {chartData && (
+      <Box sx={{ width: "100%", mt: 1 }}>
+        <MiniTrendChart data={chartData} color={color} area={chartArea} ariaLabel={label} />
+      </Box>
+    )}
     {actionLabel && actionTo && (
       <Button
         component={RouterLink}
@@ -78,6 +95,7 @@ const DashboardStatCard: React.FC<DashboardStatCardProps> = ({
       </Button>
     )}
   </MotionBox>
-);
+  );
+};
 
 export default DashboardStatCard;
