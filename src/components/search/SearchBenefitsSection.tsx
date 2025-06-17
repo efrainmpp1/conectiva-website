@@ -40,6 +40,12 @@ const SearchBenefitsSection: React.FC = () => {
       >
         Benefícios em Destaque
       </Typography>
+      <Typography
+        variant="subtitle2"
+        sx={{ textAlign: 'center', color: alpha(theme.palette.common.white, 0.8), mb: 4 }}
+      >
+        Prospecte com precisão, avance com velocidade
+      </Typography>
       <Grid container spacing={4} justifyContent="center">
         {benefits.map((b) => (
           <Grid item xs={12} sm={6} md={4} key={b.title}>
@@ -49,6 +55,7 @@ const SearchBenefitsSection: React.FC = () => {
               viewport={{ once: true }}
               transition={{ duration: theme.animations.durationBase, ease: theme.animations.easing }}
               whileHover={{ scale: 1.05, boxShadow: theme.customShadows.neon }}
+              whileTap={{ scale: 0.98 }}
               sx={{
                 p: 4,
                 textAlign: 'center',

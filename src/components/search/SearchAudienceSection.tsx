@@ -42,6 +42,12 @@ const SearchAudienceSection: React.FC = () => {
       >
         Ideal para...
       </Typography>
+      <Typography
+        variant="subtitle2"
+        sx={{ textAlign: 'center', color: alpha(theme.palette.common.white, 0.8), mb: 4 }}
+      >
+        Conecte-se aos clientes certos
+      </Typography>
       <Grid container spacing={4} justifyContent="center">
         {audiences.map((a) => (
           <Grid item xs={12} sm={6} md={4} key={a.title}>
@@ -51,6 +57,7 @@ const SearchAudienceSection: React.FC = () => {
               viewport={{ once: true }}
               transition={{ duration: theme.animations.durationBase, ease: theme.animations.easing }}
               whileHover={{ scale: 1.05, boxShadow: theme.customShadows.neon }}
+              whileTap={{ scale: 0.98 }}
               sx={{
                 p: 4,
                 textAlign: 'center',

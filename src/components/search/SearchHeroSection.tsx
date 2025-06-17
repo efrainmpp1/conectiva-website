@@ -35,14 +35,20 @@ const SearchHeroSection: React.FC = () => {
           >
             Descreva sua empresa ideal. Receba a lista perfeita em segundos.
           </Typography>
-          <Typography
-            variant="h4"
-            component="p"
-            sx={{ color: alpha(theme.palette.common.white, 0.85) }}
-          >
-            A IA entende sua necessidade, encontra os melhores contatos e entrega tudo pronto para você prospectar.
-          </Typography>
-        </Grid>
+        <Typography
+          variant="h4"
+          component="p"
+          sx={{ color: alpha(theme.palette.common.white, 0.85) }}
+        >
+          A IA entende sua necessidade, encontra os melhores contatos e entrega tudo pronto para você prospectar.
+        </Typography>
+        <Typography
+          variant="subtitle1"
+          sx={{ mt: 1, color: theme.palette.primary.light, fontWeight: 600 }}
+        >
+          IA que entende sua demanda
+        </Typography>
+      </Grid>
         <Grid item xs={12} md={6} sx={{ textAlign: 'center' }}>
           <Box
             component="img"
