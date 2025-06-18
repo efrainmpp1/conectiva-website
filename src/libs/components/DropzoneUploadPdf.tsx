@@ -6,11 +6,13 @@ import {
   CircularProgress,
   Snackbar,
   Alert,
+  Tooltip,
 } from '@mui/material';
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import PictureAsPdfIcon from '@mui/icons-material/PictureAsPdf';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import ErrorOutlineIcon from '@mui/icons-material/ErrorOutline';
+import HelpOutlineIcon from '@mui/icons-material/HelpOutline';
 import { analyzeEdital } from '../../services/edital';
 
 const DropzoneUploadPdf: React.FC = () => {
@@ -153,16 +155,35 @@ const DropzoneUploadPdf: React.FC = () => {
           ) : (
             <CloudUploadIcon sx={{ fontSize: 80, color: '#B388FF' }} />
           )}
-          <Typography
+          <Box
             sx={{
-              fontSize: '1.75rem',
-              fontWeight: 700,
-              textAlign: 'center',
+              display: 'inline-flex',
+              alignItems: 'center',
+              justifyContent: 'center',
               mb: 1,
+              gap: 0.5,
             }}
           >
-            Envie seu Edital em PDF para Análise
-          </Typography>
+            <Typography
+              sx={{
+                fontSize: '1.75rem',
+                fontWeight: 700,
+                textAlign: 'center',
+              }}
+            >
+              Envie seu Edital em PDF para Análise
+            </Typography>
+            <Tooltip
+              title="A IA extrai CNAEs, região e porte, gerando uma lista de empresas compatíveis."
+              enterTouchDelay={0}
+            >
+              <HelpOutlineIcon
+                fontSize="small"
+                color="action"
+                aria-label="Como funciona?"
+              />
+            </Tooltip>
+          </Box>
           <Typography
             sx={{
               fontSize: '1rem',
