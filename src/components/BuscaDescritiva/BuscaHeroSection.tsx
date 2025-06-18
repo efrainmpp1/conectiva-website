@@ -3,7 +3,7 @@ import { Box, Grid, Typography } from '@mui/material';
 import { useTheme, alpha } from '@mui/material/styles';
 import { motion, useReducedMotion } from 'framer-motion';
 
-const MotionBox = motion(Box);
+const MotionBox = motion.create(Box);
 
 /**
  * Hero section for the Busca Descritiva page.

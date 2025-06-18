@@ -5,7 +5,7 @@ import CircularProgress from '@mui/material/CircularProgress';
 import { motion, useReducedMotion } from 'framer-motion';
 import { trackEvent } from '../../libs/analytics';
 
-const MotionPaper = motion(Paper);
+const MotionPaper = motion.create(Paper);
 
 /**
  * Highlighted final call-to-action encouraging registration or contact.

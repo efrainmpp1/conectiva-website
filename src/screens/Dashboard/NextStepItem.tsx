@@ -10,7 +10,7 @@ interface NextStepItemProps {
   actionTo: string;
 }
 
-const MotionBox = motion(Box);
+const MotionBox = motion.create(Box);
 
 const NextStepItem: React.FC<NextStepItemProps> = ({
   icon,
