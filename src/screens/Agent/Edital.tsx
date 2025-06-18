@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box } from '@mui/material';
+import { Box, Grid } from '@mui/material';
 import DropzoneUploadPdf from '../../libs/components/DropzoneUploadPdf';
 import BackDashboardButton from '../../libs/components/BackDashboardButton';
 
@@ -16,7 +16,29 @@ const EditalPage: React.FC = () => {
         px: { xs: 2, md: 4 },
       }}
     >
-      <DropzoneUploadPdf />
+      <Grid container spacing={4} alignItems="center" justifyContent="center">
+        <Grid item xs={12} md={6}>
+          <DropzoneUploadPdf />
+        </Grid>
+        <Grid
+          item
+          xs={12}
+          md={6}
+          sx={{ display: 'flex', justifyContent: 'center' }}
+        >
+          <Box
+            component="img"
+            src="/assets/illustration_edital.svg"
+            alt="Análise de Edital"
+            sx={{
+              maxWidth: 400,
+              width: '100%',
+              opacity: 0.4,
+              display: { xs: 'none', md: 'block' },
+            }}
+          />
+        </Grid>
+      </Grid>
       <BackDashboardButton sx={{ mb: 0 }} />
     </Box>
   );
