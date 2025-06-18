@@ -5,9 +5,19 @@ import BackDashboardButton from '../../libs/components/BackDashboardButton';
 
 const EditalPage: React.FC = () => {
   return (
-    <Box display="flex" flexDirection="column" justifyContent="center" alignItems="center" minHeight="60vh">
+    <Box
+      sx={{
+        minHeight: 'calc(100vh - 64px)',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center',
+        gap: { xs: 3, md: 6 },
+        px: { xs: 2, md: 4 },
+      }}
+    >
       <DropzoneUploadPdf />
-      <BackDashboardButton />
+      <BackDashboardButton sx={{ mb: 0 }} />
     </Box>
   );
 };
