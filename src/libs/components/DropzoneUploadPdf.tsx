@@ -11,6 +11,7 @@ import {
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import PictureAsPdfIcon from '@mui/icons-material/PictureAsPdf';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
+import InsertDriveFileIcon from '@mui/icons-material/InsertDriveFile';
 import ErrorOutlineIcon from '@mui/icons-material/ErrorOutline';
 import HelpOutlineIcon from '@mui/icons-material/HelpOutline';
 import { analyzeEdital } from '../../services/edital';
@@ -121,26 +122,45 @@ const DropzoneUploadPdf: React.FC = () => {
       >
       {fileName ? (
         <>
-          <CheckCircleIcon color="success" sx={{ fontSize: 64 }} />
-          <Typography variant="h6" sx={{ mt: 1, fontWeight: 600 }}>
-            {fileName}
-          </Typography>
-          <Typography variant="body2" color="success.main" sx={{ mb: 2 }}>
-            Edital carregado com sucesso!
-          </Typography>
-          <Box sx={{ display: 'flex', gap: 1, mb: 1 }}>
-            <Button
-              variant="contained"
-              onClick={handleAnalyze}
-              disabled={loading}
-              aria-label="Analisar edital"
-            >
-              {loading ? <CircularProgress size={24} /> : 'Analisar Edital'}
-            </Button>
-            <Button variant="outlined" onClick={reset} aria-label="Enviar outro arquivo">
-              Enviar outro arquivo
+          <Box
+            sx={{
+              display: 'flex',
+              alignItems: 'center',
+              gap: 2,
+              p: 2,
+              mt: 1,
+              width: '100%',
+              border: '1px solid',
+              borderColor: 'success.light',
+              borderRadius: 2,
+              backgroundColor: 'background.paper',
+            }}
+          >
+            <InsertDriveFileIcon color="primary" sx={{ fontSize: 40 }} />
+            <Box sx={{ flexGrow: 1, minWidth: 0 }}>
+              <Typography variant="body1" fontWeight={600} sx={{ wordBreak: 'break-word' }}>
+                {fileName}
+              </Typography>
+              <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.5 }}>
+                <CheckCircleIcon color="success" fontSize="small" />
+                <Typography variant="body2" color="success.main">
+                  Arquivo carregado com sucesso!
+                </Typography>
+              </Box>
+            </Box>
+            <Button variant="outlined" onClick={reset} size="small" aria-label="Trocar arquivo">
+              Trocar arquivo
             </Button>
           </Box>
+          <Button
+            variant="contained"
+            onClick={handleAnalyze}
+            disabled={loading}
+            aria-label="Analisar edital"
+            sx={{ mt: 2 }}
+          >
+            {loading ? <CircularProgress size={24} /> : 'Analisar Edital'}
+          </Button>
           {error && (
             <Box sx={{ display: 'flex', alignItems: 'center', mt: 1, color: 'error.main' }}>
               <ErrorOutlineIcon sx={{ mr: 0.5 }} />
