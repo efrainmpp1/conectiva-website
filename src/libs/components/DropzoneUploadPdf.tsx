@@ -94,13 +94,14 @@ const DropzoneUploadPdf: React.FC = () => {
         onDragOver={handleDragOver}
         onDragLeave={handleDragLeave}
         tabIndex={0}
+        role="button"
         aria-label="Área para upload de PDF"
         sx={{
-          maxWidth: 400,
+          maxWidth: 500,
           border: '2px dashed',
-          borderColor: isDragOver ? 'primary.main' : 'grey.500',
+          borderColor: isDragOver ? '#9C27B0' : '#B388FF',
           borderRadius: 2,
-          p: 4,
+          p: { xs: 6, sm: 8 },
           m: '0 auto',
           textAlign: 'center',
           cursor: 'pointer',
@@ -108,14 +109,18 @@ const DropzoneUploadPdf: React.FC = () => {
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'center',
-          gap: 1,
-          transition: 'border-color 0.2s ease-in-out',
+          gap: 2,
+          transition: 'border-color 0.2s ease-in-out, box-shadow 0.2s',
+          '&:hover': {
+            boxShadow: 3,
+            borderColor: '#B388FF',
+          },
         }}
       >
       {fileName ? (
         <>
-          <CheckCircleIcon color="success" sx={{ fontSize: 48 }} />
-          <Typography variant="h6" sx={{ mt: 1 }}>
+          <CheckCircleIcon color="success" sx={{ fontSize: 64 }} />
+          <Typography variant="h6" sx={{ mt: 1, fontWeight: 600 }}>
             {fileName}
           </Typography>
           <Typography variant="body2" color="success.main" sx={{ mb: 2 }}>
@@ -144,15 +149,30 @@ const DropzoneUploadPdf: React.FC = () => {
       ) : (
         <>
           {isDragOver ? (
-            <PictureAsPdfIcon color="primary" sx={{ fontSize: 48 }} />
+            <PictureAsPdfIcon sx={{ fontSize: 80, color: '#B388FF' }} />
           ) : (
-            <CloudUploadIcon sx={{ fontSize: 48 }} color="action" />
+            <CloudUploadIcon sx={{ fontSize: 80, color: '#B388FF' }} />
           )}
-          <Typography variant="h6" sx={{ fontWeight: 600 }}>
+          <Typography
+            sx={{
+              fontSize: '1.75rem',
+              fontWeight: 700,
+              textAlign: 'center',
+              mb: 1,
+            }}
+          >
             Envie seu Edital em PDF para Análise
           </Typography>
-          <Typography variant="body2" color="text.secondary">
-            Clique para selecionar o arquivo ou arraste e solte aqui o edital
+          <Typography
+            sx={{
+              fontSize: '1rem',
+              fontWeight: 400,
+              color: 'text.secondary',
+              maxWidth: '90%',
+              mx: 'auto',
+            }}
+          >
+            Clique para selecionar ou arraste e solte aqui o arquivo em PDF
           </Typography>
           {error && (
             <Box sx={{ display: 'flex', alignItems: 'center', mt: 1, color: 'error.main' }}>
