@@ -11,11 +11,11 @@ export function useAnaliseDeEdital() {
   const analisar = async (arquivoPdf: File) => {
     setStatusAnalise('processando');
     setMensagemErro(null);
+    if (csvBlobUrl) {
+      URL.revokeObjectURL(csvBlobUrl);
+    }
+    setCsvBlobUrl(null);
     try {
-      if (csvBlobUrl) {
-        URL.revokeObjectURL(csvBlobUrl);
-        setCsvBlobUrl(null);
-      }
       const blob = await analyzeEdital(arquivoPdf);
       const url = URL.createObjectURL(blob);
       setCsvBlobUrl(url);
@@ -23,7 +23,7 @@ export function useAnaliseDeEdital() {
     } catch (error) {
       setStatusAnalise('erro');
       setMensagemErro(
-        'Ocorreu um erro ao analisar o edital. Tente novamente mais tarde.',
+        'Ocorreu um erro ao analisar o edital. Verifique o arquivo e tente novamente.',
       );
     }
   };

@@ -198,11 +198,17 @@ const DropzoneUploadPdf: React.FC = () => {
             </>
           )}
           {statusAnalise === 'erro' && (
-            <Alert severity="error" sx={{ mt: 2 }} aria-live="polite">
-              {mensagemErro}
-              <Button onClick={handleAnalyze} size="small" sx={{ ml: 2 }}>
-                Tentar novamente
-              </Button>
+            <Alert
+              severity="error"
+              sx={{ mt: 3 }}
+              aria-live="polite"
+              action={
+                <Button color="inherit" size="small" onClick={handleAnalyze}>
+                  Tentar Novamente
+                </Button>
+              }
+            >
+              {mensagemErro || 'Erro desconhecido. Por favor, tente novamente.'}
             </Alert>
           )}
           {error && (
