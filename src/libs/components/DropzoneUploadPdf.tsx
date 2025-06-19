@@ -4,7 +4,6 @@ import {
   Typography,
   Button,
   CircularProgress,
-  Snackbar,
   Alert,
   Tooltip,
 } from '@mui/material';
@@ -14,15 +13,20 @@ import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import InsertDriveFileIcon from '@mui/icons-material/InsertDriveFile';
 import ErrorOutlineIcon from '@mui/icons-material/ErrorOutline';
 import HelpOutlineIcon from '@mui/icons-material/HelpOutline';
-import { analyzeEdital } from '../../services/edital';
+import { useAnaliseDeEdital } from '../hooks/useAnaliseDeEdital';
 
 const DropzoneUploadPdf: React.FC = () => {
   const [fileName, setFileName] = useState<string | null>(null);
   const [pdfFile, setPdfFile] = useState<File | null>(null);
   const [error, setError] = useState<string | null>(null);
-  const [loading, setLoading] = useState(false);
   const [isDragOver, setIsDragOver] = useState(false);
-  const [showSuccess, setShowSuccess] = useState(false);
+  const {
+    statusAnalise,
+    csvBlobUrl,
+    mensagemErro,
+    analisar,
+    reset: resetAnalise,
+  } = useAnaliseDeEdital();
   const inputRef = useRef<HTMLInputElement>(null);
 
   const handleFiles = (files: FileList | null) => {
@@ -62,28 +66,14 @@ const DropzoneUploadPdf: React.FC = () => {
 
   const handleAnalyze = async () => {
     if (!pdfFile) return;
-    try {
-      setLoading(true);
-      const blob = await analyzeEdital(pdfFile);
-      const url = window.URL.createObjectURL(blob);
-      const link = document.createElement('a');
-      link.href = url;
-      link.setAttribute('download', 'empresas_interessadas.csv');
-      document.body.appendChild(link);
-      link.click();
-      link.remove();
-      setShowSuccess(true);
-    } catch {
-      setError('Ocorreu um erro ao enviar o arquivo. Tente novamente.');
-    } finally {
-      setLoading(false);
-    }
+    await analisar(pdfFile);
   };
 
   const reset = () => {
     setFileName(null);
     setPdfFile(null);
     setError(null);
+    resetAnalise();
     if (inputRef.current) {
       inputRef.current.value = '';
     }
@@ -152,15 +142,46 @@ const DropzoneUploadPdf: React.FC = () => {
               Trocar arquivo
             </Button>
           </Box>
-          <Button
-            variant="contained"
-            onClick={handleAnalyze}
-            disabled={loading}
-            aria-label="Analisar edital"
-            sx={{ mt: 2 }}
-          >
-            {loading ? <CircularProgress size={24} /> : 'Analisar Edital'}
-          </Button>
+          {statusAnalise === 'idle' && (
+            <Button
+              variant="contained"
+              onClick={handleAnalyze}
+              aria-label="Analisar edital"
+              sx={{ mt: 2 }}
+            >
+              Analisar Edital
+            </Button>
+          )}
+          {statusAnalise === 'processando' && (
+            <Box sx={{ mt: 2, display: 'flex', alignItems: 'center', gap: 1 }} aria-live="polite">
+              <CircularProgress size={24} />
+              <Typography>
+                Estamos analisando seu edital. Isso pode levar alguns segundos...
+              </Typography>
+            </Box>
+          )}
+          {statusAnalise === 'concluido' && csvBlobUrl && (
+            <Button
+              variant="contained"
+              onClick={() => {
+                const link = document.createElement('a');
+                link.href = csvBlobUrl;
+                link.setAttribute('download', 'empresas_compativeis.csv');
+                link.click();
+              }}
+              sx={{ mt: 2 }}
+            >
+              Baixar Resultado (.CSV)
+            </Button>
+          )}
+          {statusAnalise === 'erro' && (
+            <Alert severity="error" sx={{ mt: 2 }} aria-live="polite">
+              {mensagemErro}
+              <Button onClick={handleAnalyze} size="small" sx={{ ml: 2 }}>
+                Tentar novamente
+              </Button>
+            </Alert>
+          )}
           {error && (
             <Box sx={{ display: 'flex', alignItems: 'center', mt: 1, color: 'error.main' }}>
               <ErrorOutlineIcon sx={{ mr: 0.5 }} />
@@ -229,22 +250,8 @@ const DropzoneUploadPdf: React.FC = () => {
         accept="application/pdf"
         style={{ display: 'none' }}
         onChange={handleChange}
-        />
+      />
       </Box>
-      <Snackbar
-        open={showSuccess}
-        autoHideDuration={6000}
-        onClose={() => setShowSuccess(false)}
-        anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
-      >
-      <Alert
-        onClose={() => setShowSuccess(false)}
-        severity="success"
-        variant="filled"
-      >
-        Análise concluída. Download iniciado.
-        </Alert>
-      </Snackbar>
     </>
   );
 };
