@@ -12,6 +12,10 @@ export function useAnaliseDeEdital() {
     setStatusAnalise('processando');
     setMensagemErro(null);
     try {
+      if (csvBlobUrl) {
+        URL.revokeObjectURL(csvBlobUrl);
+        setCsvBlobUrl(null);
+      }
       const blob = await analyzeEdital(arquivoPdf);
       const url = URL.createObjectURL(blob);
       setCsvBlobUrl(url);

@@ -11,6 +11,7 @@ import {
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import PictureAsPdfIcon from '@mui/icons-material/PictureAsPdf';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
+import DownloadIcon from '@mui/icons-material/Download';
 import InsertDriveFileIcon from '@mui/icons-material/InsertDriveFile';
 import ErrorOutlineIcon from '@mui/icons-material/ErrorOutline';
 import HelpOutlineIcon from '@mui/icons-material/HelpOutline';
@@ -174,18 +175,27 @@ const DropzoneUploadPdf: React.FC = () => {
             </Box>
           </Fade>
           {statusAnalise === 'concluido' && csvBlobUrl && (
-            <Button
-              variant="contained"
-              onClick={() => {
-                const link = document.createElement('a');
-                link.href = csvBlobUrl;
-                link.setAttribute('download', 'empresas_compativeis.csv');
-                link.click();
-              }}
-              sx={{ mt: 2 }}
-            >
-              Baixar Resultado (.CSV)
-            </Button>
+            <>
+              <Alert severity="success" sx={{ mt: 3 }} aria-live="polite">
+                🎉 Análise concluída com sucesso! Seu arquivo com a lista de empresas está pronto para download.
+              </Alert>
+              <Button
+                variant="contained"
+                color="primary"
+                startIcon={<DownloadIcon />}
+                sx={{ mt: 2 }}
+                onClick={() => {
+                  const link = document.createElement('a');
+                  link.href = csvBlobUrl;
+                  link.setAttribute('download', 'empresas_compativeis.csv');
+                  document.body.appendChild(link);
+                  link.click();
+                  link.remove();
+                }}
+              >
+                Baixar Resultado (.CSV)
+              </Button>
+            </>
           )}
           {statusAnalise === 'erro' && (
             <Alert severity="error" sx={{ mt: 2 }} aria-live="polite">
