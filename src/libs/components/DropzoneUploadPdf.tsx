@@ -4,6 +4,7 @@ import {
   Typography,
   Button,
   CircularProgress,
+  Fade,
   Alert,
   Tooltip,
 } from '@mui/material';
@@ -138,28 +139,40 @@ const DropzoneUploadPdf: React.FC = () => {
                 </Typography>
               </Box>
             </Box>
-            <Button variant="outlined" onClick={reset} size="small" aria-label="Trocar arquivo">
+            <Button variant="outlined" onClick={reset} size="small" aria-label="Trocar arquivo" disabled={statusAnalise === 'processando'}>
               Trocar arquivo
             </Button>
           </Box>
-          {statusAnalise === 'idle' && (
-            <Button
-              variant="contained"
-              onClick={handleAnalyze}
-              aria-label="Analisar edital"
-              sx={{ mt: 2 }}
+          <Button
+            variant="contained"
+            onClick={handleAnalyze}
+            aria-label="Analisar edital"
+            sx={{ mt: 2 }}
+            disabled={statusAnalise === 'processando'}
+          >
+            Analisar Edital
+          </Button>
+          <Fade in={statusAnalise === 'processando'} timeout={300} unmountOnExit>
+            <Box
+              display="flex"
+              alignItems="center"
+              justifyContent="center"
+              gap={2}
+              sx={theme => ({
+                padding: 2,
+                backgroundColor: 'background.paper',
+                borderRadius: 2,
+                border: `1px solid ${theme.palette.divider}`,
+                mt: 3,
+              })}
+              aria-live="polite"
             >
-              Analisar Edital
-            </Button>
-          )}
-          {statusAnalise === 'processando' && (
-            <Box sx={{ mt: 2, display: 'flex', alignItems: 'center', gap: 1 }} aria-live="polite">
-              <CircularProgress size={24} />
-              <Typography>
-                Estamos analisando seu edital. Isso pode levar alguns segundos...
+              <CircularProgress color="primary" size={28} />
+              <Typography color="text.secondary" fontWeight={500}>
+                Estamos analisando seu edital... Isso pode levar alguns segundos.
               </Typography>
             </Box>
-          )}
+          </Fade>
           {statusAnalise === 'concluido' && csvBlobUrl && (
             <Button
               variant="contained"
