@@ -59,10 +59,6 @@ const router = createBrowserRouter([
         element: <RegisterPage />,
       },
       {
-        path: 'agent/edital',
-        element: <EditalPage />,
-      },
-      {
         path: 'agent/prospeccao',
         element: <ProspeccaoPage />,
       },
@@ -81,6 +77,10 @@ const router = createBrowserRouter([
           {
             path: 'agente',
             element: <AgentPage />,
+          },
+          {
+            path: 'analise-edital',
+            element: <EditalPage />,
           },
           {
             path: 'historico',
