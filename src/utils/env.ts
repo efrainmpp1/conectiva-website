@@ -3,5 +3,5 @@ export function isProductionEnv() {
 }
 
 export function isMockMode() {
-  return import.meta.env.VITE_MOCK_MODE === 'true';
+  return import.meta.env.VITE_PROD !== 'true';
 }
