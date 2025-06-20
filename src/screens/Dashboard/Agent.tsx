@@ -26,7 +26,7 @@ const AgentPage: React.FC = () => {
       description:
         "Descreva o tipo de empresa que procura e a IA retorna opções relevantes.",
       icon: <Search size={36} />,
-      path: "/agent/prospeccao",
+      path: "/dashboard/prospeccao-inteligente",
     },
   ];
 
