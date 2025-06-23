@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import {
   Container,
   Stack,
@@ -6,24 +6,23 @@ import {
   TextField,
   Button,
   Box,
+  Alert,
+  CircularProgress,
 } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
 import SearchIcon from "@mui/icons-material/Search";
+import { useProspeccaoInteligente } from "../../hooks/useProspeccaoInteligente";
 
 const ProspeccaoInteligentePage: React.FC = () => {
-  const [descricao, setDescricao] = useState("");
-  const [loading, setLoading] = useState(false);
   const theme = useTheme();
-
-  const handleSubmit = async () => {
-    setLoading(true);
-    try {
-      // TODO: integrate with prospection API
-      await new Promise((resolve) => setTimeout(resolve, 500));
-    } finally {
-      setLoading(false);
-    }
-  };
+  const {
+    descricao,
+    setDescricao,
+    status,
+    erro,
+    csvUrl,
+    executarProspeccao,
+  } = useProspeccaoInteligente();
 
   return (
     <Container maxWidth="md" sx={{ py: 4 }}>
@@ -51,12 +50,35 @@ const ProspeccaoInteligentePage: React.FC = () => {
           />
           <Button
             variant="contained"
-            onClick={handleSubmit}
-            disabled={loading}
-            startIcon={<SearchIcon />}
+            onClick={executarProspeccao}
+            disabled={status === 'processando'}
+            startIcon={status === 'processando' ? undefined : <SearchIcon />}
           >
-            Executar Prospecção
+            {status === 'processando' ? (
+              <CircularProgress size={24} color="inherit" />
+            ) : (
+              'Executar Prospecção'
+            )}
           </Button>
+
+          {csvUrl && (
+            <Button
+              href={csvUrl}
+              download="empresas_compatíveis.csv"
+              variant="outlined"
+              color="success"
+              fullWidth
+              sx={{ mt: 2 }}
+            >
+              Baixar Arquivo CSV
+            </Button>
+          )}
+
+          {erro && (
+            <Alert severity="error" sx={{ mt: 2 }}>
+              {erro}
+            </Alert>
+          )}
         </Stack>
       </Box>
     </Container>

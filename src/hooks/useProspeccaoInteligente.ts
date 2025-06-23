@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { enviarDescricaoProspeccao } from '@/services/prospeccao';
+import { enviarDescricaoProspeccao } from '../services/prospeccao';
 
 export type StatusProspeccao = 'idle' | 'processando' | 'concluido' | 'erro';
 
