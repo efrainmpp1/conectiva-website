@@ -60,7 +60,11 @@ const router = createBrowserRouter([
       },
       {
         path: 'agent/prospeccao',
-        element: <ProspeccaoPage />,
+        element: (
+          <ProtectedRoute>
+            <ProspeccaoPage />
+          </ProtectedRoute>
+        ),
       },
       {
         path: 'dashboard',
