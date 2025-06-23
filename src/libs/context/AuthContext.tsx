@@ -7,6 +7,9 @@ import {
   onAuthStateChanged,
   createUserWithEmailAndPassword,
   updateProfile,
+  setPersistence,
+  browserLocalPersistence,
+  browserSessionPersistence,
 } from "firebase/auth";
 import { auth } from "../../services/firebase";
 
@@ -23,7 +26,7 @@ interface AuthContextProps {
   loading: boolean;
   login: (email: string, password: string, stayLoggedIn: boolean) => Promise<void>;
   signUp: (name: string, email: string, password: string) => Promise<void>;
-  loginWithGoogle: () => Promise<void>;
+  loginWithGoogle: (stayLoggedIn: boolean) => Promise<void>;
   logout: () => Promise<void>;
 }
 
@@ -33,7 +36,7 @@ const AuthContext = createContext<AuthContextProps>({
   loading: true,
   login: async (_email: string, _password: string, _stayLoggedIn: boolean) => {},
   signUp: async () => {},
-  loginWithGoogle: async () => {},
+  loginWithGoogle: async (_stayLoggedIn: boolean) => {},
   logout: async () => {},
 });
 
@@ -44,7 +47,9 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const stored = localStorage.getItem("user");
+    const storedLocal = localStorage.getItem("user");
+    const storedSession = sessionStorage.getItem("user");
+    const stored = storedLocal || storedSession;
     if (stored) {
       setUser(JSON.parse(stored));
     }
@@ -58,10 +63,12 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
           photoURL: firebaseUser.photoURL,
         };
         setUser(userData);
-        localStorage.setItem("user", JSON.stringify(userData));
+        const storage = localStorage.getItem("user") ? localStorage : sessionStorage;
+        storage.setItem("user", JSON.stringify(userData));
       } else {
         setUser(null);
         localStorage.removeItem("user");
+        sessionStorage.removeItem("user");
       }
       setLoading(false);
     });
@@ -71,8 +78,10 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const login = async (
     email: string,
     password: string,
-    _stayLoggedIn: boolean,
+    stayLoggedIn: boolean,
   ) => {
+    const persistence = stayLoggedIn ? browserLocalPersistence : browserSessionPersistence;
+    await setPersistence(auth, persistence);
     const cred = await signInWithEmailAndPassword(auth, email, password);
     const u = cred.user;
     const userData: AuthUser = {
@@ -82,7 +91,13 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       photoURL: u.photoURL,
     };
     setUser(userData);
-    localStorage.setItem("user", JSON.stringify(userData));
+    const storage = stayLoggedIn ? localStorage : sessionStorage;
+    storage.setItem("user", JSON.stringify(userData));
+    if (stayLoggedIn) {
+      sessionStorage.removeItem("user");
+    } else {
+      localStorage.removeItem("user");
+    }
   };
 
   const signUp = async (name: string, email: string, password: string) => {
@@ -92,8 +107,10 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     }
   };
 
-  const loginWithGoogle = async () => {
+  const loginWithGoogle = async (stayLoggedIn: boolean) => {
     const provider = new GoogleAuthProvider();
+    const persistence = stayLoggedIn ? browserLocalPersistence : browserSessionPersistence;
+    await setPersistence(auth, persistence);
     const cred = await signInWithPopup(auth, provider);
     const u = cred.user;
     const userData: AuthUser = {
@@ -103,13 +120,20 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       photoURL: u.photoURL,
     };
     setUser(userData);
-    localStorage.setItem("user", JSON.stringify(userData));
+    const storage = stayLoggedIn ? localStorage : sessionStorage;
+    storage.setItem("user", JSON.stringify(userData));
+    if (stayLoggedIn) {
+      sessionStorage.removeItem("user");
+    } else {
+      localStorage.removeItem("user");
+    }
   };
 
   const logout = async () => {
     await signOut(auth);
     setUser(null);
     localStorage.removeItem("user");
+    sessionStorage.removeItem("user");
   };
 
   return (

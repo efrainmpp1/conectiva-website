@@ -67,7 +67,7 @@ const LoginPage: React.FC = () => {
   const handleGoogle = async () => {
     setLoading(true);
     try {
-      await loginWithGoogle();
+      await loginWithGoogle(stayLoggedIn);
       navigate("/dashboard");
     } catch (err) {
       setErrors({ general: "Falha ao fazer login" });
