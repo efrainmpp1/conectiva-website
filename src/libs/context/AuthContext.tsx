@@ -21,7 +21,7 @@ interface AuthContextProps {
   user: AuthUser | null;
   setUser: (user: AuthUser | null) => void;
   loading: boolean;
-  login: (email: string, password: string) => Promise<void>;
+  login: (email: string, password: string, stayLoggedIn: boolean) => Promise<void>;
   signUp: (name: string, email: string, password: string) => Promise<void>;
   loginWithGoogle: () => Promise<void>;
   logout: () => Promise<void>;
@@ -31,7 +31,7 @@ const AuthContext = createContext<AuthContextProps>({
   user: null,
   setUser: () => {},
   loading: true,
-  login: async () => {},
+  login: async (_email: string, _password: string, _stayLoggedIn: boolean) => {},
   signUp: async () => {},
   loginWithGoogle: async () => {},
   logout: async () => {},
@@ -68,7 +68,11 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     return () => unsubscribe();
   }, []);
 
-  const login = async (email: string, password: string) => {
+  const login = async (
+    email: string,
+    password: string,
+    _stayLoggedIn: boolean,
+  ) => {
     const cred = await signInWithEmailAndPassword(auth, email, password);
     const u = cred.user;
     const userData: AuthUser = {

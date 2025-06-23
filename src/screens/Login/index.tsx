@@ -7,6 +7,8 @@ import {
   Typography,
   Alert,
   Link,
+  Checkbox,
+  FormControlLabel,
 } from "@mui/material";
 import { useNavigate, Link as RouterLink } from "react-router-dom";
 import { useAuth } from "../../libs/context/AuthContext";
@@ -23,6 +25,7 @@ const LoginPage: React.FC = () => {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [stayLoggedIn, setStayLoggedIn] = useState(false);
   const [errors, setErrors] = useState<FormErrors>({});
   const [loading, setLoading] = useState(false);
 
@@ -52,7 +55,7 @@ const LoginPage: React.FC = () => {
     if (!validate()) return;
     setLoading(true);
     try {
-      await login(email, password);
+      await login(email, password, stayLoggedIn);
       navigate("/dashboard");
     } catch (err: any) {
       setErrors({ general: "Falha ao fazer login" });
@@ -104,6 +107,16 @@ const LoginPage: React.FC = () => {
             onChange={(e) => setPassword(e.target.value)}
             error={!!errors.password}
             helperText={errors.password}
+          />
+          <FormControlLabel
+            control={
+              <Checkbox
+                checked={stayLoggedIn}
+                onChange={(e) => setStayLoggedIn(e.target.checked)}
+                color="primary"
+              />
+            }
+            label="Manter-me conectado"
           />
           <Button
             type="submit"
