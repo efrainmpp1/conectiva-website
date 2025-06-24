@@ -14,36 +14,38 @@ import RegisterPage from './screens/Register';
 import EditalPage from './screens/Agent/Edital';
 import ProspeccaoPage from './screens/Agent/Prospeccao';
 import AuthGuard from './components/AuthGuard';
-          <AuthGuard>
-          </AuthGuard>
-          <AuthGuard>
-          </AuthGuard>
-import CoinsPage from './screens/Dashboard/Coins';
-import ProfilePage from './screens/Dashboard/Profile';
-import ProtectedRoute from './libs/components/ProtectedRoute';
-
-const router = createBrowserRouter([
-  {
-    path: '/',
-    element: <App />,
-    children: [
-      {
-        index: true,
-        element: <Home />,
-      },
-      ...featureRoutes.map(fr => ({
-        path: fr.path,
-        element: <FeatureDetailPage serviceId={fr.id} />,
-      })),
-      {
-        path: 'service/:id',
-        element: <ServicePage />,
-      },
-      {
-        path: 'sobre',
-        element: <AboutPage />,
-      },
-      {
+import { Outlet } from 'react-router-dom';
+            <Outlet />
+            path: 'agent/prospeccao',
+            element: <ProspeccaoPage />,
+            path: 'dashboard',
+            element: <DashboardLayout />,
+            children: [
+              {
+                index: true,
+                element: <DashboardHome />,
+              },
+              {
+                path: 'agente',
+                element: <AgentPage />,
+              },
+              {
+                path: 'analise-edital',
+                element: <EditalPage />,
+              },
+              {
+                path: 'historico',
+                element: <HistoryPage />,
+              },
+              {
+                path: 'moedas',
+                element: <CoinsPage />,
+              },
+              {
+                path: 'perfil',
+                element: <ProfilePage />,
+              },
+            ],
         path: 'planos',
         element: <PlansPage />,
       },
