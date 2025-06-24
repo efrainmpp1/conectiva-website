@@ -13,11 +13,6 @@ import {
   browserSessionPersistence,
 } from "firebase/auth";
 import { auth } from "../../services/firebase";
-import {
-  AUTH_KEY,
-  clearAuthStorage,
-  setAuthStorage,
-} from "../../utils/authStorage";
 
 interface AuthUser {
   uid: string;
@@ -64,14 +59,8 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       if (firebaseUser) {
         const userData = formatFirebaseUser(firebaseUser);
         setUser(userData);
-
-        const storage = localStorage.getItem(AUTH_KEY)
-          ? localStorage
-          : sessionStorage;
-        storage.setItem(AUTH_KEY, JSON.stringify(userData));
       } else {
         setUser(null);
-        clearAuthStorage();
       }
       setLoading(false);
     });
@@ -95,8 +84,6 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       photoURL: u.photoURL,
     };
     setUser(userData);
-    clearAuthStorage();
-    setAuthStorage(userData, stayLoggedIn);
   };
 
   const signUp = async (name: string, email: string, password: string) => {
@@ -119,15 +106,12 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       photoURL: u.photoURL,
     };
     setUser(userData);
-    clearAuthStorage();
-    setAuthStorage(userData, stayLoggedIn);
   };
 
   const logout = async () => {
     setLoading(true);
     await signOut(auth);
     setUser(null);
-    clearAuthStorage();
     setLoading(false);
   };
 
