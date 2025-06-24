@@ -42,8 +42,14 @@ import { Outlet } from 'react-router-dom';
                 element: <CoinsPage />,
               },
               {
-                path: 'perfil',
-                element: <ProfilePage />,
+            path: 'agent',
+            element: <Outlet />,
+            children: [
+              {
+                path: 'prospeccao',
+                element: <ProspeccaoPage />,
+              },
+            ],
               },
             ],
         path: 'planos',
