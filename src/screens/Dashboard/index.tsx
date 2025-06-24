@@ -30,7 +30,7 @@ import {
   Search,
   BrainCircuit,
 } from "lucide-react";
-import { Outlet, Link as RouterLink } from "react-router-dom";
+import { Outlet, Link as RouterLink, useNavigate } from "react-router-dom";
 import { useAuth } from "../../libs/context/AuthContext";
 
 const drawerWidth = 240;
@@ -46,6 +46,7 @@ const menuItems = [
 
 const DashboardLayout: React.FC = () => {
   const { user, logout } = useAuth();
+  const navigate = useNavigate();
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
   const [open, setOpen] = useState(false);
@@ -71,6 +72,7 @@ const DashboardLayout: React.FC = () => {
   const handleLogout = async () => {
     await logout();
     handleMenuClose();
+    navigate('/login');
   };
 
   const drawer = (

@@ -1,5 +1,4 @@
-import React from 'react';
-import { createBrowserRouter } from 'react-router-dom';
+import { createBrowserRouter, Outlet } from 'react-router-dom';
 import App from './App';
 import Home from './screens/Home';
 import ServicePage from './screens/Service';
@@ -13,37 +12,46 @@ import LoginPage from './screens/Login';
 import RegisterPage from './screens/Register';
 import EditalPage from './screens/Agent/Edital';
 import ProspeccaoPage from './screens/Agent/Prospeccao';
-import ProspeccaoInteligentePage from './screens/ProspeccaoInteligente/ProspeccaoInteligente';
-import DashboardLayout from './screens/Dashboard';
-import DashboardHome from './screens/Dashboard/Home';
-import AgentPage from './screens/Dashboard/Agent';
-import HistoryPage from './screens/Dashboard/History';
-import CoinsPage from './screens/Dashboard/Coins';
-import ProfilePage from './screens/Dashboard/Profile';
-import ProtectedRoute from './libs/components/ProtectedRoute';
+import AuthGuard from './components/AuthGuard';
+const featureDetailRoutes = featureRoutes.map((fr) => ({
+  path: fr.path,
+  element: <FeatureDetailPage serviceId={fr.id} />,
+}));
 
-const router = createBrowserRouter([
-  {
-    path: '/',
-    element: <App />,
-    children: [
-      {
-        index: true,
-        element: <Home />,
-      },
-      ...featureRoutes.map(fr => ({
-        path: fr.path,
-        element: <FeatureDetailPage serviceId={fr.id} />,
-      })),
-      {
-        path: 'service/:id',
-        element: <ServicePage />,
-      },
-      {
-        path: 'sobre',
-        element: <AboutPage />,
-      },
-      {
+      ...featureDetailRoutes,
+            element: <DashboardLayout />,
+            children: [
+              {
+                index: true,
+                element: <DashboardHome />,
+              },
+              {
+                path: 'agente',
+                element: <AgentPage />,
+              },
+              {
+                path: 'analise-edital',
+                element: <EditalPage />,
+              },
+              {
+                path: 'historico',
+                element: <HistoryPage />,
+              },
+              {
+                path: 'moedas',
+                element: <CoinsPage />,
+              },
+              {
+            path: 'agent',
+            element: <Outlet />,
+            children: [
+              {
+                path: 'prospeccao',
+                element: <ProspeccaoPage />,
+              },
+            ],
+              },
+            ],
         path: 'planos',
         element: <PlansPage />,
       },
@@ -61,7 +69,11 @@ const router = createBrowserRouter([
       },
       {
         path: 'agent/prospeccao',
-        element: <ProspeccaoPage />,
+        element: (
+          <ProtectedRoute>
+            <ProspeccaoPage />
+          </ProtectedRoute>
+        ),
       },
       {
         path: 'dashboard',
