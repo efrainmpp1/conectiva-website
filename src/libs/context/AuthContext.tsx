@@ -13,7 +13,11 @@ import {
   browserSessionPersistence,
 } from "firebase/auth";
 import { auth } from "../../services/firebase";
-import { clearAuthStorage, setAuthStorage } from "../../utils/authStorage";
+import {
+  AUTH_KEY,
+  clearAuthStorage,
+  setAuthStorage,
+} from "../../utils/authStorage";
 
 interface AuthUser {
   uid: string;
@@ -60,9 +64,11 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       if (firebaseUser) {
         const userData = formatFirebaseUser(firebaseUser);
         setUser(userData);
-        const stayLoggedIn = Boolean(localStorage.getItem("user"));
-        clearAuthStorage();
-        setAuthStorage(userData, stayLoggedIn);
+
+        const storage = localStorage.getItem(AUTH_KEY)
+          ? localStorage
+          : sessionStorage;
+        storage.setItem(AUTH_KEY, JSON.stringify(userData));
       } else {
         setUser(null);
         clearAuthStorage();
