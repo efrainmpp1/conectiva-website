@@ -124,9 +124,11 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   };
 
   const logout = async () => {
+    setLoading(true);
     await signOut(auth);
     setUser(null);
     clearAuthStorage();
+    setLoading(false);
   };
 
   return (
