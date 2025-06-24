@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
+import type { User } from "firebase/auth";
 import {
   GoogleAuthProvider,
   signInWithEmailAndPassword,
@@ -19,6 +20,13 @@ interface AuthUser {
   displayName: string | null;
   photoURL: string | null;
 }
+
+const formatFirebaseUser = (firebaseUser: User): AuthUser => ({
+  uid: firebaseUser.uid,
+  email: firebaseUser.email,
+  displayName: firebaseUser.displayName,
+  photoURL: firebaseUser.photoURL,
+});
 
 interface AuthContextProps {
   user: AuthUser | null;
@@ -49,18 +57,10 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (firebaseUser) => {
       if (firebaseUser) {
-        const userData: AuthUser = {
-          uid: firebaseUser.uid,
-          email: firebaseUser.email,
-          displayName: firebaseUser.displayName,
-          photoURL: firebaseUser.photoURL,
-        };
+        const userData = formatFirebaseUser(firebaseUser);
         setUser(userData);
-        if (localStorage.getItem("user")) {
-          localStorage.setItem("user", JSON.stringify(userData));
-        } else {
-          sessionStorage.setItem("user", JSON.stringify(userData));
-        }
+        const storage = localStorage.getItem("user") ? localStorage : sessionStorage;
+        storage.setItem("user", JSON.stringify(userData));
       } else {
         setUser(null);
         localStorage.removeItem("user");
@@ -68,6 +68,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       }
       setLoading(false);
     });
+
     return () => unsubscribe();
   }, []);
 
