@@ -13,6 +13,7 @@ import {
   browserSessionPersistence,
 } from "firebase/auth";
 import { auth } from "../../services/firebase";
+import { clearAuthStorage, setAuthStorage } from "../../utils/authStorage";
 
 interface AuthUser {
   uid: string;
@@ -59,12 +60,12 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       if (firebaseUser) {
         const userData = formatFirebaseUser(firebaseUser);
         setUser(userData);
-        const storage = localStorage.getItem("user") ? localStorage : sessionStorage;
-        storage.setItem("user", JSON.stringify(userData));
+        const stayLoggedIn = Boolean(localStorage.getItem("user"));
+        clearAuthStorage();
+        setAuthStorage(userData, stayLoggedIn);
       } else {
         setUser(null);
-        localStorage.removeItem("user");
-        sessionStorage.removeItem("user");
+        clearAuthStorage();
       }
       setLoading(false);
     });
@@ -88,13 +89,8 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       photoURL: u.photoURL,
     };
     setUser(userData);
-    const storage = stayLoggedIn ? localStorage : sessionStorage;
-    storage.setItem("user", JSON.stringify(userData));
-    if (stayLoggedIn) {
-      sessionStorage.removeItem("user");
-    } else {
-      localStorage.removeItem("user");
-    }
+    clearAuthStorage();
+    setAuthStorage(userData, stayLoggedIn);
   };
 
   const signUp = async (name: string, email: string, password: string) => {
@@ -117,20 +113,14 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       photoURL: u.photoURL,
     };
     setUser(userData);
-    const storage = stayLoggedIn ? localStorage : sessionStorage;
-    storage.setItem("user", JSON.stringify(userData));
-    if (stayLoggedIn) {
-      sessionStorage.removeItem("user");
-    } else {
-      localStorage.removeItem("user");
-    }
+    clearAuthStorage();
+    setAuthStorage(userData, stayLoggedIn);
   };
 
   const logout = async () => {
     await signOut(auth);
     setUser(null);
-    localStorage.removeItem("user");
-    sessionStorage.removeItem("user");
+    clearAuthStorage();
   };
 
   return (
