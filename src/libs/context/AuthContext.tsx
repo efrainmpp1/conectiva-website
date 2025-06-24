@@ -13,13 +13,13 @@ import {
   browserSessionPersistence,
 } from "firebase/auth";
 import { auth } from "../../services/firebase";
+import {
+  clearAuthStorage,
+  setAuthStorage,
+  syncAuthStorage,
+} from "../utils/authStorage";
+import type { AuthUser } from "../interfaces/AuthUser";
 
-interface AuthUser {
-  uid: string;
-  email: string | null;
-  displayName: string | null;
-  photoURL: string | null;
-}
 
 const formatFirebaseUser = (firebaseUser: User): AuthUser => ({
   uid: firebaseUser.uid,
@@ -59,8 +59,10 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       if (firebaseUser) {
         const userData = formatFirebaseUser(firebaseUser);
         setUser(userData);
+        syncAuthStorage(userData);
       } else {
         setUser(null);
+        clearAuthStorage();
       }
       setLoading(false);
     });
@@ -84,6 +86,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       photoURL: u.photoURL,
     };
     setUser(userData);
+    setAuthStorage(userData, stayLoggedIn);
   };
 
   const signUp = async (name: string, email: string, password: string) => {
@@ -106,12 +109,14 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       photoURL: u.photoURL,
     };
     setUser(userData);
+    setAuthStorage(userData, stayLoggedIn);
   };
 
   const logout = async () => {
     setLoading(true);
     await signOut(auth);
     setUser(null);
+    clearAuthStorage();
     setLoading(false);
   };
 

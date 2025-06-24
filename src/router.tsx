@@ -13,11 +13,11 @@ import LoginPage from './screens/Login';
 import RegisterPage from './screens/Register';
 import EditalPage from './screens/Agent/Edital';
 import ProspeccaoPage from './screens/Agent/Prospeccao';
-import ProspeccaoInteligentePage from './screens/ProspeccaoInteligente/ProspeccaoInteligente';
-import DashboardLayout from './screens/Dashboard';
-import DashboardHome from './screens/Dashboard/Home';
-import AgentPage from './screens/Dashboard/Agent';
-import HistoryPage from './screens/Dashboard/History';
+import AuthGuard from './components/AuthGuard';
+          <AuthGuard>
+          </AuthGuard>
+          <AuthGuard>
+          </AuthGuard>
 import CoinsPage from './screens/Dashboard/Coins';
 import ProfilePage from './screens/Dashboard/Profile';
 import ProtectedRoute from './libs/components/ProtectedRoute';
