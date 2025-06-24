@@ -1,4 +1,3 @@
-import React from 'react';
 import { createBrowserRouter, Outlet } from 'react-router-dom';
 import App from './App';
 import Home from './screens/Home';
@@ -14,10 +13,12 @@ import RegisterPage from './screens/Register';
 import EditalPage from './screens/Agent/Edital';
 import ProspeccaoPage from './screens/Agent/Prospeccao';
 import AuthGuard from './components/AuthGuard';
-      ...featureRoutes.map((fr) => ({
-            path: 'agent/prospeccao',
-            element: <ProspeccaoPage />,
-            path: 'dashboard',
+const featureDetailRoutes = featureRoutes.map((fr) => ({
+  path: fr.path,
+  element: <FeatureDetailPage serviceId={fr.id} />,
+}));
+
+      ...featureDetailRoutes,
             element: <DashboardLayout />,
             children: [
               {
