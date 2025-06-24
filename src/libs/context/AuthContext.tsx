@@ -47,13 +47,6 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const storedLocal = localStorage.getItem("user");
-    const storedSession = sessionStorage.getItem("user");
-    const stored = storedLocal || storedSession;
-    if (stored) {
-      setUser(JSON.parse(stored));
-    }
-
     const unsubscribe = onAuthStateChanged(auth, (firebaseUser) => {
       if (firebaseUser) {
         const userData: AuthUser = {
@@ -63,8 +56,11 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
           photoURL: firebaseUser.photoURL,
         };
         setUser(userData);
-        const storage = localStorage.getItem("user") ? localStorage : sessionStorage;
-        storage.setItem("user", JSON.stringify(userData));
+        if (localStorage.getItem("user")) {
+          localStorage.setItem("user", JSON.stringify(userData));
+        } else {
+          sessionStorage.setItem("user", JSON.stringify(userData));
+        }
       } else {
         setUser(null);
         localStorage.removeItem("user");
