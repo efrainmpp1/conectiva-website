@@ -27,6 +27,7 @@ import {
   History,
   Coins,
   User,
+  Search,
   BrainCircuit,
 } from "lucide-react";
 import { Outlet, Link as RouterLink, useNavigate } from "react-router-dom";
@@ -37,6 +38,7 @@ const drawerWidth = 240;
 const menuItems = [
   { label: "Dashboard", to: "/dashboard", icon: <LayoutDashboard size={20} /> },
   { label: "Executar Agente", to: "/dashboard/agente", icon: <PlayCircle size={20} /> },
+  { label: "Prospecção Inteligente", to: "/dashboard/prospeccao-inteligente", icon: <Search size={20} /> },
   { label: "Histórico", to: "/dashboard/historico", icon: <History size={20} /> },
   { label: "Minhas Moedas", to: "/dashboard/moedas", icon: <Coins size={20} /> },
   { label: "Perfil", to: "/dashboard/perfil", icon: <User size={20} /> },

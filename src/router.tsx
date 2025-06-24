@@ -13,6 +13,7 @@ import LoginPage from './screens/Login';
 import RegisterPage from './screens/Register';
 import EditalPage from './screens/Agent/Edital';
 import ProspeccaoPage from './screens/Agent/Prospeccao';
+import ProspeccaoInteligentePage from './screens/ProspeccaoInteligente/ProspeccaoInteligente';
 import DashboardLayout from './screens/Dashboard';
 import DashboardHome from './screens/Dashboard/Home';
 import AgentPage from './screens/Dashboard/Agent';
@@ -85,6 +86,10 @@ const router = createBrowserRouter([
           {
             path: 'analise-edital',
             element: <EditalPage />,
+          },
+          {
+            path: 'prospeccao-inteligente',
+            element: <ProspeccaoInteligentePage />,
           },
           {
             path: 'historico',
