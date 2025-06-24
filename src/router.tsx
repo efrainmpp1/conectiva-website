@@ -1,5 +1,5 @@
 import React from 'react';
-import { createBrowserRouter } from 'react-router-dom';
+import { createBrowserRouter, Outlet } from 'react-router-dom';
 import App from './App';
 import Home from './screens/Home';
 import ServicePage from './screens/Service';
@@ -14,8 +14,7 @@ import RegisterPage from './screens/Register';
 import EditalPage from './screens/Agent/Edital';
 import ProspeccaoPage from './screens/Agent/Prospeccao';
 import AuthGuard from './components/AuthGuard';
-import { Outlet } from 'react-router-dom';
-            <Outlet />
+      ...featureRoutes.map((fr) => ({
             path: 'agent/prospeccao',
             element: <ProspeccaoPage />,
             path: 'dashboard',
