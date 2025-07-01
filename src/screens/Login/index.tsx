@@ -1,15 +1,9 @@
-import React, { useState } from "react";
-import {
-  Box,
-  Paper,
-  TextField,
-  Button,
-  Typography,
-  Alert,
-  Link,
-} from "@mui/material";
-import { useNavigate, Link as RouterLink } from "react-router-dom";
-import { useAuth } from "../../libs/context/AuthContext";
+import React, { useState } from 'react';
+import { Box, Paper, TextField, Button, Typography, Alert, Link } from '@mui/material';
+import { useNavigate, Link as RouterLink } from 'react-router-dom';
+import { useAuth } from '../../libs/context/AuthContext';
+import { registerUser } from '../../services/users';
+import type { User } from 'firebase/auth';
 
 interface FormErrors {
   email?: string;
@@ -21,8 +15,8 @@ const LoginPage: React.FC = () => {
   const { login, loginWithGoogle } = useAuth();
   const navigate = useNavigate();
 
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const [errors, setErrors] = useState<FormErrors>({});
   const [loading, setLoading] = useState(false);
 
@@ -31,15 +25,15 @@ const LoginPage: React.FC = () => {
     let valid = true;
 
     if (!email.trim()) {
-      newErrors.email = "E-mail é obrigatório";
+      newErrors.email = 'E-mail é obrigatório';
       valid = false;
     } else if (!/\S+@\S+\.\S+/.test(email)) {
-      newErrors.email = "E-mail inválido";
+      newErrors.email = 'E-mail inválido';
       valid = false;
     }
 
     if (!password.trim()) {
-      newErrors.password = "Senha é obrigatória";
+      newErrors.password = 'Senha é obrigatória';
       valid = false;
     }
 
@@ -53,9 +47,10 @@ const LoginPage: React.FC = () => {
     setLoading(true);
     try {
       await login(email, password);
-      navigate("/dashboard");
-    } catch (err: any) {
-      setErrors({ general: "Falha ao fazer login" });
+      navigate('/dashboard');
+    } catch (err: unknown) {
+      console.error(err);
+      setErrors({ general: 'Falha ao fazer login' });
     } finally {
       setLoading(false);
     }
@@ -64,18 +59,31 @@ const LoginPage: React.FC = () => {
   const handleGoogle = async () => {
     setLoading(true);
     try {
-      await loginWithGoogle();
-      navigate("/dashboard");
+      const user: User = await loginWithGoogle();
+
+      const { uid, email, displayName, metadata } = user;
+
+      // Verifica se é a primeira vez que o usuário faz login
+      if (metadata.creationTime === metadata.lastSignInTime) {
+        await registerUser({
+          firebase_uid: uid,
+          email: email ?? '',
+          name: displayName ?? '',
+        });
+      }
+
+      navigate('/dashboard');
     } catch (err) {
-      setErrors({ general: "Falha ao fazer login" });
+      console.error(err);
+      setErrors({ general: 'Falha ao fazer login' });
     } finally {
       setLoading(false);
     }
   };
 
   return (
-    <Box sx={{ display: "flex", justifyContent: "center", mt: 6 }}>
-      <Paper elevation={2} sx={{ p: 4, maxWidth: 400, width: "100%" }}>
+    <Box sx={{ display: 'flex', justifyContent: 'center', mt: 6 }}>
+      <Paper elevation={2} sx={{ p: 4, maxWidth: 400, width: '100%' }}>
         <Typography variant="h4" gutterBottom>
           Entrar
         </Typography>
@@ -113,7 +121,7 @@ const LoginPage: React.FC = () => {
             disabled={loading}
             sx={{ mt: 2 }}
           >
-            {loading ? "Carregando..." : "Entrar"}
+            {loading ? 'Carregando...' : 'Entrar'}
           </Button>
         </Box>
         <Button

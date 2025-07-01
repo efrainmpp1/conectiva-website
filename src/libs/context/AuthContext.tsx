@@ -16,7 +16,7 @@ interface AuthContextProps {
   loading: boolean;
   login: (email: string, password: string) => Promise<void>;
   signUp: (name: string, email: string, password: string) => Promise<User>;
-  loginWithGoogle: () => Promise<void>;
+  loginWithGoogle: () => Promise<User>; // ⬅ Atualizado aqui
   logout: () => Promise<void>;
 }
 
@@ -27,7 +27,9 @@ const AuthContext = createContext<AuthContextProps>({
   signUp: async () => {
     throw new Error('signUp function not initialized');
   },
-  loginWithGoogle: async () => {},
+  loginWithGoogle: async () => {
+    throw new Error('loginWithGoogle function not initialized');
+  },
   logout: async () => {},
 });
 
@@ -62,9 +64,10 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     return cred.user;
   };
 
-  const loginWithGoogle = async () => {
+  const loginWithGoogle = async (): Promise<User> => {
     const provider = new GoogleAuthProvider();
-    await signInWithPopup(auth, provider);
+    const result = await signInWithPopup(auth, provider);
+    return result.user; // ⬅ Retorna o usuário autenticado
   };
 
   const logout = async () => {
