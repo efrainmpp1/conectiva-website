@@ -4,6 +4,7 @@ import { Box, Paper, TextField, Button, Typography, Alert, Link } from '@mui/mat
 import { useNavigate, Link as RouterLink } from 'react-router-dom';
 import { useAuth } from '../../libs/context/AuthContext';
 import { registerUser } from '../../services/users';
+import { deleteUser } from 'firebase/auth';
 
 interface FormErrors {
   name?: string;
@@ -84,14 +85,17 @@ const RegisterPage: React.FC = () => {
     e.preventDefault();
     if (!validate()) return;
     setLoading(true);
+
     try {
       const newUser = await signUp(name, email, password);
-      // register user on Node API Server
       const firebaseUid = newUser.uid;
+
       const response = await registerUser({ firebase_uid: firebaseUid, name, email });
       if (!response) {
+        await deleteUser(newUser);
         throw new Error('Erro ao registrar usuário no servidor');
       }
+
       navigate('/dashboard');
     } catch (err) {
       console.error(err);
