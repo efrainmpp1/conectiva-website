@@ -1,16 +1,9 @@
-import React, { useState } from "react";
-import type { FirebaseError } from "firebase/app";
-import {
-  Box,
-  Paper,
-  TextField,
-  Button,
-  Typography,
-  Alert,
-  Link,
-} from "@mui/material";
-import { useNavigate, Link as RouterLink } from "react-router-dom";
-import { useAuth } from "../../libs/context/AuthContext";
+import React, { useState } from 'react';
+import type { FirebaseError } from 'firebase/app';
+import { Box, Paper, TextField, Button, Typography, Alert, Link } from '@mui/material';
+import { useNavigate, Link as RouterLink } from 'react-router-dom';
+import { useAuth } from '../../libs/context/AuthContext';
+import { registerUser } from '../../services/users';
 
 interface FormErrors {
   name?: string;
@@ -24,30 +17,30 @@ const RegisterPage: React.FC = () => {
   const { signUp } = useAuth();
   const navigate = useNavigate();
 
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
   const [errors, setErrors] = useState<FormErrors>({});
   const [loading, setLoading] = useState(false);
 
   const getErrorMessage = (error: unknown): string => {
-    if (typeof error === "object" && error && (error as FirebaseError).code) {
+    if (typeof error === 'object' && error && (error as FirebaseError).code) {
       const code = (error as FirebaseError).code;
       switch (code) {
-        case "auth/email-already-in-use":
-          return "E-mail já cadastrado";
-        case "auth/invalid-email":
-          return "E-mail inválido";
-        case "auth/weak-password":
-          return "Senha deve ter pelo menos 6 caracteres";
-        case "auth/network-request-failed":
-          return "Problema de rede. Tente novamente";
+        case 'auth/email-already-in-use':
+          return 'E-mail já cadastrado';
+        case 'auth/invalid-email':
+          return 'E-mail inválido';
+        case 'auth/weak-password':
+          return 'Senha deve ter pelo menos 6 caracteres';
+        case 'auth/network-request-failed':
+          return 'Problema de rede. Tente novamente';
         default:
-          return "Falha ao criar conta";
+          return 'Falha ao criar conta';
       }
     }
-    return "Falha ao criar conta";
+    return 'Falha ao criar conta';
   };
 
   const validate = (): boolean => {
@@ -55,31 +48,31 @@ const RegisterPage: React.FC = () => {
     let valid = true;
 
     if (!name.trim()) {
-      newErrors.name = "Nome é obrigatório";
+      newErrors.name = 'Nome é obrigatório';
       valid = false;
     }
 
     if (!email.trim()) {
-      newErrors.email = "E-mail é obrigatório";
+      newErrors.email = 'E-mail é obrigatório';
       valid = false;
     } else if (!/\S+@\S+\.\S+/.test(email)) {
-      newErrors.email = "E-mail inválido";
+      newErrors.email = 'E-mail inválido';
       valid = false;
     }
 
     if (!password) {
-      newErrors.password = "Senha é obrigatória";
+      newErrors.password = 'Senha é obrigatória';
       valid = false;
     } else if (password.length < 6) {
-      newErrors.password = "Senha deve ter pelo menos 6 caracteres";
+      newErrors.password = 'Senha deve ter pelo menos 6 caracteres';
       valid = false;
     }
 
     if (!confirmPassword) {
-      newErrors.confirmPassword = "Confirme a senha";
+      newErrors.confirmPassword = 'Confirme a senha';
       valid = false;
     } else if (confirmPassword !== password) {
-      newErrors.confirmPassword = "Senhas não conferem";
+      newErrors.confirmPassword = 'Senhas não conferem';
       valid = false;
     }
 
@@ -92,8 +85,14 @@ const RegisterPage: React.FC = () => {
     if (!validate()) return;
     setLoading(true);
     try {
-      await signUp(name, email, password);
-      navigate("/dashboard");
+      const newUser = await signUp(name, email, password);
+      // register user on Node API Server
+      const firebaseUid = newUser.uid;
+      const response = await registerUser({ firebase_uid: firebaseUid, name, email });
+      if (!response) {
+        throw new Error('Erro ao registrar usuário no servidor');
+      }
+      navigate('/dashboard');
     } catch (err) {
       console.error(err);
       setErrors({ general: getErrorMessage(err) });
@@ -103,8 +102,8 @@ const RegisterPage: React.FC = () => {
   };
 
   return (
-    <Box sx={{ display: "flex", justifyContent: "center", mt: 6 }}>
-      <Paper elevation={2} sx={{ p: 4, maxWidth: 400, width: "100%" }}>
+    <Box sx={{ display: 'flex', justifyContent: 'center', mt: 6 }}>
+      <Paper elevation={2} sx={{ p: 4, maxWidth: 400, width: '100%' }}>
         <Typography variant="h4" gutterBottom>
           Criar Conta
         </Typography>
@@ -161,7 +160,7 @@ const RegisterPage: React.FC = () => {
             disabled={loading}
             sx={{ mt: 2 }}
           >
-            {loading ? "Carregando..." : "Criar Conta"}
+            {loading ? 'Carregando...' : 'Criar Conta'}
           </Button>
         </Box>
         <Typography variant="body2" align="center" sx={{ mt: 2 }}>
