@@ -1,5 +1,5 @@
-import React, { createContext, useContext, useEffect, useState } from "react";
-import type { User } from "firebase/auth";
+import React, { createContext, useContext, useEffect, useState } from 'react';
+import type { User } from 'firebase/auth';
 import {
   GoogleAuthProvider,
   signInWithEmailAndPassword,
@@ -8,14 +8,14 @@ import {
   onAuthStateChanged,
   createUserWithEmailAndPassword,
   updateProfile,
-} from "firebase/auth";
-import { auth } from "../../services/firebase";
+} from 'firebase/auth';
+import { auth } from '../../services/firebase';
 
 interface AuthContextProps {
   user: User | null;
   loading: boolean;
   login: (email: string, password: string) => Promise<void>;
-  signUp: (name: string, email: string, password: string) => Promise<void>;
+  signUp: (name: string, email: string, password: string) => Promise<User>;
   loginWithGoogle: () => Promise<void>;
   logout: () => Promise<void>;
 }
@@ -24,7 +24,9 @@ const AuthContext = createContext<AuthContextProps>({
   user: null,
   loading: true,
   login: async () => {},
-  signUp: async () => {},
+  signUp: async () => {
+    throw new Error('signUp function not initialized');
+  },
   loginWithGoogle: async () => {},
   logout: async () => {},
 });
@@ -40,9 +42,9 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       setUser(currentUser);
       setLoading(false);
       if (currentUser) {
-        localStorage.setItem("authUser", JSON.stringify(currentUser));
+        localStorage.setItem('authUser', JSON.stringify(currentUser));
       } else {
-        localStorage.removeItem("authUser");
+        localStorage.removeItem('authUser');
       }
     });
     return unsubscribe;
@@ -52,11 +54,12 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     await signInWithEmailAndPassword(auth, email, password);
   };
 
-  const signUp = async (name: string, email: string, password: string) => {
+  const signUp = async (name: string, email: string, password: string): Promise<User> => {
     const cred = await createUserWithEmailAndPassword(auth, email, password);
     if (cred.user && name) {
       await updateProfile(cred.user, { displayName: name });
     }
+    return cred.user;
   };
 
   const loginWithGoogle = async () => {
