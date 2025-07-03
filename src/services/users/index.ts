@@ -6,3 +6,6 @@ export const registerUser = isMockMode() ? mock.registerUser : integration.regis
 export const getUserByFirebaseUid = isMockMode()
   ? mock.getUserByFirebaseUid
   : integration.getUserByFirebaseUid;
+export const getUserHistoricalServices = isMockMode()
+  ? mock.getUserHistoricalServices
+  : integration.getUserHistoricalServices;

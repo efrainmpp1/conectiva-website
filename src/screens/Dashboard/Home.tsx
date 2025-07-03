@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Box, Grid, Typography, Button } from "@mui/material";
 import { Wallet, Clock, Activity, User } from "lucide-react";
 import DashboardStatCard from "./DashboardStatCard";
@@ -7,12 +7,18 @@ import RecentActivityItem from "./RecentActivityItem";
 import NextStepItem from "./NextStepItem";
 import DashboardAlert from "./DashboardAlert";
 import { Link as RouterLink } from "react-router-dom";
+import { useAuth } from "../../libs/context/AuthContext";
+import { getUserByFirebaseUid } from "../../services/users";
+import type { User as AppUser } from "../../libs/interfaces/User";
 
 const DashboardHome: React.FC = () => {
-  const creditsRemaining = 30;
+  const { user } = useAuth();
+  const [userData, setUserData] = useState<AppUser | null>(null);
+
+  const creditsRemaining = userData?.coins ?? 0;
+  const plan = userData?.plan ?? "Free";
   const creditsUsedPercent = 70;
   const executions = 5;
-  const plan = "Free";
   const lastExecution = {
     agent: "LeadGen",
     date: "10/06/2025 14:00",
@@ -41,6 +47,19 @@ const DashboardHome: React.FC = () => {
       statusColor: "primary" as const,
     },
   ];
+
+  useEffect(() => {
+    const fetchUserData = async () => {
+      if (!user) return;
+      try {
+        const data = await getUserByFirebaseUid(user.uid);
+        setUserData(data);
+      } catch (err) {
+        console.error("Erro ao buscar dados do usu\u00e1rio", err);
+      }
+    };
+    fetchUserData();
+  }, [user]);
 
   const creditsColor =
     creditsUsedPercent >= 80
