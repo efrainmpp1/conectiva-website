@@ -10,15 +10,18 @@ import { Link as RouterLink } from 'react-router-dom';
 import { useAuth } from '../../libs/context/AuthContext';
 import { getNumberOfHistoricalServicesByUserId, getUserByFirebaseUid } from '../../services/users';
 import type { User as AppUser } from '../../libs/interfaces/User';
+import { calculateCreditUsage } from '../../utils/creditUtils';
 
 const DashboardHome: React.FC = () => {
   const { user } = useAuth();
   const [userData, setUserData] = useState<AppUser | null>(null);
   const [numberOfExecutions, setNumberOfExecutions] = useState<number>(0);
 
-  const creditsRemaining = userData?.coins ?? 0;
+  const MAX_CREDITS = 10;
+  const creditsRemaining = userData?.coins ?? MAX_CREDITS;
   const plan = userData?.plan ?? 'Free';
-  const creditsUsedPercent = 70;
+  const creditsUsed = MAX_CREDITS - creditsRemaining;
+  const creditsUsedPercent = calculateCreditUsage(creditsRemaining, MAX_CREDITS);
   const lastExecution = {
     agent: 'LeadGen',
     date: '10/06/2025 14:00',
@@ -152,7 +155,14 @@ const DashboardHome: React.FC = () => {
           <DashboardStatCard
             icon={<Wallet size={20} />}
             label="Créditos Restantes"
-            value={creditsRemaining}
+            value={
+              <Box component="span">
+                {creditsRemaining}
+                <Typography component="span" variant="caption" sx={{ ml: 1 }}>
+                  Usados: {creditsUsed}
+                </Typography>
+              </Box>
+            }
             progress={creditsUsedPercent}
             statusColor={creditsColor}
             actionLabel="Adicionar"
