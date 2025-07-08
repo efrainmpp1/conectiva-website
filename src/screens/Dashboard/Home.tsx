@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import { Box, Grid, Typography, Button } from '@mui/material';
+import { Box, Grid, Typography /*Button*/ } from '@mui/material';
 import { Wallet, Clock, Activity, User } from 'lucide-react';
 import DashboardStatCard from './DashboardStatCard';
 import DashboardActionButton from './DashboardActionButton';
-import RecentActivityItem from './RecentActivityItem';
+//import RecentActivityItem from './RecentActivityItem';
 import NextStepItem from './NextStepItem';
 import DashboardAlert from './DashboardAlert';
-import { Link as RouterLink } from 'react-router-dom';
+//import { Link as RouterLink } from 'react-router-dom';
 import { useAuth } from '../../libs/context/AuthContext';
 import {
   getLastServiceUsedByUserId,
@@ -41,7 +41,7 @@ const DashboardHome: React.FC = () => {
     };
     fetchLastServiceUsed();
   }, [userData]);
-
+  /*
   const recentActivities = [
     {
       icon: <Activity size={18} />,
@@ -63,7 +63,7 @@ const DashboardHome: React.FC = () => {
       date: '05/06/2025 09:00',
       statusColor: 'primary' as const,
     },
-  ];
+  ];*/
 
   useEffect(() => {
     const fetchUserData = async () => {
@@ -229,6 +229,7 @@ const DashboardHome: React.FC = () => {
           mb: 4,
         }}
       />
+      {/*
       <Box sx={{ mb: 4 }}>
         <Typography
           variant="h6"
@@ -262,7 +263,7 @@ const DashboardHome: React.FC = () => {
           borderRadius: 1,
           mb: 4,
         }}
-      />
+      />*/}
       <Box sx={{ mb: 4 }}>
         <Typography
           variant="h6"
