@@ -1,32 +1,37 @@
 import React, { useEffect, useState } from "react";
-import { Card, Typography, Button, Box } from "@mui/material";
-import { useNavigate } from "react-router-dom";
-import { getBalance, buyCredits } from "../../services/credits";
+import { Card, Typography, Button, Box, Snackbar, Alert } from "@mui/material";
+import { useAuth } from "../../libs/context/AuthContext";
+import { getUserByFirebaseUid } from "../../services/users";
 
 const CoinsPage: React.FC = () => {
+  const { user } = useAuth();
   const [balance, setBalance] = useState(0);
-  const navigate = useNavigate();
+  const [openSnackbar, setOpenSnackbar] = useState(false);
 
   useEffect(() => {
     const fetchBalance = async () => {
+      if (!user) return;
       try {
-        const value = await getBalance();
-        setBalance(value);
+        const data = await getUserByFirebaseUid(user.uid);
+        setBalance(data.coins);
       } catch (err) {
         console.error("Erro ao buscar saldo de moedas", err);
       }
     };
 
     fetchBalance();
-  }, []);
+  }, [user]);
 
-  const handleBuyCredits = async () => {
-    try {
-      await buyCredits();
-      navigate("/comprar-moedas");
-    } catch (err) {
-      console.error("Erro ao comprar moedas", err);
-    }
+  const handleBuyCredits = () => {
+    setOpenSnackbar(true);
+  };
+
+  const handleCloseSnackbar = (
+    _event?: React.SyntheticEvent | Event,
+    reason?: string,
+  ) => {
+    if (reason === "clickaway") return;
+    setOpenSnackbar(false);
   };
 
   return (
@@ -50,6 +55,20 @@ const CoinsPage: React.FC = () => {
           Comprar Mais Moedas
         </Button>
       </Card>
+      <Snackbar
+        open={openSnackbar}
+        autoHideDuration={6000}
+        onClose={handleCloseSnackbar}
+        anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
+      >
+        <Alert
+          onClose={handleCloseSnackbar}
+          severity="info"
+          variant="filled"
+        >
+          Estamos em fase de testes e em breve abriremos para compra de créditos e planos.
+        </Alert>
+      </Snackbar>
     </Box>
   );
 };
