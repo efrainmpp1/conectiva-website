@@ -19,6 +19,8 @@ import {
   LinearProgress,
   Menu as MuiMenu,
   MenuItem,
+  Snackbar,
+  Alert,
 } from "@mui/material";
 import {
   Menu as MenuIcon,
@@ -50,6 +52,7 @@ const DashboardLayout: React.FC = () => {
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
   const [open, setOpen] = useState(false);
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+  const [openSnackbar, setOpenSnackbar] = useState(false);
 
   const plan = "Free";
   const progress = 30;
@@ -71,6 +74,18 @@ const DashboardLayout: React.FC = () => {
   const handleLogout = async () => {
     await logout();
     handleMenuClose();
+  };
+
+  const handleBuyCredits = () => {
+    setOpenSnackbar(true);
+  };
+
+  const handleCloseSnackbar = (
+    _event?: React.SyntheticEvent | Event,
+    reason?: string,
+  ) => {
+    if (reason === "clickaway") return;
+    setOpenSnackbar(false);
   };
 
   const drawer = (
@@ -178,6 +193,7 @@ const DashboardLayout: React.FC = () => {
             <Button
               variant="contained"
               aria-label="Adicionar créditos"
+              onClick={handleBuyCredits}
               sx={(theme) => ({
                 ml: 1,
                 background: theme.palette.gradients.purplePink,
@@ -209,6 +225,16 @@ const DashboardLayout: React.FC = () => {
       <Box component="main" sx={{ flexGrow: 1, p: 3, mt: 8 }}>
         <Outlet />
       </Box>
+      <Snackbar
+        open={openSnackbar}
+        autoHideDuration={6000}
+        onClose={handleCloseSnackbar}
+        anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
+      >
+        <Alert onClose={handleCloseSnackbar} severity="info" variant="filled">
+          Estamos em fase de testes e em breve abriremos para compra de créditos e planos.
+        </Alert>
+      </Snackbar>
     </Box>
   );
 };
