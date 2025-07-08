@@ -18,3 +18,8 @@ export const getUserHistoricalServices = async (id: number): Promise<UserHistori
   );
   return data.historicalServices;
 };
+
+export const getNumberOfHistoricalServicesByUserId = async (id: number): Promise<number> => {
+  const { data } = await apiNode.get<{ count: number }>(`/users/${id}/historical-services/count`);
+  return data.count;
+};

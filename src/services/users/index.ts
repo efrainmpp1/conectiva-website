@@ -9,3 +9,6 @@ export const getUserByFirebaseUid = isMockMode()
 export const getUserHistoricalServices = isMockMode()
   ? mock.getUserHistoricalServices
   : integration.getUserHistoricalServices;
+export const getNumberOfHistoricalServicesByUserId = isMockMode()
+  ? mock.getNumberOfHistoricalServicesByUserId
+  : integration.getNumberOfHistoricalServicesByUserId;
