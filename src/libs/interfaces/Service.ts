@@ -7,3 +7,15 @@ export interface Service {
   imagePath: string;
   videoId: string; // YouTube Video ID
 }
+
+export interface ServiceBackend {
+  id: number;
+  name: string;
+  description: string;
+  price: number;
+}
+
+export interface ServiceBackendSimplify {
+  id: number;
+  name: string;
+}

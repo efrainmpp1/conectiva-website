@@ -1,4 +1,5 @@
 import { RegisterNewUser, User } from '../../libs/interfaces/User';
+import { UserHistoricalService } from '../../libs/interfaces/UserHistoricalService';
 
 export const registerUser = async (newUserRegisterData: RegisterNewUser): Promise<User> => {
   // Simula um usuário registrado retornando os dados enviados com um ID fictício
@@ -17,4 +18,48 @@ export const getUserByFirebaseUid = async (): Promise<User> => {
     coins: 20,
     plan: 'free',
   } as User;
+};
+
+export const getNumberOfHistoricalServicesByUserId = async (): Promise<number> => {
+  // Simula a contagem de serviços históricos do usuário
+  return 10; // Retorna um número fictício de serviços históricos
+};
+
+export const getUserHistoricalServices = async (): Promise<UserHistoricalService[]> => {
+  // Simula a busca de serviços históricos do usuário
+  return [
+    {
+      id: 2,
+      qtd: 2,
+      total: 2,
+      status: 'success',
+      created_at: '03/07/2025 às 17:17',
+      service: {
+        id: 4,
+        name: 'Agente de Prospecção - Descritivo',
+      },
+    },
+    {
+      id: 1,
+      qtd: 2,
+      total: 4,
+      status: 'success',
+      created_at: '03/07/2025 às 17:16',
+      service: {
+        id: 3,
+        name: 'Agente de Edital - Licitação',
+      },
+    },
+  ];
+};
+
+export const getLastServiceUsedByUserId = async (): Promise<{
+  id: number;
+  name: string;
+} | null> => {
+  // Simula a busca do último serviço usado pelo usuário
+  return {
+    id: 3,
+    name: 'Agente de Edital - Licitação',
+  };
 };

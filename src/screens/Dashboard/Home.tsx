@@ -1,75 +1,132 @@
-import React, { useState } from "react";
-import { Box, Grid, Typography, Button } from "@mui/material";
-import { Wallet, Clock, Activity, User } from "lucide-react";
-import DashboardStatCard from "./DashboardStatCard";
-import DashboardActionButton from "./DashboardActionButton";
-import RecentActivityItem from "./RecentActivityItem";
-import NextStepItem from "./NextStepItem";
-import DashboardAlert from "./DashboardAlert";
-import { Link as RouterLink } from "react-router-dom";
+import React, { useEffect, useState } from 'react';
+import { Box, Grid, Typography /*Button*/ } from '@mui/material';
+import { Wallet, Clock, Activity, User } from 'lucide-react';
+import DashboardStatCard from './DashboardStatCard';
+import DashboardActionButton from './DashboardActionButton';
+//import RecentActivityItem from './RecentActivityItem';
+import NextStepItem from './NextStepItem';
+import DashboardAlert from './DashboardAlert';
+//import { Link as RouterLink } from 'react-router-dom';
+import { useAuth } from '../../libs/context/AuthContext';
+import {
+  getLastServiceUsedByUserId,
+  getNumberOfHistoricalServicesByUserId,
+  getUserByFirebaseUid,
+} from '../../services/users';
+import type { User as AppUser } from '../../libs/interfaces/User';
+import { calculateCreditUsage } from '../../utils/creditUtils';
+import { ServiceBackendSimplify } from '../../libs/interfaces/Service';
 
 const DashboardHome: React.FC = () => {
-  const creditsRemaining = 30;
-  const creditsUsedPercent = 70;
-  const executions = 5;
-  const plan = "Free";
-  const lastExecution = {
-    agent: "LeadGen",
-    date: "10/06/2025 14:00",
-    success: true,
-  };
+  const { user } = useAuth();
+  const [userData, setUserData] = useState<AppUser | null>(null);
+  const [numberOfExecutions, setNumberOfExecutions] = useState<number>(0);
+  const [lastServiceUsed, setLastServiceUsed] = useState<ServiceBackendSimplify | null>(null);
 
+  const MAX_CREDITS = 10;
+  const creditsRemaining = userData?.coins ?? MAX_CREDITS;
+  const plan = userData?.plan ?? 'Free';
+  const creditsUsed = MAX_CREDITS - creditsRemaining;
+  const creditsUsedPercent = calculateCreditUsage(creditsRemaining, MAX_CREDITS);
+
+  useEffect(() => {
+    const fetchLastServiceUsed = async () => {
+      if (!userData) return;
+      try {
+        const lastService = await getLastServiceUsedByUserId(userData.id);
+        setLastServiceUsed(lastService);
+      } catch (err) {
+        console.error('Erro ao buscar último serviço usado', err);
+      }
+    };
+    fetchLastServiceUsed();
+  }, [userData]);
+  /*
   const recentActivities = [
     {
       icon: <Activity size={18} />,
-      description: "Executou LeadGen",
-      date: "10/06/2025 14:00",
-      statusColor: "success" as const,
-      actionLabel: "Ver",
-      actionTo: "/dashboard/historico",
+      description: 'Executou LeadGen',
+      date: '10/06/2025 14:00',
+      statusColor: 'success' as const,
+      actionLabel: 'Ver',
+      actionTo: '/dashboard/historico',
     },
     {
       icon: <Wallet size={18} />,
-      description: "Adicionou 20 créditos",
-      date: "08/06/2025 12:30",
-      statusColor: "secondary" as const,
+      description: 'Adicionou 20 créditos',
+      date: '08/06/2025 12:30',
+      statusColor: 'secondary' as const,
     },
     {
       icon: <User size={18} />,
-      description: "Upgrade para plano Pro",
-      date: "05/06/2025 09:00",
-      statusColor: "primary" as const,
+      description: 'Upgrade para plano Pro',
+      date: '05/06/2025 09:00',
+      statusColor: 'primary' as const,
     },
-  ];
+  ];*/
 
-  const creditsColor =
-    creditsUsedPercent >= 80
-      ? "error"
-      : creditsUsedPercent >= 50
-      ? "warning"
-      : "success";
+  useEffect(() => {
+    const fetchUserData = async () => {
+      if (!user) return;
+      try {
+        const data = await getUserByFirebaseUid(user.uid);
+        setUserData(data);
+      } catch (err) {
+        console.error('Erro ao buscar dados do usu\u00e1rio', err);
+      }
+    };
+    fetchUserData();
+  }, [user]);
+
+  useEffect(() => {
+    const fetchExecutions = async () => {
+      if (!userData) return;
+      try {
+        const count = await getNumberOfHistoricalServicesByUserId(userData.id);
+        console.log('Número de execuções:', count);
+        setNumberOfExecutions(count);
+      } catch (err) {
+        console.error('Erro ao buscar n\u00famero de execu\u00e7\u00f5es', err);
+      }
+    };
+    fetchExecutions();
+  }, [userData]);
+
+  let creditsColor: 'error' | 'warning' | 'success';
+  if (creditsUsedPercent >= 80) {
+    creditsColor = 'error';
+  } else if (creditsUsedPercent >= 50) {
+    creditsColor = 'warning';
+  } else {
+    creditsColor = 'success';
+  }
 
   const [alerts, setAlerts] = useState(() => {
-    const items = [] as { id: number; severity: "error" | "success" | "info" | "warning"; message: string; dismissible?: boolean }[];
-    if (creditsRemaining < 10) {
+    const items = [] as {
+      id: number;
+      severity: 'error' | 'success' | 'info' | 'warning';
+      message: string;
+      dismissible?: boolean;
+    }[];
+    if (creditsRemaining < 5) {
       items.push({
         id: 1,
-        severity: "error",
-        message: "Seus créditos estão quase acabando. Adicione mais para continuar.",
+        severity: 'error',
+        message: 'Seus créditos estão quase acabando. Adicione mais para continuar.',
       });
     }
-    if (executions >= 10) {
+    if (numberOfExecutions >= 4) {
       items.push({
         id: 2,
-        severity: "success",
-        message: `Parabéns, você executou ${executions} agentes este mês!`,
+        severity: 'success',
+        message: `Parabéns, você executou ${numberOfExecutions} agentes este mês!`,
         dismissible: true,
       });
     }
     items.push({
       id: 3,
-      severity: "info",
-      message: "Confira as novidades e recursos que acabamos de lançar.",
+      severity: 'info',
+      message: 'Confira as novidades e recursos que acabamos de lançar.',
       dismissible: true,
     });
     return items;
@@ -79,39 +136,24 @@ const DashboardHome: React.FC = () => {
     setAlerts((prev) => prev.filter((a) => a.id !== id));
   };
 
-  const creditsTrend = [
-    { value: 50 },
-    { value: 40 },
-    { value: 35 },
-    { value: 30 },
-    { value: 30 },
-  ];
-  const executionsTrend = [
-    { value: 1 },
-    { value: 2 },
-    { value: 2 },
-    { value: 3 },
-    { value: 5 },
-  ];
-
   const nextSteps = [
     {
       icon: <Activity size={18} />,
-      text: "Execute um agente agora",
-      actionLabel: "Executar",
-      actionTo: "/dashboard/agente",
+      text: 'Execute um agente agora',
+      actionLabel: 'Executar',
+      actionTo: '/dashboard/agente',
     },
     {
       icon: <Wallet size={18} />,
-      text: "Adicione créditos e continue prospectando",
-      actionLabel: "Adicionar",
-      actionTo: "/dashboard/moedas",
+      text: 'Adicione créditos e continue prospectando',
+      actionLabel: 'Adicionar',
+      actionTo: '/dashboard/moedas',
     },
     {
       icon: <User size={18} />,
-      text: "Veja dicas para melhorar seus resultados",
-      actionLabel: "Ver dicas",
-      actionTo: "/ajuda",
+      text: 'Veja dicas para melhorar seus resultados',
+      actionLabel: 'Ver dicas',
+      actionTo: '/ajuda',
     },
   ];
 
@@ -130,36 +172,43 @@ const DashboardHome: React.FC = () => {
           <DashboardStatCard
             icon={<Wallet size={20} />}
             label="Créditos Restantes"
-            value={creditsRemaining}
+            value={
+              <Box component="span">
+                {creditsRemaining}
+                <Typography component="span" variant="caption" sx={{ ml: 1 }}>
+                  Usados: {creditsUsed}
+                </Typography>
+              </Box>
+            }
             progress={creditsUsedPercent}
             statusColor={creditsColor}
-            actionLabel="Adicionar"
-            actionTo="/dashboard/moedas"
-            chartData={creditsTrend}
+            //actionLabel="Adicionar"
+            //actionTo="/dashboard/moedas"
+            //chartData={creditsTrend}
             chartColor="#00e676"
             chartArea
           />
         </Grid>
         <Grid item xs={12} sm={6} md={3}>
-          <DashboardStatCard
+          {/*<DashboardStatCard
             icon={<Activity size={20} />}
             label="Execuções"
-            value={executions}
+            value={numberOfExecutions}
             statusColor="primary"
             actionLabel="Ver histórico"
             actionTo="/dashboard/historico"
             chartData={executionsTrend}
             chartColor="#ff9100"
-          />
+          />*/}
         </Grid>
         <Grid item xs={12} sm={6} md={3}>
           <DashboardStatCard
             icon={<Clock size={20} />}
             label="Última Execução"
-            value={lastExecution.agent ? `${lastExecution.agent}` : "-"}
-            statusColor={lastExecution.success ? "success" : "error"}
-            actionLabel="Detalhes"
-            actionTo="/dashboard/historico"
+            value={lastServiceUsed ? `${lastServiceUsed.name}` : '-'}
+            //statusColor={lastExecution.success ? 'success' : 'error'}
+            //actionLabel="Detalhes"
+            //actionTo="/dashboard/historico"
           />
         </Grid>
         <Grid item xs={12} sm={6} md={3}>
@@ -167,12 +216,20 @@ const DashboardHome: React.FC = () => {
             icon={<User size={20} />}
             label="Plano Atual"
             value={plan}
-            actionLabel="Upgrade"
-            actionTo="/planos"
+            //actionLabel="Upgrade"
+            //actionTo="/planos"
           />
         </Grid>
       </Grid>
-      <Box sx={{ height: 2, background: (theme) => theme.palette.gradients.purplePink, borderRadius: 1, mb: 4 }} />
+      <Box
+        sx={{
+          height: 2,
+          background: (theme) => theme.palette.gradients.purplePink,
+          borderRadius: 1,
+          mb: 4,
+        }}
+      />
+      {/*
       <Box sx={{ mb: 4 }}>
         <Typography
           variant="h6"
@@ -180,8 +237,8 @@ const DashboardHome: React.FC = () => {
             mb: 2,
             fontWeight: 700,
             background: (theme) => theme.palette.gradients.purplePink,
-            WebkitBackgroundClip: "text",
-            WebkitTextFillColor: "transparent",
+            WebkitBackgroundClip: 'text',
+            WebkitTextFillColor: 'transparent',
           }}
         >
           Atividades Recentes
@@ -199,7 +256,14 @@ const DashboardHome: React.FC = () => {
           Ver tudo
         </Button>
       </Box>
-      <Box sx={{ height: 2, background: (theme) => theme.palette.gradients.purplePink, borderRadius: 1, mb: 4 }} />
+      <Box
+        sx={{
+          height: 2,
+          background: (theme) => theme.palette.gradients.purplePink,
+          borderRadius: 1,
+          mb: 4,
+        }}
+      />*/}
       <Box sx={{ mb: 4 }}>
         <Typography
           variant="h6"
@@ -207,8 +271,8 @@ const DashboardHome: React.FC = () => {
             mb: 2,
             fontWeight: 700,
             background: (theme) => theme.palette.gradients.purplePink,
-            WebkitBackgroundClip: "text",
-            WebkitTextFillColor: "transparent",
+            WebkitBackgroundClip: 'text',
+            WebkitTextFillColor: 'transparent',
           }}
         >
           Próximos Passos
@@ -240,11 +304,7 @@ const DashboardHome: React.FC = () => {
           />
         </Grid>
         <Grid item xs={6} md={3}>
-          <DashboardActionButton
-            icon={<User size={28} />}
-            label="Perfil"
-            to="/dashboard/perfil"
-          />
+          <DashboardActionButton icon={<User size={28} />} label="Perfil" to="/dashboard/perfil" />
         </Grid>
       </Grid>
     </Box>
