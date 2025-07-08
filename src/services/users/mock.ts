@@ -52,3 +52,14 @@ export const getUserHistoricalServices = async (): Promise<UserHistoricalService
     },
   ];
 };
+
+export const getLastServiceUsedByUserId = async (): Promise<{
+  id: number;
+  name: string;
+} | null> => {
+  // Simula a busca do último serviço usado pelo usuário
+  return {
+    id: 3,
+    name: 'Agente de Edital - Licitação',
+  };
+};

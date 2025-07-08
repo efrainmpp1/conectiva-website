@@ -14,3 +14,8 @@ export interface ServiceBackend {
   description: string;
   price: number;
 }
+
+export interface ServiceBackendSimplify {
+  id: number;
+  name: string;
+}

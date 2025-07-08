@@ -1,30 +1,47 @@
 import React, { useEffect, useState } from 'react';
-import { Box, Grid, Typography, Button } from '@mui/material';
+import { Box, Grid, Typography /*Button*/ } from '@mui/material';
 import { Wallet, Clock, Activity, User } from 'lucide-react';
 import DashboardStatCard from './DashboardStatCard';
 import DashboardActionButton from './DashboardActionButton';
-import RecentActivityItem from './RecentActivityItem';
+//import RecentActivityItem from './RecentActivityItem';
 import NextStepItem from './NextStepItem';
 import DashboardAlert from './DashboardAlert';
-import { Link as RouterLink } from 'react-router-dom';
+//import { Link as RouterLink } from 'react-router-dom';
 import { useAuth } from '../../libs/context/AuthContext';
-import { getNumberOfHistoricalServicesByUserId, getUserByFirebaseUid } from '../../services/users';
+import {
+  getLastServiceUsedByUserId,
+  getNumberOfHistoricalServicesByUserId,
+  getUserByFirebaseUid,
+} from '../../services/users';
 import type { User as AppUser } from '../../libs/interfaces/User';
+import { calculateCreditUsage } from '../../utils/creditUtils';
+import { ServiceBackendSimplify } from '../../libs/interfaces/Service';
 
 const DashboardHome: React.FC = () => {
   const { user } = useAuth();
   const [userData, setUserData] = useState<AppUser | null>(null);
   const [numberOfExecutions, setNumberOfExecutions] = useState<number>(0);
+  const [lastServiceUsed, setLastServiceUsed] = useState<ServiceBackendSimplify | null>(null);
 
-  const creditsRemaining = userData?.coins ?? 0;
+  const MAX_CREDITS = 10;
+  const creditsRemaining = userData?.coins ?? MAX_CREDITS;
   const plan = userData?.plan ?? 'Free';
-  const creditsUsedPercent = 70;
-  const lastExecution = {
-    agent: 'LeadGen',
-    date: '10/06/2025 14:00',
-    success: true,
-  };
+  const creditsUsed = MAX_CREDITS - creditsRemaining;
+  const creditsUsedPercent = calculateCreditUsage(creditsRemaining, MAX_CREDITS);
 
+  useEffect(() => {
+    const fetchLastServiceUsed = async () => {
+      if (!userData) return;
+      try {
+        const lastService = await getLastServiceUsedByUserId(userData.id);
+        setLastServiceUsed(lastService);
+      } catch (err) {
+        console.error('Erro ao buscar último serviço usado', err);
+      }
+    };
+    fetchLastServiceUsed();
+  }, [userData]);
+  /*
   const recentActivities = [
     {
       icon: <Activity size={18} />,
@@ -46,7 +63,7 @@ const DashboardHome: React.FC = () => {
       date: '05/06/2025 09:00',
       statusColor: 'primary' as const,
     },
-  ];
+  ];*/
 
   useEffect(() => {
     const fetchUserData = async () => {
@@ -75,8 +92,14 @@ const DashboardHome: React.FC = () => {
     fetchExecutions();
   }, [userData]);
 
-  const creditsColor =
-    creditsUsedPercent >= 80 ? 'error' : creditsUsedPercent >= 50 ? 'warning' : 'success';
+  let creditsColor: 'error' | 'warning' | 'success';
+  if (creditsUsedPercent >= 80) {
+    creditsColor = 'error';
+  } else if (creditsUsedPercent >= 50) {
+    creditsColor = 'warning';
+  } else {
+    creditsColor = 'success';
+  }
 
   const [alerts, setAlerts] = useState(() => {
     const items = [] as {
@@ -112,9 +135,6 @@ const DashboardHome: React.FC = () => {
   const handleCloseAlert = (id: number) => {
     setAlerts((prev) => prev.filter((a) => a.id !== id));
   };
-
-  const creditsTrend = [{ value: 50 }, { value: 40 }, { value: 35 }, { value: 30 }, { value: 30 }];
-  const executionsTrend = [{ value: 1 }, { value: 2 }, { value: 2 }, { value: 3 }, { value: 5 }];
 
   const nextSteps = [
     {
@@ -152,18 +172,25 @@ const DashboardHome: React.FC = () => {
           <DashboardStatCard
             icon={<Wallet size={20} />}
             label="Créditos Restantes"
-            value={creditsRemaining}
+            value={
+              <Box component="span">
+                {creditsRemaining}
+                <Typography component="span" variant="caption" sx={{ ml: 1 }}>
+                  Usados: {creditsUsed}
+                </Typography>
+              </Box>
+            }
             progress={creditsUsedPercent}
             statusColor={creditsColor}
-            actionLabel="Adicionar"
-            actionTo="/dashboard/moedas"
-            chartData={creditsTrend}
+            //actionLabel="Adicionar"
+            //actionTo="/dashboard/moedas"
+            //chartData={creditsTrend}
             chartColor="#00e676"
             chartArea
           />
         </Grid>
         <Grid item xs={12} sm={6} md={3}>
-          <DashboardStatCard
+          {/*<DashboardStatCard
             icon={<Activity size={20} />}
             label="Execuções"
             value={numberOfExecutions}
@@ -172,16 +199,16 @@ const DashboardHome: React.FC = () => {
             actionTo="/dashboard/historico"
             chartData={executionsTrend}
             chartColor="#ff9100"
-          />
+          />*/}
         </Grid>
         <Grid item xs={12} sm={6} md={3}>
           <DashboardStatCard
             icon={<Clock size={20} />}
             label="Última Execução"
-            value={lastExecution.agent ? `${lastExecution.agent}` : '-'}
-            statusColor={lastExecution.success ? 'success' : 'error'}
-            actionLabel="Detalhes"
-            actionTo="/dashboard/historico"
+            value={lastServiceUsed ? `${lastServiceUsed.name}` : '-'}
+            //statusColor={lastExecution.success ? 'success' : 'error'}
+            //actionLabel="Detalhes"
+            //actionTo="/dashboard/historico"
           />
         </Grid>
         <Grid item xs={12} sm={6} md={3}>
@@ -189,8 +216,8 @@ const DashboardHome: React.FC = () => {
             icon={<User size={20} />}
             label="Plano Atual"
             value={plan}
-            actionLabel="Upgrade"
-            actionTo="/planos"
+            //actionLabel="Upgrade"
+            //actionTo="/planos"
           />
         </Grid>
       </Grid>
@@ -202,6 +229,7 @@ const DashboardHome: React.FC = () => {
           mb: 4,
         }}
       />
+      {/*
       <Box sx={{ mb: 4 }}>
         <Typography
           variant="h6"
@@ -235,7 +263,7 @@ const DashboardHome: React.FC = () => {
           borderRadius: 1,
           mb: 4,
         }}
-      />
+      />*/}
       <Box sx={{ mb: 4 }}>
         <Typography
           variant="h6"

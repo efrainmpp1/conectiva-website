@@ -1,6 +1,7 @@
 import { apiNode } from '../apiNode';
 import { RegisterNewUser, User } from '../../libs/interfaces/User';
 import { UserHistoricalService } from '../../libs/interfaces/UserHistoricalService';
+import { ServiceBackendSimplify } from '../../libs/interfaces/Service';
 
 export const registerUser = async (newUserRegisterData: RegisterNewUser): Promise<User> => {
   const { data } = await apiNode.post<{ user: User }>('/users', newUserRegisterData);
@@ -22,4 +23,13 @@ export const getUserHistoricalServices = async (id: number): Promise<UserHistori
 export const getNumberOfHistoricalServicesByUserId = async (id: number): Promise<number> => {
   const { data } = await apiNode.get<{ count: number }>(`/users/${id}/historical-services/count`);
   return data.count;
+};
+
+export const getLastServiceUsedByUserId = async (
+  id: number,
+): Promise<ServiceBackendSimplify | null> => {
+  const { data } = await apiNode.get<{ lastServiceUsed: ServiceBackendSimplify | null }>(
+    `/users/${id}/historical-services/last`,
+  );
+  return data.lastServiceUsed;
 };
