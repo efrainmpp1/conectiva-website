@@ -116,9 +116,6 @@ const DashboardHome: React.FC = () => {
     setAlerts((prev) => prev.filter((a) => a.id !== id));
   };
 
-  const creditsTrend = [{ value: 50 }, { value: 40 }, { value: 35 }, { value: 30 }, { value: 30 }];
-  const executionsTrend = [{ value: 1 }, { value: 2 }, { value: 2 }, { value: 3 }, { value: 5 }];
-
   const nextSteps = [
     {
       icon: <Activity size={18} />,
@@ -165,15 +162,15 @@ const DashboardHome: React.FC = () => {
             }
             progress={creditsUsedPercent}
             statusColor={creditsColor}
-            actionLabel="Adicionar"
-            actionTo="/dashboard/moedas"
-            chartData={creditsTrend}
+            //actionLabel="Adicionar"
+            //actionTo="/dashboard/moedas"
+            //chartData={creditsTrend}
             chartColor="#00e676"
             chartArea
           />
         </Grid>
         <Grid item xs={12} sm={6} md={3}>
-          <DashboardStatCard
+          {/*<DashboardStatCard
             icon={<Activity size={20} />}
             label="Execuções"
             value={numberOfExecutions}
@@ -182,7 +179,7 @@ const DashboardHome: React.FC = () => {
             actionTo="/dashboard/historico"
             chartData={executionsTrend}
             chartColor="#ff9100"
-          />
+          />*/}
         </Grid>
         <Grid item xs={12} sm={6} md={3}>
           <DashboardStatCard
@@ -190,8 +187,8 @@ const DashboardHome: React.FC = () => {
             label="Última Execução"
             value={lastExecution.agent ? `${lastExecution.agent}` : '-'}
             statusColor={lastExecution.success ? 'success' : 'error'}
-            actionLabel="Detalhes"
-            actionTo="/dashboard/historico"
+            //actionLabel="Detalhes"
+            //actionTo="/dashboard/historico"
           />
         </Grid>
         <Grid item xs={12} sm={6} md={3}>
@@ -199,8 +196,8 @@ const DashboardHome: React.FC = () => {
             icon={<User size={20} />}
             label="Plano Atual"
             value={plan}
-            actionLabel="Upgrade"
-            actionTo="/planos"
+            //actionLabel="Upgrade"
+            //actionTo="/planos"
           />
         </Grid>
       </Grid>
