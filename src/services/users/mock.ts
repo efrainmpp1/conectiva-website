@@ -22,7 +22,7 @@ export const getUserByFirebaseUid = async (): Promise<User> => {
 
 export const getNumberOfHistoricalServicesByUserId = async (): Promise<number> => {
   // Simula a contagem de serviços históricos do usuário
-  return 7; // Retorna um número fictício de serviços históricos
+  return 10; // Retorna um número fictício de serviços históricos
 };
 
 export const getUserHistoricalServices = async (): Promise<UserHistoricalService[]> => {
