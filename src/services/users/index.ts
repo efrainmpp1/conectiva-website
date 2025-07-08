@@ -12,3 +12,6 @@ export const getUserHistoricalServices = isMockMode()
 export const getNumberOfHistoricalServicesByUserId = isMockMode()
   ? mock.getNumberOfHistoricalServicesByUserId
   : integration.getNumberOfHistoricalServicesByUserId;
+export const getLastServiceUsedByUserId = isMockMode()
+  ? mock.getLastServiceUsedByUserId
+  : integration.getLastServiceUsedByUserId;
