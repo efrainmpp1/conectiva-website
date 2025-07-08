@@ -8,25 +8,39 @@ import NextStepItem from './NextStepItem';
 import DashboardAlert from './DashboardAlert';
 import { Link as RouterLink } from 'react-router-dom';
 import { useAuth } from '../../libs/context/AuthContext';
-import { getNumberOfHistoricalServicesByUserId, getUserByFirebaseUid } from '../../services/users';
+import {
+  getLastServiceUsedByUserId,
+  getNumberOfHistoricalServicesByUserId,
+  getUserByFirebaseUid,
+} from '../../services/users';
 import type { User as AppUser } from '../../libs/interfaces/User';
 import { calculateCreditUsage } from '../../utils/creditUtils';
+import { ServiceBackendSimplify } from '../../libs/interfaces/Service';
 
 const DashboardHome: React.FC = () => {
   const { user } = useAuth();
   const [userData, setUserData] = useState<AppUser | null>(null);
   const [numberOfExecutions, setNumberOfExecutions] = useState<number>(0);
+  const [lastServiceUsed, setLastServiceUsed] = useState<ServiceBackendSimplify | null>(null);
 
   const MAX_CREDITS = 10;
   const creditsRemaining = userData?.coins ?? MAX_CREDITS;
   const plan = userData?.plan ?? 'Free';
   const creditsUsed = MAX_CREDITS - creditsRemaining;
   const creditsUsedPercent = calculateCreditUsage(creditsRemaining, MAX_CREDITS);
-  const lastExecution = {
-    agent: 'LeadGen',
-    date: '10/06/2025 14:00',
-    success: true,
-  };
+
+  useEffect(() => {
+    const fetchLastServiceUsed = async () => {
+      if (!userData) return;
+      try {
+        const lastService = await getLastServiceUsedByUserId(userData.id);
+        setLastServiceUsed(lastService);
+      } catch (err) {
+        console.error('Erro ao buscar último serviço usado', err);
+      }
+    };
+    fetchLastServiceUsed();
+  }, [userData]);
 
   const recentActivities = [
     {
@@ -78,8 +92,14 @@ const DashboardHome: React.FC = () => {
     fetchExecutions();
   }, [userData]);
 
-  const creditsColor =
-    creditsUsedPercent >= 80 ? 'error' : creditsUsedPercent >= 50 ? 'warning' : 'success';
+  let creditsColor: 'error' | 'warning' | 'success';
+  if (creditsUsedPercent >= 80) {
+    creditsColor = 'error';
+  } else if (creditsUsedPercent >= 50) {
+    creditsColor = 'warning';
+  } else {
+    creditsColor = 'success';
+  }
 
   const [alerts, setAlerts] = useState(() => {
     const items = [] as {
@@ -185,8 +205,8 @@ const DashboardHome: React.FC = () => {
           <DashboardStatCard
             icon={<Clock size={20} />}
             label="Última Execução"
-            value={lastExecution.agent ? `${lastExecution.agent}` : '-'}
-            statusColor={lastExecution.success ? 'success' : 'error'}
+            value={lastServiceUsed ? `${lastServiceUsed.name}` : '-'}
+            //statusColor={lastExecution.success ? 'success' : 'error'}
             //actionLabel="Detalhes"
             //actionTo="/dashboard/historico"
           />
