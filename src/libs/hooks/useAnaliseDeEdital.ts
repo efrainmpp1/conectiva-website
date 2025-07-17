@@ -22,8 +22,11 @@ export function useAnaliseDeEdital() {
       setStatusAnalise('concluido');
     } catch (error) {
       setStatusAnalise('erro');
+      console.error('Erro ao analisar o edital:', error);
       setMensagemErro(
-        'Ocorreu um erro ao analisar o edital. Verifique o arquivo e tente novamente.',
+        `Ocorreu um erro ao analisar o edital. Verifique o arquivo e tente novamente. ${
+          error instanceof Error ? error.message : ''
+        }`,
       );
     }
   };
