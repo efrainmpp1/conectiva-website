@@ -1,12 +1,5 @@
 import React from 'react';
-import {
-  Box,
-  Grid,
-  Paper,
-  Typography,
-  List,
-  ListItem,
-} from '@mui/material';
+import { Box, Grid, Paper, Typography, List, ListItem } from '@mui/material';
 import DropzoneUploadPdf from '../../libs/components/DropzoneUploadPdf';
 import BackDashboardButton from '../../libs/components/BackDashboardButton';
 
@@ -28,12 +21,7 @@ const EditalPage: React.FC = () => {
         alignItems="flex-start"
         justifyContent="center"
       >
-        <Grid
-          item
-          xs={12}
-          md={6}
-          sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}
-        >
+        <Grid item xs={12} md={6} sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
           <DropzoneUploadPdf />
           <BackDashboardButton sx={{ alignSelf: 'flex-start', mt: 2 }} />
         </Grid>

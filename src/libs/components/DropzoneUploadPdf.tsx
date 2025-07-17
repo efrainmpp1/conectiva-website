@@ -1,13 +1,5 @@
 import React, { useState, useRef } from 'react';
-import {
-  Box,
-  Typography,
-  Button,
-  CircularProgress,
-  Fade,
-  Alert,
-  Tooltip,
-} from '@mui/material';
+import { Box, Typography, Button, CircularProgress, Fade, Alert, Tooltip } from '@mui/material';
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import PictureAsPdfIcon from '@mui/icons-material/PictureAsPdf';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
@@ -16,6 +8,8 @@ import InsertDriveFileIcon from '@mui/icons-material/InsertDriveFile';
 import ErrorOutlineIcon from '@mui/icons-material/ErrorOutline';
 import HelpOutlineIcon from '@mui/icons-material/HelpOutline';
 import { useAnaliseDeEdital } from '../hooks/useAnaliseDeEdital';
+import { getUserByFirebaseUid } from '../../services/users';
+import { useAuth } from '../context/AuthContext';
 
 const DropzoneUploadPdf: React.FC = () => {
   const [fileName, setFileName] = useState<string | null>(null);
@@ -29,6 +23,7 @@ const DropzoneUploadPdf: React.FC = () => {
     analisar,
     reset: resetAnalise,
   } = useAnaliseDeEdital();
+  const { user } = useAuth();
   const inputRef = useRef<HTMLInputElement>(null);
 
   const handleFiles = (files: FileList | null) => {
@@ -68,7 +63,19 @@ const DropzoneUploadPdf: React.FC = () => {
 
   const handleAnalyze = async () => {
     if (!pdfFile) return;
-    await analisar(pdfFile);
+    //verify if user has coins to use this service
+    if (user) {
+      const user_backend = await getUserByFirebaseUid(user.uid);
+      if (user_backend.coins < 2) {
+        setError(
+          'Você não possui créditos suficientes para realizar esta análise. Por favor, adquira mais créditos.',
+        );
+        return;
+      }
+      await analisar(pdfFile);
+    } else {
+      setError('Você precisa estar logado para realizar esta análise.');
+    }
   };
 
   const reset = () => {
@@ -112,8 +119,7 @@ const DropzoneUploadPdf: React.FC = () => {
           },
         }}
       >
-      {fileName ? (
-        <>
+        {fileName ? (
           <Box
             sx={{
               display: 'flex',
@@ -140,73 +146,74 @@ const DropzoneUploadPdf: React.FC = () => {
                 </Typography>
               </Box>
             </Box>
-            <Button variant="outlined" onClick={reset} size="small" aria-label="Trocar arquivo" disabled={statusAnalise === 'processando'}>
+            <Button
+              variant="outlined"
+              onClick={reset}
+              size="small"
+              aria-label="Trocar arquivo"
+              disabled={statusAnalise === 'processando'}
+            >
               Trocar arquivo
             </Button>
           </Box>
-        </>
-      ) : (
-        <>
-          {isDragOver ? (
-            <PictureAsPdfIcon sx={{ fontSize: 80, color: '#B388FF' }} />
-          ) : (
-            <CloudUploadIcon sx={{ fontSize: 80, color: '#B388FF' }} />
-          )}
-          <Box
-            sx={{
-              display: 'inline-flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              mb: 1,
-              gap: 0.5,
-            }}
-          >
-            <Typography
+        ) : (
+          <>
+            {isDragOver ? (
+              <PictureAsPdfIcon sx={{ fontSize: 80, color: '#B388FF' }} />
+            ) : (
+              <CloudUploadIcon sx={{ fontSize: 80, color: '#B388FF' }} />
+            )}
+            <Box
               sx={{
-                fontSize: '1.75rem',
-                fontWeight: 700,
-                textAlign: 'center',
+                display: 'inline-flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                mb: 1,
+                gap: 0.5,
               }}
             >
-              Envie seu Edital em PDF para Análise
-            </Typography>
-            <Tooltip
-              title="A IA extrai CNAEs, região e porte, gerando uma lista de empresas compatíveis."
-              enterTouchDelay={0}
-            >
-              <HelpOutlineIcon
-                fontSize="small"
-                color="action"
-                aria-label="Como funciona?"
-              />
-            </Tooltip>
-          </Box>
-          <Typography
-            sx={{
-              fontSize: '1rem',
-              fontWeight: 400,
-              color: 'text.secondary',
-              maxWidth: '90%',
-              mx: 'auto',
-            }}
-          >
-            Clique para selecionar ou arraste e solte aqui o arquivo em PDF
-          </Typography>
-          {error && (
-            <Box sx={{ display: 'flex', alignItems: 'center', mt: 1, color: 'error.main' }}>
-              <ErrorOutlineIcon sx={{ mr: 0.5 }} />
-              <Typography variant="body2">{error}</Typography>
+              <Typography
+                sx={{
+                  fontSize: '1.75rem',
+                  fontWeight: 700,
+                  textAlign: 'center',
+                }}
+              >
+                Envie seu Edital em PDF para Análise
+              </Typography>
+              <Tooltip
+                title="A IA extrai CNAEs, região e porte, gerando uma lista de empresas compatíveis."
+                enterTouchDelay={0}
+              >
+                <HelpOutlineIcon fontSize="small" color="action" aria-label="Como funciona?" />
+              </Tooltip>
             </Box>
-          )}
-        </>
-      )}
-      <input
-        ref={inputRef}
-        type="file"
-        accept="application/pdf"
-        style={{ display: 'none' }}
-        onChange={handleChange}
-      />
+            <Typography
+              sx={{
+                fontSize: '1rem',
+                fontWeight: 400,
+                color: 'text.secondary',
+                maxWidth: '90%',
+                mx: 'auto',
+              }}
+            >
+              Clique para selecionar ou arraste e solte aqui o arquivo em PDF
+            </Typography>
+            {error && (
+              <Box sx={{ display: 'flex', alignItems: 'center', mt: 1, color: 'error.main' }}>
+                <ErrorOutlineIcon sx={{ mr: 0.5 }} />
+                <Typography variant="body2">{error}</Typography>
+              </Box>
+            )}
+          </>
+        )}
+        <input
+          ref={inputRef}
+          type="file"
+          accept="application/pdf"
+          style={{ display: 'none' }}
+          onChange={handleChange}
+        />
       </Box>
       {fileName && (
         <>
@@ -225,7 +232,7 @@ const DropzoneUploadPdf: React.FC = () => {
               alignItems="center"
               justifyContent="center"
               gap={2}
-              sx={theme => ({
+              sx={(theme) => ({
                 padding: 2,
                 backgroundColor: 'background.paper',
                 borderRadius: 2,
@@ -243,7 +250,8 @@ const DropzoneUploadPdf: React.FC = () => {
           {statusAnalise === 'concluido' && csvBlobUrl && (
             <>
               <Alert severity="success" sx={{ mt: 3 }} aria-live="polite">
-                🎉 Análise concluída com sucesso! Seu arquivo com a lista de empresas está pronto para download.
+                🎉 Análise concluída com sucesso! Seu arquivo com a lista de empresas está pronto
+                para download.
               </Alert>
               <Button
                 variant="contained"
